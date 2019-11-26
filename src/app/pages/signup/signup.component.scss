@@ -1,0 +1,31 @@
+@import '../../../styles/variabales.scss';
+
+h2 {
+    color: $secondary;
+    margin-bottom: 1em;
+}
+
+.form-wrapper {
+    min-width: 40%;
+    margin-bottom: 10%;
+    border: 2px solid $light-grey;
+    padding: 1em 2em;
+}
+
+.first-name {
+    margin-right: 0.5em;
+}
+
+.last-name {
+    margin-left: 0.5em;
+}
+
+button {
+    width: 100%;
+    &.btn {
+        border-radius: 0;
+        &:focus {
+            box-shadow: none;
+        }
+    }
+}

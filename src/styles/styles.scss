@@ -1,0 +1,18 @@
+/* You can add global styles to this file, and also import other style files */
+@import'variabales';
+@import '../../node_modules/bootstrap/scss/bootstrap';
+
+body {
+    color: $secondary;
+}
+
+.container-wrapper {
+    height: calc(100vh - 80px) !important;
+}
+
+.navbar {
+    height: 80px;
+}
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

@@ -1,0 +1,28 @@
+<nav class="navbar navbar-expand-lg navbar-dark  static-top">
+    <div class="container">
+        <a class="navbar-brand" href="#">CVBOX</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+            (click)="isCollapsed = !isCollapsed">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarResponsive" [ngbCollapse]="isCollapsed">
+
+            <div class="ml-auto">
+                <div ngbDropdown class="d-inline-block">
+                    <button class=" btn btn-light" id="dropdownBasic1" ngbDropdownToggle>button</button>
+                    <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                        <a routerLink="/login" ngbDropdownItem>Login</a>
+                        <a routerLink="/profile" ngbDropdownItem>profile</a>
+                        <a routerLink="/signup" ngbDropdownItem>sign up</a>
+                        <a routerLink="/personal-info" ngbDropdownItem>personal-info</a>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+</nav>

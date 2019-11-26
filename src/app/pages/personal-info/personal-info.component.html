@@ -1,0 +1,315 @@
+<app-nav></app-nav>
+<div class="container">
+
+
+    <div class="card">
+        <div class="card-header">
+            Personal information
+        </div>
+
+        <div class="card-body">
+            <form novalidate [formGroup]="infoForm" class="mx-5">
+
+                <h4 class="display-2 mb-4">basic informatiopn</h4>
+                <div class="form-group row mb-2">
+                    <label class="col-md-2 col-form-label" for="nameId">Name</label>
+                    <div class="col-md-8">
+                        <input class="form-control" id="nameId" type="text" placeholder="Name (required)"
+                            formControlName="name" [ngClass]="{'is-invalid': (infoForm.get('name').touched ||
+                            infoForm.get('name').dirty) &&
+                            !infoForm.get('name').valid }" />
+                        <span class="invalid-feedback">
+                            <span *ngIf="infoForm.get('name').errors?.required">
+                                Please enter your name.
+                            </span>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="form-group row mb-2">
+                    <label class="col-md-2 col-form-label" for="emailId">Email</label>
+                    <div class="col-md-8">
+                        <input class="form-control" id="emailId" type="email" placeholder="email (required)"
+                            formControlName="email" [ngClass]="{'is-invalid': (infoForm.get('email').touched ||
+                                    infoForm.get('email').dirty) &&
+                                    !infoForm.get('email').valid }" />
+                        <span class="invalid-feedback">
+                            <span *ngIf="infoForm.get('email').errors?.required">
+                                Please enter your email.
+                            </span>
+                            <span *ngIf="infoForm.get('email').errors?.email">
+                                Please enter valid email.
+                            </span>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="form-group row mb-2">
+                    <label class="col-md-2 col-form-label" for="phoneId">phone</label>
+                    <div class="col-md-8">
+                        <input class="form-control" id="phoneId" type="tel" placeholder="phone (required)"
+                            formControlName="phone" [ngClass]="{'is-invalid': (infoForm.get('phone').touched ||
+                                        infoForm.get('phone').dirty) &&
+                                        !infoForm.get('phone').valid }" />
+                        <span class="invalid-feedback">
+                            <span *ngIf="infoForm.get('phone').errors?.required">
+                                Please enter your phone.
+                            </span>
+
+                        </span>
+                    </div>
+                </div>
+                <br>
+                <div>
+                    <h4 class=" display-2 mb-4">Work Exppeience</h4>
+
+                    <div formArrayName="jobs">
+                        <div [formGroupName]="i" *ngFor="let job of jobs.controls; let i=index">
+                            <div class="form-group row mb-2">
+                                <label class="col-md-2 col-form-label" for="jobTitleId">job Title</label>
+                                <div class="col-md-8">
+                                    <input class="form-control" id="jobTitleId" type="tel"
+                                        placeholder="job Title (required)" formControlName="jobTitle"
+                                        [ngClass]="{'is-invalid': (job.controls.jobTitle.touched || job.controls.jobTitle.dirty) &&!job.controls.jobTitle.valid }" />
+                                    <span class="invalid-feedback">
+                                        <span *ngIf="job.controls.jobTitle.errors?.required">
+                                            Please enter your jobTitle.
+                                        </span>
+
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="form-group row mb-2">
+                                <label class="col-md-2 col-form-label" for="categoryId">category</label>
+                                <div class="col-md-8">
+                                    <input class="form-control" id="categoryId" type="text"
+                                        placeholder=" category (required)" formControlName="category"
+                                        [ngClass]="{'is-invalid': (job.controls.category.touched || job.controls.category.dirty) &&!job.controls.category.valid }" />
+                                    <span class="invalid-feedback">
+                                        <span *ngIf="job.controls.category.errors?.required">
+                                            Please enter your category.
+                                        </span>
+
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div class="form-group row mb-2">
+                                <label class="col-md-2 col-form-label" for="departmentyId">department</label>
+                                <div class="col-md-8">
+                                    <input class="form-control" id="departmentId" type="text"
+                                        placeholder=" department (required)" formControlName="department"
+                                        [ngClass]="{'is-invalid': (job.controls.department.touched || job.controls.department.dirty) &&!job.controls.department.valid }" />
+                                    <span class="invalid-feedback">
+                                        <span *ngIf="job.controls.department.errors?.required">
+                                            Please enter department.
+                                        </span>
+
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div class="form-group row mb-2">
+                                <label class="col-md-2 col-form-label" for="yearsOfEperienceId">years Of
+                                    Eperience</label>
+                                <div class="col-md-8">
+                                    <input class="form-control" id="yearsOfEperienceId" type="text"
+                                        placeholder=" yearsOfEperience (required)" formControlName="yearsOfEperience"
+                                        [ngClass]="{'is-invalid': (job.controls.yearsOfEperience.touched || job.controls.yearsOfEperience.dirty) &&!job.controls.yearsOfEperience.valid }" />
+                                    <span class="invalid-feedback">
+                                        <span *ngIf="job.controls.yearsOfEperience.errors?.required">
+                                            Please enter years Of Eperience.
+                                        </span>
+
+                                    </span>
+                                </div>
+                            </div>
+                            <br>
+                        </div>
+
+                        <div class="form-group row mb-2">
+                            <div class="col-md-4">
+                                <button class="btn btn-outline-primary" type="button"
+                                    [title]="jobs.valid ? 'Add another mailing job' : 'Disabled until the existing jobs data is valid'"
+                                    [disabled]="!jobs.valid" (click)="addJob()">
+                                    Add Another job
+                                </button>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+                <div class="my-5">
+                    <h4 class=" display-2 mb-4">Address</h4>
+
+                    <div class="form-group row mb-2">
+                        <label class="col-md-2 col-form-label" for="nameId">Country</label>
+                        <div class="col-md-8">
+                            <select class="form-control" id="countryId" (change)="onChangeCountry($event.target.value)"
+                                placeholder="Country (required)" formControlName="country" [ngClass]="{'is-invalid': (infoForm.get('country').touched ||
+                                    infoForm.get('country').dirty) &&
+                                    !infoForm.get('country').valid }">
+                                <option *ngFor="let country of countryInfo; let i = index" value="{{i}}">
+                                    {{country.CountryName}}</option>
+                            </select>
+                            <span class="invalid-feedback">
+                                <span *ngIf="infoForm.get('country').errors?.required">
+                                    Please enter your country.
+                                </span>
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="form-group row mb-2">
+                        <label class="col-md-2 col-form-label" for="stateId">State</label>
+                        <div class="col-md-8">
+
+                            <select class="form-control" (change)="onChangeState($event.target.value)" id="stateId"
+                                placeholder="state (required)" formControlName="state" [ngClass]="{'is-invalid': (infoForm.get('state').touched ||
+                                        infoForm.get('state').dirty) &&
+                                        !infoForm.get('state').valid }">
+                                <option *ngIf="stateInfo == ''" value="-1">--Select State--</option>
+                                <option *ngFor="let state of stateInfo; let j = index" value="{{j}}">{{state.StateName}}
+                                </option>
+                            </select>
+                            <span class="invalid-feedback">
+                                <span *ngIf="infoForm.get('state').errors?.required">
+                                    Please enter your state.
+                                </span>
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="form-group row mb-2">
+                        <label class="col-md-2 col-form-label" for="cityId">City</label>
+                        <div class="col-md-8">
+
+                            <select class="form-control" id="cityId" placeholder="city (required)"
+                                formControlName="city" [ngClass]="{'is-invalid': (infoForm.get('city').touched ||
+                                            infoForm.get('city').dirty) &&
+                                            !infoForm.get('city').valid }">
+                                <option *ngIf="cityInfo == ''" value="-1">--Select CIty--</option>
+                                <option *ngFor="let city of cityInfo; let k = index" value="{{k}}">{{city}}</option>
+                            </select>
+                            <span class="invalid-feedback">
+                                <span *ngIf="infoForm.get('city').errors?.required">
+                                    Please enter your city.
+                                </span>
+                            </span>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="form-group row mb-2" style="float: right;">
+                    <div class="offset-md-2 col-md-4">
+                        <button class="btn btn-primary mr-3" type="submit" style="width:80px"
+                            [title]="infoForm.valid ? 'Save your entered data' : 'Disabled until the form data is valid'"
+                            [disabled]="!infoForm.valid">
+                            Save
+                        </button>
+
+                    </div>
+                </div>
+            </form>
+        </div>
+
+    </div>
+
+</div>
+<!-- 
+<div class=" main main-raised ">
+    <div class="profile-content">
+        <div class="container">
+
+
+
+            <div class="container mt-4">
+                <button mat-raised-button (click)="isLinear = !isLinear" id="toggle-linear">
+                    {{!isLinear ? 'Enable linear mode' : 'Disable linear mode'}}
+                </button>
+                <mat-horizontal-stepper [linear]="isLinear" #stepper>
+                    <mat-step [stepControl]="firstFormGroup">
+                        <form [formGroup]="firstFormGroup ">
+
+
+                            <div class="example-container">
+
+                                <ng-template matStepLabel>Basic info</ng-template>
+                                <mat-form-field>
+                                    <input matInput placeholder=" name" formControlName="firstname" required>
+                                </mat-form-field>
+                                <mat-form-field>
+                                    <input matInput placeholder="last name" formControlName="lastname" required>
+                                </mat-form-field>
+                                <mat-form-field>
+                                    <input matInput placeholder="phone" formControlName="phone" required>
+                                </mat-form-field>
+                                <div>
+                                    <button mat-button matStepperNext>Next</button>
+                                </div>
+                            </div>
+                        </form>
+                    </mat-step>
+                    <mat-step [stepControl]="secondFormGroup">
+                        <form [formGroup]="secondFormGroup">
+                            <div class="example-container">
+
+                                <ng-template matStepLabel>work Experience</ng-template>
+                                <mat-form-field>
+                                    <input matInput placeholder=" job title" formControlName="jobTitle" required>
+                                </mat-form-field>
+                                <mat-form-field>
+                                    <input matInput placeholder="Category" formControlName="category" required>
+                                </mat-form-field>
+                                <mat-form-field>
+                                    <input matInput placeholder="Department" formControlName="department" required>
+                                </mat-form-field>
+                                <mat-form-field>
+                                    <input matInput placeholder="Year of experience" formControlName="yeareEperience"
+                                        required>
+                                </mat-form-field>
+                                <div>
+                                    <button mat-button matStepperNext>Next</button>
+                                </div>
+                            </div>
+                        </form>
+                    </mat-step>
+
+                    <mat-step [stepControl]="thirdFormGroup">
+                        <form [formGroup]="thirdFormGroup">
+                            <div class="example-container">
+
+                                <ng-template matStepLabel>ِAddress</ng-template>
+                                <mat-form-field>
+                                    <input matInput placeholder=" Country/region" formControlName="country" required>
+                                </mat-form-field>
+                                <mat-form-field>
+                                    <input matInput placeholder="state" formControlName="state" required>
+                                </mat-form-field>
+                                <mat-form-field>
+                                    <input matInput placeholder="city" formControlName="city" required>
+                                </mat-form-field>
+
+                                <div>
+                                    <button mat-button matStepperNext>Next</button>
+                                </div>
+                            </div>
+                        </form>
+                    </mat-step>
+                    <mat-step>
+                        <ng-template matStepLabel>Done</ng-template>
+                        You are now done.
+                        <div>
+                            <button mat-button matStepperPrevious>Back</button>
+                            <button mat-button (click)="stepper.reset()">Reset</button>
+                        </div>
+                    </mat-step>
+                </mat-horizontal-stepper>
+            </div>
+
+
+
+        </div>
+    </div>
+</div> -->

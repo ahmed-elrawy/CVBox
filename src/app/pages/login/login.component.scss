@@ -1,0 +1,41 @@
+@import '../../../styles/variabales.scss';
+
+
+
+  
+h2 {
+    color: $secondary;
+    margin-bottom: 1em;
+}
+
+.form-wrapper {
+    background-color: #ffffff;
+    min-width: 40%;
+    margin-bottom: 10%;
+    border: 2px solid $light-grey;
+    padding: 1em 2em;
+}
+
+button {
+    width: 100%;
+    &.btn {
+        border-radius: 0;
+        &:focus {
+            box-shadow: none;
+        }
+    }
+}
+
+.backgground {
+    position: relative;
+    background-color: #343a40;
+    max-width: 100%;
+    background: url(../../../assets/bg.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    min-height: 650px;
+    max-height: 600px;
+    padding-bottom: 8rem;
+  
+  }
