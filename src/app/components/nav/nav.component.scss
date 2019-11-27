@@ -1,7 +1,18 @@
 
-@import '../../../styles/variabales.scss';
-
-
+nav {
+    transition: 1.0s;
+    font-size: 1.2rem
+    
+    /* box-shadow: 0 4px 8px 0 , 0 6px 20px 0 rgba(0, 0, 0, 0.19); */
+    }
 .navbar {
-    background-color: $primary;
-}
+    background-color: transparent;
+
+  }
+
+  nav:hover {
+    transition: 1.0s;
+      background-color: #ffffff;
+      color: white
+  
+    }

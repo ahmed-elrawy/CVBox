@@ -1,54 +1,137 @@
-<app-nav></app-nav>
-<header id="home-section" class=" text-white text-center">
-    <div class="overlay"></div>
-    <div class="container">
-        <div class="row">
-            <div class="col-xl-9 mx-auto">
-                <h1 class="mb-5">FIND CV</h1>
+<div class="back">
+    <header id="home-section" class=" text-white text-center">
+
+        <div class="container">
+
+            <!-- <div>
+                <div style="display: inline ;float: left;">
+                    <a class="navbar-brand" [routerLink]="['/home']"
+                        style=" color: thistle; margin-top: 40px; font-size: x-large;">HOME</a>
+                </div>
+
+                <div style="display: inline; float:right; margin-top: 50px;">
+                    <button type="button" [routerLink]="['/login']" class="btn btn-outline-light mr-4">login</button>
+                    <button type="button" [routerLink]="['/signup']" class="btn btn-outline-light mr-4">sign up</button>
+                    <button type="button" [routerLink]="['/profile']" class="btn btn-outline-light">profile</button>
+
+                </div>
             </div>
-            <div class="col-md-10 col-lg-8 col-xl-7 mx-auto">
-                <form>
-                    <div class="form-row">
-                        <div class="col-12 col-md-9 mb-2 mb-md-0">
-                            <select class="form-control form-control-lg" id="exampleFormControlSelect1">
-                                <option value="">slect conference </option>
-                                <option value="one"> </option>
-
-                            </select>
 
 
 
-                        </div>
-                        <div class="col-12 col-md-3">
-                            <button type="submit" class="btn btn-block btn-lg btn-primary">Search</button>
-                        </div>
-                    </div>
-                </form>
+        </div> -->
 
+            <div class="d-flex row-hl">
+                <div class="mr-auto p-2 item-hl">
+                    <a class="navbar-brand" [routerLink]="['/home']"
+                        style=" color: thistle; margin-top: 40px; font-size: x-large;">HOME</a>
+                </div>
 
+                <div class=" p-2 item-hl" style="margin-top: 40px;">
+                    <button type=" button" [routerLink]="['/login']" class="btn btn-outline-light mr-4">login</button>
+                    <button type="button" [routerLink]="['/signup']" class="btn btn-outline-light mr-4">sign up</button>
+                    <button type="button" [routerLink]="['/profile']" class="btn btn-outline-light">profile</button>
 
+                </div>
             </div>
+
+
 
         </div>
 
+        <div class="row mt-5">
+            <div class="mx-auto ">
+                <div class="findbox">
+                    <span>s </span> <span>find CV</span>
+                </div>
+            </div>
+        </div>
 
-    </div>
+    </header>
+    <section>
+        <div class="container">
+            <div class="row mt-4 ">
+                <div class="mx-auto my-auto  mb-5">
+                    <div *ngIf="!category">
+                        <a (click)="console()"> categories>department</a>
 
+                    </div>
+                    <div *ngIf="category">
+                        <a (click)="console()"> categories> </a>
+                    </div>
 
-    <div class="list-group list mx-auto mt-5">
-        <!-- <ng-container *ngFor="let chatroom of chatroomService.chatrooms | async">
-            <a [routerLink]="['/chat', chatroom.id]" class="list-group-item list-group-item-action active">
-                {{ chatroom.name }}
-            </a>
-        </ng-container> -->
-        <a href="#" class="list-group-item list-group-item-action active">
-            Cras justo odio
-        </a>
-        <a href="#" class="list-group-item list-group-item-action ">Dapibus ac facilisis in</a>
-        <a href="#" class="list-group-item list-group-item-action">Morbi leo risus</a>
-        <a href="#" class="list-group-item list-group-item-action">Porta ac consectetur ac</a>
-        <a href="#" class="list-group-item list-group-item-action disabled">Vestibulum at eros</a>
-    </div>
+                </div>
 
+            </div>
+            <div class="row list ">
+                <ng-template [ngIf]="category">
+                    <div class="group-list">
 
-</header>
+                        <ul class=" d-flex flex-wrap row-hl  ">
+                            <li class=" list-group-item " (click)="console()">
+                                <img src="../../../assets/medical.svg">
+                                <h4>name</h4>
+                            </li>
+                            <li class=" list-group-item ">
+                                <img src="../../../assets/medical.svg" (click)="console()">
+                                <h4>name</h4>
+                            </li>
+                            <li class=" list-group-item ">
+                                <img src="../../../assets/medical.svg" (click)="console()">
+                                <h4>name</h4>
+                            </li>
+                            <li class=" list-group-item ">
+                                <img src="../../../assets/medical.svg" (click)="console()">
+                                <h4>name</h4>
+                            </li>
+                            <li class=" list-group-item ">
+                                <img src="../../../assets/medical.svg" (click)="console()">
+                                <h4>name</h4>
+                            </li>
+                            <li class=" list-group-item ">
+                                <img src="../../../assets/medical.svg" (click)="console()">
+                                <h4>name</h4>
+                            </li>
+                            <li class=" list-group-item ">
+                                <img src="../../../assets/medical.svg" (click)="console()">
+                                <h4>name</h4>
+                            </li>
+                        </ul>
+                    </div>
+
+                </ng-template>
+
+                <ng-template [ngIf]="department">
+                    <div class="group-list-department">
+
+                        <ul class=" d-flex flex-wrap row-hl  ">
+                            <li class=" list-group-item ">
+                                <h4>department 1</h4>
+                            </li>
+                            <li class=" list-group-item ">
+                                <h4>department 1</h4>
+                            </li>
+                            <li class=" list-group-item ">
+                                <h4>department 1</h4>
+                            </li>
+                            <li class=" list-group-item ">
+                                <h4>department 1</h4>
+                            </li>
+                            <li class=" list-group-item ">
+                                <h4>department 1</h4>
+                            </li>
+                            <li class=" list-group-item ">
+                                <h4>department 1</h4>
+                            </li>
+                            <li class=" list-group-item ">
+                                <h4>department 1</h4>
+                            </li>
+
+                        </ul>
+                    </div>
+
+                </ng-template>
+            </div>
+        </div>
+    </section>
+</div>

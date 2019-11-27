@@ -6,6 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
+  category: boolean = true
+  department: boolean = false
   constructor() { }
 
   ngOnInit() {
@@ -14,5 +16,9 @@ export class HomeComponent implements OnInit {
 
 
 
-
+  console() {
+    console.log('hello')
+    this.category = !this.category
+    this.department = !this.department
+  }
 }

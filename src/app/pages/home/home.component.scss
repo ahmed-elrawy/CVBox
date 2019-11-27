@@ -1,26 +1,54 @@
+@import '../../../styles/variabales.scss';
+
+
+.back {
+  background-color: #f0f1f3;
+}
 #home-section {
     position: relative;
-    background-color: #343a40;
     max-width: 100%;
     background: url(../../../assets/bg.png);
     background-repeat: no-repeat;
     background-size: cover;
-    background-attachment: fixed;
-    min-height: 650px;
-    padding-top: 11rem;
+    height: 220px;
     padding-bottom: 8rem;
-  
+  }
+
+  .findbox {
+    display: inline-block;
+    width: 370px;
+    height: 45px;
+    border-radius: 10px;
+    background-color: #ffffff;
+  }
+  .findbox span {
+    font-size: x-large;
+    color: slategray;;
   }
 
 
-.list{
-  height:200px;
-   width:40%;
-   overflow:hidden;
-   overflow-y:scroll;
+  // .list ul li {
+  //   padding: 30px;
+  // }
+  .list ul li {
+   margin: 20px;
+   padding: 25px 70px 25px 70px;
+  }
+ .list ul img {
+    width: 120px;
+    height: 120px;
   }
 
-  
+  .list ul li h4 {
+  color: $primary;
+  }
 
+  .group-list {
+    margin: 0px 80px 0px 80px;
+  }
+.group-list-department > li {
+  margin: 20px;
+  padding: 25px 70px 25px 70px
+}
   
   

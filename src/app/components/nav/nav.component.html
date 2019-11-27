@@ -1,28 +1,41 @@
-<nav class="navbar navbar-expand-lg navbar-dark  static-top">
-    <div class="container">
-        <a class="navbar-brand" href="#">CVBOX</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
-            (click)="isCollapsed = !isCollapsed">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+<!--
 
-        <div class="collapse navbar-collapse" id="navbarResponsive" [ngbCollapse]="isCollapsed">
+<nav class="navbar navbar-expand-lg  navbar-dark fixed-top ">
+    <div class="row mx-4">
+        <a class="navbar-brand display-4 mt-2 ">Foster+Partners</a>
 
-            <div class="ml-auto">
-                <div ngbDropdown class="d-inline-block">
-                    <button class=" btn btn-light" id="dropdownBasic1" ngbDropdownToggle>button</button>
-                    <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-                        <a routerLink="/login" ngbDropdownItem>Login</a>
-                        <a routerLink="/profile" ngbDropdownItem>profile</a>
-                        <a routerLink="/signup" ngbDropdownItem>sign up</a>
-                        <a routerLink="/personal-info" ngbDropdownItem>personal-info</a>
 
-                    </div>
-                </div>
+
+
+
+        <div class="collapse navbar-collapse" id="navbarCollapse" [ngbCollapse]="isCollapsed">
+            <div class="searchBox d-none d-lg-block" style="top:0px">
+
+
             </div>
+            <ul [ngClass]="{'first': true, 'second': true, 'third': false}" class="navbar-nav ml-auto">
 
+
+                <li class="nav-item">
+                    <a href="#home" class="nav-link">Project</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#explore-head-section" class="nav-link">Studio</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#create-head-section" class="nav-link">Expertise</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#share-head-section" class="nav-link">News</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#share-head-section" class="nav-link">Careeers</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#share-head-section" class="nav-link">Contact </a>
+                </li>
+            </ul>
         </div>
     </div>
 
-
-</nav>
+</nav> -->
