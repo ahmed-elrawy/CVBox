@@ -19,8 +19,8 @@
     </div>
 </div> -->
 
-
-<div class="back">
+<div class="back" style="width: 100%; height: 100%;"></div>
+<div class="">
 
     <header id="home-section" class=" text-white text-center ">
 
@@ -29,7 +29,7 @@
             <div class="d-flex row-hl">
                 <div class="mr-auto p-2 item-hl">
                     <a class="navbar-brand" [routerLink]="['/home']"
-                        style=" color: thistle; margin-top: 40px; font-size: x-large;">HOME</a>
+                        style=" color: #fff; margin-top: 40px; font-size: x-large;">HOME</a>
                 </div>
 
                 <div class=" p-2 item-hl" style="margin-top: 40px;" *ngIf="currentUser else loggedOut">
@@ -66,7 +66,7 @@
 
 
             <div class="container-wrapper container d-flex justify-content-center align-items-center">
-                <div class="form-wrapper text-center ">
+                <div class="form-wrapper text-center bg-white ">
                     <h2 class="text-center">Login</h2>
                     <form [formGroup]="loginForm" (submit)="submit()" novalidate>
                         <div class="form-group">

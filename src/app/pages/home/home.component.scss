@@ -2,7 +2,14 @@
 
 
 .back {
-  background-color: #f0f1f3;
+  position: fixed;
+  left: 0px;
+  top: 0px;
+  
+  z-index: -1;
+
+  background-color: #e2e4e7;
+
 }
 #home-section {
     position: relative;
