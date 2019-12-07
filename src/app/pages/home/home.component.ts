@@ -3,6 +3,8 @@ import { CvBoxService } from 'src/app/services/cv-box.service';
 import { Observable } from 'rxjs';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { filter } from 'rxjs/operators';
+import { AuthService } from 'src/app/services/auth.service';
+import { User } from 'src/app/classes/user';
 
 @Component({
   selector: 'app-home',
@@ -10,6 +12,8 @@ import { filter } from 'rxjs/operators';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
+  public currentUser: User = null;
+
   category: boolean = true
   department: boolean = false
   user: boolean = false;
@@ -22,13 +26,16 @@ export class HomeComponent implements OnInit {
   users: Observable<any[]>
   constructor(
     public cv: CvBoxService,
-    public db: AngularFirestore) {
+    public db: AngularFirestore,
+    public auth: AuthService) {
 
 
   }
 
   ngOnInit() {
-
+    this.auth.currentUser.subscribe(user => {
+      this.currentUser = user;
+    })
 
   }
 

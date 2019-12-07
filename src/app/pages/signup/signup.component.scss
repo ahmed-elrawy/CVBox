@@ -20,7 +20,7 @@ h2 {
     margin-left: 0.5em;
 }
 
-button {
+form button {
     width: 100%;
     &.btn {
         border-radius: 0;
@@ -29,3 +29,20 @@ button {
         }
     }
 }
+
+#home-section {
+    position: relative;
+    max-width: 100%;
+    background: url(../../../assets/bg.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 180px;
+    padding-bottom: 8rem;
+  }
+
+  .findbox {
+    display: inline-block;
+    height: 35px;
+    border-radius: 10px;
+  }
+ 

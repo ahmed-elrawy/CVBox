@@ -3,36 +3,27 @@
 
         <div class="container">
 
-            <!-- <div>
-                <div style="display: inline ;float: left;">
-                    <a class="navbar-brand" [routerLink]="['/home']"
-                        style=" color: thistle; margin-top: 40px; font-size: x-large;">HOME</a>
-                </div>
-
-                <div style="display: inline; float:right; margin-top: 50px;">
-                    <button type="button" [routerLink]="['/login']" class="btn btn-outline-light mr-4">login</button>
-                    <button type="button" [routerLink]="['/signup']" class="btn btn-outline-light mr-4">sign up</button>
-                    <button type="button" [routerLink]="['/profile']" class="btn btn-outline-light">profile</button>
-
-                </div>
-            </div>
-
-
-
-        </div> -->
-
             <div class="d-flex row-hl">
                 <div class="mr-auto p-2 item-hl">
                     <a class="navbar-brand" [routerLink]="['/home']"
                         style=" color: thistle; margin-top: 40px; font-size: x-large;">HOME</a>
                 </div>
 
-                <div class=" p-2 item-hl" style="margin-top: 40px;">
-                    <button type=" button" [routerLink]="['/login']" class="btn btn-outline-light mr-4">login</button>
-                    <button type="button" [routerLink]="['/signup']" class="btn btn-outline-light mr-4">sign up</button>
+                <div class=" p-2 item-hl" style="margin-top: 40px;" *ngIf="currentUser else loggedOut">
                     <button type="button" [routerLink]="['/profile']" class="btn btn-outline-light">profile</button>
-
+                    <button type="button" (click)="auth.logout()" class="btn btn-outline-light">signout</button>
                 </div>
+                <ng-template #loggedOut>
+
+                    <div class=" p-2 item-hl" style="margin-top: 40px;">
+                        <button type=" button" [routerLink]="['/login']"
+                            class="btn btn-outline-light mr-4">login</button>
+                        <button type="button" [routerLink]="['/signup']" class="btn btn-outline-light mr-4">sign
+                            up</button>
+
+                    </div>
+                </ng-template>
+
             </div>
 
 
@@ -48,6 +39,7 @@
         </div>
 
     </header>
+
     <section>
         <div class="container">
             <div class="row mt-4 ">
@@ -67,12 +59,10 @@
 
             <div class="row list ">
 
-
-
                 <ng-template [ngIf]="category">
                     <ng-container *ngFor="let chatroom of cv.test | async">
                         <div class="col-md-4 col-sm-6 ">
-                            <div class="card card-block m-3 p-2 align-items-center" (click)="console(chatroom.id)">
+                            <div class="card card-block m-3  align-items-center" (click)="console(chatroom.id)">
                                 <img [src]="chatroom.image">
                                 <h4 class="card-title mt-3 mb-3">{{chatroom.id}}</h4>
                             </div>
@@ -80,28 +70,7 @@
                     </ng-container>
                 </ng-template>
 
-
-
-                <!-- <ng-template [ngIf]="department">
-
-                    <ng-container *ngFor="let item of items | async">
-                        <div class="group-list">
-
-                            <div class="group-list-department">
-
-                                <ul class=" d-flex flex-wrap row-hl  ">
-
-                                    <li class=" list-group-item ">
-                                        <h4>{{item.name}}</h4>
-                                    </li>
-
-                                </ul>
-                            </div>
-                        </div>
-                    </ng-container> -->
-
                 <ng-template [ngIf]="department">
-
                     <ng-container *ngFor="let item of items | async">
                         <div class="col-md-4 col-sm-6 ">
                             <div class="card card-block m-3 py-5  align-items-center"
@@ -110,13 +79,9 @@
                             </div>
                         </div>
                     </ng-container>
-
-
-
                 </ng-template>
 
                 <ng-template [ngIf]="user">
-
                     <ng-container *ngFor="let user of users | async">
                         <div class="col-md-4 col-sm-6 ">
                             <div class="card card-block m-3 py-5  align-items-center">
@@ -128,10 +93,8 @@
                             </div>
                         </div>
                     </ng-container>
-
-
-
                 </ng-template>
+
             </div>
         </div>
     </section>

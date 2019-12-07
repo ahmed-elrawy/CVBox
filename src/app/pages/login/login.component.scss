@@ -1,22 +1,26 @@
 @import '../../../styles/variabales.scss';
 
-
-
-  
 h2 {
     color: $secondary;
     margin-bottom: 1em;
 }
 
 .form-wrapper {
-    background-color: #ffffff;
     min-width: 40%;
     margin-bottom: 10%;
     border: 2px solid $light-grey;
     padding: 1em 2em;
 }
 
-button {
+.first-name {
+    margin-right: 0.5em;
+}
+
+.last-name {
+    margin-left: 0.5em;
+}
+
+form button {
     width: 100%;
     &.btn {
         border-radius: 0;
@@ -26,16 +30,19 @@ button {
     }
 }
 
-.backgground {
+#home-section {
     position: relative;
-    background-color: #343a40;
     max-width: 100%;
     background: url(../../../assets/bg.png);
     background-repeat: no-repeat;
     background-size: cover;
-    background-attachment: fixed;
-    min-height: 650px;
-    max-height: 600px;
+    height: 180px;
     padding-bottom: 8rem;
-  
   }
+
+  .findbox {
+    display: inline-block;
+    height: 35px;
+    border-radius: 10px;
+  }
+ 
