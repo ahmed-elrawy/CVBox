@@ -38,7 +38,9 @@ export class PersonalInfoComponent implements OnInit {
       jobs: this.fb.array([this.buildJob()]),
       country: ['', [Validators.required]],
       state: ['', [Validators.required]],
-      city: ['', [Validators.required]]
+      city: ['', [Validators.required]],
+      Marital: '',
+
     })
   }
 

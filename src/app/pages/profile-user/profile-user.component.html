@@ -1,4 +1,83 @@
-<div class="">
+<header id="home-section" class="  text-center">
+
+    <div class="container">
+        <div class="d-flex row-hl">
+            <div class="mr-auto p-2 item-hl">
+                <a class="navbar-brand" [routerLink]="['/home']"
+                    style=" color:#fff; margin-top: 40px; font-size: x-large;">HOME</a>
+            </div>
+
+            <div class=" p-2 item-hl" style="margin-top: 40px;" *ngIf="currentUser else loggedOut">
+                <button type="button" [routerLink]="['/profile']" class="btn btn-outline-light">profile</button>
+                <button type="button" (click)="auth.logout()" class="btn btn-outline-light">signout</button>
+            </div>
+            <ng-template #loggedOut>
+                <div class=" p-2 item-hl" style="margin-top: 40px;">
+                    <button type=" button" [routerLink]="['/login']" class="btn btn-outline-light mr-4">login</button>
+                    <button type="button" [routerLink]="['/signup']" class="btn btn-outline-light mr-4">sign
+                        up</button>
+                </div>
+            </ng-template>
+        </div>
+    </div>
+
+
+</header>
+
+<div class="container">
+    <div class="row">
+        <div class="mx-auto ">
+            <div class="  container-profile">
+                <div class="avatar-flip">
+                    <img src="http://media.idownloadblog.com/wp-content/uploads/2012/04/Phil-Schiller-headshot-e1362692403868.jpg"
+                        height="150" width="150">
+                    <img src="http://i1112.photobucket.com/albums/k497/animalsbeingdicks/abd-3-12-2015.gif~original"
+                        height="150" width="150">
+                </div>
+                <h2>Ahmed El rawy</h2>
+                <h4>HOVER OVER CONTAINER</h4>
+            </div>
+        </div>
+    </div>
+
+    <div class=" mx-4 mb-5 section2 mx-auto">
+        <div class="row mx-2">
+            <div class="col-md-5">
+                <ul class="list-group">
+                    <li class="list-group-item active" (click)="view('personal-info')"><span
+                            class="material-icons md-36">person</span>personal info
+                    </li>
+                    <li class="list-group-item" (click)="view('resume-info')"><span
+                            class="material-icons md-36">assignment
+                        </span>resume info</li>
+                    <li class="list-group-item"><span class="material-icons md-48">https</span>change password</li>
+                    <li class="list-group-item"><span class="material-icons md-48">email</span>change email address</li>
+                    <li class="list-group-item"><span class="material-icons md-48">exit_to_app
+                        </span>logout</li>
+
+
+                </ul>
+            </div>
+
+            <div class="col-7   ">
+
+                <embed *ngIf="currentUser == 'resume-info'"
+                    src="https://docs.google.com/gview?url=https://path.com/to/your/pdf.pdf&embedded=true"
+                    type="application/pdf" height="500px">
+
+                <ng-template [ngIf]="curentView == 'personal-info'">
+                    <app-personal-info></app-personal-info>
+
+                </ng-template>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="back" style="width: 100%; height: 100%;"></div>
+<!-- <div class="">
 
     <div class="backgground">
 
@@ -43,29 +122,37 @@
 
 
             </div>
+            
             <div class="container section2">
                 <div class="row mx-2">
                     <div class="col-md-5 col-sm-12 part">
                         <ul class="list-group">
-                            <li class="list-group-item active">Cras justo odio</li>
-                            <li class="list-group-item">Dapibus ac facilisis in</li>
+                            <li class="list-group-item active" (click)="view('personal-info')">personal-info</li>
+                            <li class="list-group-item" (click)="view('resume-info')">resume info</li>
                             <li class="list-group-item">Morbi leo risus</li>
                             <li class="list-group-item">Porta ac consectetur ac</li>
                             <li class="list-group-item">Vestibulum at eros</li>
                         </ul>
                     </div>
 
-                    <div class="col-7 card">
-                        <embed src="https://docs.google.com/gview?url=https://path.com/to/your/pdf.pdf&embedded=true"
+                    <div class="col-7   ">
+
+                        <embed *ngIf="currentUser == 'resume-info'"
+                            src="https://docs.google.com/gview?url=https://path.com/to/your/pdf.pdf&embedded=true"
                             type="application/pdf" height="500px">
+
+                        <ng-template [ngIf]="curentView == 'personal-info'">
+                            <app-personal-info></app-personal-info>
+
+                        </ng-template>
 
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
 
-    <!-- <div class="backgground">
+<!-- <div class="backgground">
     <div class="profile">
         <div class="container">
             <div class="row">
