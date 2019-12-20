@@ -11,7 +11,6 @@
 
                 <div class=" p-2 item-hl" style="margin-top: 40px;" *ngIf="currentUser else loggedOut">
                     <button type="button" [routerLink]="['/profile']" class="btn btn-outline-light">profile</button>
-                    <button type="button" (click)="auth.logout()" class="btn btn-outline-light">signout</button>
                 </div>
                 <ng-template #loggedOut>
 
@@ -42,47 +41,53 @@
 
     <section>
         <div class="container">
+
             <div class="row mt-4 ">
+
+
                 <div class="mx-auto my-auto  mb-5">
                     <div *ngIf="!category">
-                        <a (click)="console()"> categories>department</a>
+                        <a> categories>department</a>
 
                     </div>
                     <div *ngIf="category">
-                        <a (click)="console()"> categories> </a>
+                        <a> categories> </a>
                     </div>
 
                 </div>
 
             </div>
+            <div class="mx-auto my-auto  mb-5">
+                <loading-spinner *ngIf="showSpinner"></loading-spinner>
 
+            </div>
 
             <div class="row list ">
 
                 <ng-template [ngIf]="category">
-                    <ng-container *ngFor="let chatroom of cv.test | async">
+                    <ng-container *ngFor="let categorie of cv.categories | async">
                         <div class="col-md-4 col-sm-6 ">
-                            <div class="card card-block m-3  align-items-center" (click)="console(chatroom.id)">
-                                <img [src]="chatroom.image">
-                                <h4 class="card-title mt-3 mb-3">{{chatroom.id}}</h4>
+                            <div class="card card-block m-3  align-items-center" (click)="getDepartments(categorie.id)">
+                                <img [src]="categorie.image">
+                                <h4 class="card-title mt-3 mb-3">{{categorie.id}}</h4>
                             </div>
                         </div>
                     </ng-container>
                 </ng-template>
 
                 <ng-template [ngIf]="department">
-                    <ng-container *ngFor="let item of items | async">
+                    <ng-container *ngFor="let department of cv.departments | async">
                         <div class="col-md-4 col-sm-6 ">
                             <div class="card card-block m-3 py-5  align-items-center"
-                                (click)="userconsole(item.category_id)">
-                                <h4>{{item.name}}</h4>
+                                (click)="getUsers(department.category_id)">
+                                <h4>{{department.name}}</h4>
                             </div>
                         </div>
                     </ng-container>
                 </ng-template>
 
                 <ng-template [ngIf]="user">
-                    <ng-container *ngFor="let user of users | async">
+                    <ng-container *ngFor="let user of cv.users | async">
                         <div class="col-md-4 col-sm-6 ">
                             <div class="card card-block m-3 py-5  align-items-center">
                                 <h4>name: {{user.name}}</h4>

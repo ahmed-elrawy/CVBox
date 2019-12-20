@@ -5,6 +5,7 @@ import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/fire
 import { filter } from 'rxjs/operators';
 import { AuthService } from 'src/app/services/auth.service';
 import { User } from 'src/app/classes/user';
+import { AngularFireAuth } from '@angular/fire/auth';
 
 @Component({
   selector: 'app-home',
@@ -17,13 +18,8 @@ export class HomeComponent implements OnInit {
   category: boolean = true
   department: boolean = false
   user: boolean = false;
-  departments: Observable<any[]>;
-
-
-  itemCollection: AngularFirestoreCollection<any>;
-  items: Observable<any[]>
-  usersCollections: AngularFirestoreCollection<any>;
-  users: Observable<any[]>
+  showSpinner: boolean = true;
+  token
   constructor(
     public cv: CvBoxService,
     public db: AngularFirestore,
@@ -33,43 +29,36 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() {
+    // this.afAuth.auth.currentUser.getIdToken().then((token: string) => {
+    //   this.token = token; console.log(this.token)
+    // }).catch(error => console.log(error))
+
     this.auth.currentUser.subscribe(user => {
       this.currentUser = user;
     })
 
+    this.cv.categories.subscribe(() => this.showSpinner = false)
+
   }
 
 
 
-  console(id) {
+  getDepartments(id) {
     this.department = !this.department
     this.category = !this.category
-    this.itemCollection = this.db.collection('departments', ref => {
-      // Compose a query using multiple .where() methods
-      return ref
-        .where('category_id', '==', id)
-
-    });
-    this.items = this.itemCollection.valueChanges();
-
-    console.log(this.items)
-    console.log(this.itemCollection)
+    this.cv.getDepartments(id)
   }
 
-  userconsole(id) {
+  getUsers(id) {
     this.department = false
     this.category = false
     this.user = true
-    this.usersCollections = this.db.collection('users', ref => {
-      // Compose a query using multiple .where() methods
-      return ref
-        .where('category', '==', id)
 
-    });
-    this.users = this.usersCollections.valueChanges();
+    this.cv.getUsers(id)
 
-    console.log(this.users)
-    console.log(this.usersCollections)
   }
+
+
+
 
 }

@@ -8,6 +8,8 @@ import { AngularFireAuth } from "@angular/fire/auth";
 import { AngularFirestore, AngularFirestoreDocument } from "@angular/fire/firestore";
 import { switchMap } from 'rxjs/operators';
 import { from } from 'rxjs';
+import * as firebase from 'firebase';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -66,7 +68,7 @@ export class AuthService {
 
   public login(email: string, password: string): Observable<boolean> {
     const promise = this.afAuth.auth.signInWithEmailAndPassword(email, password)
-      .then((user) => true)
+      .then((user) => this.router.navigate(['/home']))
       .catch((user) => false)
     return from(promise);
 
@@ -75,7 +77,7 @@ export class AuthService {
   public logout(): void {
     this.afAuth.auth.signOut()
       .then(() => {
-        this.router.navigate(['/login']);
+        this.router.navigate(['/home']);
         this.alertService.alerts.next(new Alert('You have been signed out.'))
 
       })
@@ -92,4 +94,13 @@ export class AuthService {
         this.router.navigate(['<!-- enter your route name here -->']);
       })
   }
+
+
+  resetPassword(email: string) {
+    var auth = firebase.auth();
+    return auth.sendPasswordResetEmail(email)
+      .then(() => console.log("email sent"))
+      .catch((error) => console.log(error))
+  }
+
 }

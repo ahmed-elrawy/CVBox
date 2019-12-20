@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, Validators, FormBuilder, FormArray } from '@angular/forms';
-import { Info } from './info';
+import { FormGroup, Validators, FormBuilder, FormArray, NgForm } from '@angular/forms';
 import { CountriesService } from 'src/app/services/countries.service';
+import { CvBoxService } from 'src/app/services/cv-box.service';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { AuthService } from 'src/app/services/auth.service';
+
 
 @Component({
   selector: 'app-personal-info',
@@ -10,101 +13,105 @@ import { CountriesService } from 'src/app/services/countries.service';
 })
 export class PersonalInfoComponent implements OnInit {
 
-  stateInfo: any[] = [];
-  countryInfo: any[] = [];
-  cityInfo: any[] = [];
 
   infoForm: FormGroup;
   emailMessage: string;
 
+  userdata: any = {}
 
-  get jobs(): FormArray {
-    return this.infoForm.get('jobs') as FormArray;
-  }
 
   private validationMessages = {
     required: 'Please enter your email address.',
     email: 'Please enter a valid email address.'
   };
-  constructor(private fb: FormBuilder, private country: CountriesService) { }
+  constructor(
+    private fb: FormBuilder,
+    private country: CountriesService,
+    private db: AngularFirestore,
+    private cv: CvBoxService,
+    private firestore: AngularFirestore,
+    private auth: AuthService) {
+    this.db.doc<any>(`users/${this.auth.userData.uid}`).valueChanges().subscribe(
+      user => {
+        this.userdata = user;
+        this.populateTestDate()
+
+        console.log(this.userdata)
+      }, (error) => {
+        console.log(error);
+      }
+    );
+  }
 
   ngOnInit() {
-    this.getCountries();
+
+
+
 
     this.infoForm = this.fb.group({
       name: ['', [Validators.required, Validators.minLength(3)]],
       email: ['', [Validators.required, Validators.email]],
       phone: ['', [Validators.required]],
-      jobs: this.fb.array([this.buildJob()]),
+      age: ['', [Validators.required]],
+      gender: ['', [Validators.required]],
+      jobTitle: ['', Validators.required],
+      category: ['', Validators.required],
+      departments: ['', Validators.required],
+      year_experience: ['', Validators.required],
       country: ['', [Validators.required]],
       state: ['', [Validators.required]],
       city: ['', [Validators.required]],
-      Marital: '',
+      marital: ['', [Validators.required]],
+      military: ['', [Validators.required],]
 
+    })
+
+    // this.infoForm.patchValue({
+    //   category: this.userdata.category,
+    //   departments: this.userdata.departments,
+    //   country: this.userdata.country,
+    //   state: this.userdata.state,
+    // })
+  }
+
+  populateTestDate() {
+
+    console.log(this.userdata)
+
+    this.infoForm.patchValue({
+      name: this.userdata.name,
+      email: this.userdata.email,
+      phone: this.userdata.phone,
+      age: this.userdata.age,
+      gender: this.userdata.gender,
+      jobTitle: this.userdata.jobTitle,
+      category: this.userdata.category,
+      departments: this.userdata.departments,
+      year_experience: this.userdata.year_experience,
+      country: this.userdata.country,
+      state: this.userdata.state,
+      city: this.userdata.city,
+      marital: this.userdata.marital,
+      military: this.userdata.military
     })
   }
 
-  getCountries() {
-    this.country.allCountries().
-      subscribe(
-        data2 => {
-          this.countryInfo = data2.Countries;
-          //console.log('Data:', this.countryInfo);
-        },
-        err => console.log(err),
-        () => console.log('complete')
-      )
+  get cat() {
+    return this.userdata.category;
+
   }
 
-  onChangeCountry(countryValue) {
-    this.stateInfo = this.countryInfo[countryValue].States;
-    this.cityInfo = this.stateInfo[0].Cities;
-    console.log(this.cityInfo);
+  onSubmit(form: NgForm) {
+    let data = Object.assign({}, form.value);
+    delete data.id;
+    if (this.auth.userData.uid == null)
+      this.firestore.collection('users').add(data);
+    else
+      this.firestore.doc('users/' + this.auth.userData.uid).update(data);
+
   }
 
-  onChangeState(stateValue) {
-    this.cityInfo = this.stateInfo[stateValue].Cities;
-    //console.log(this.cityInfo);
-  }
-
-  buildJob(): FormGroup {
-    return this.fb.group({
-      jobTitle: ['', Validators.required],
-      category: ['', Validators.required],
-      department: ['', Validators.required],
-      yearsOfEperience: ['', Validators.required]
-    })
-  }
-
-  addJob(): void {
-    this.jobs.push(this.buildJob());
-  }
-  // isLinear = false;
-  // firstFormGroup: FormGroup;
-  // secondFormGroup: FormGroup;
-  // thirdFormGroup: FormGroup;
-
-  // constructor(private _formBuilder: FormBuilder) { }
-
-  // ngOnInit() {
-  //   this.firstFormGroup = this._formBuilder.group({
-  //     firstname: ['', Validators.required],
-  //     lastname: ['', Validators.required],
-  //     phone: ['', Validators.required]
 
 
-  //   });
-  //   this.secondFormGroup = this._formBuilder.group({
-  //     jobTitle: ['', Validators.required],
-  //     category: ['', Validators.required],
-  //     department: ['', Validators.required],
-  //     yeareEperience: ['', Validators.required]
-  //   });
 
-  //   this.thirdFormGroup = this._formBuilder.group({
-  //     country: ['', Validators.required],
-  //     state: ['', Validators.required],
-  //     city: ['', Validators.required],
-  //   });
-  // }
 }

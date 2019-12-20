@@ -1,18 +1,55 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
+
+interface Countries {
+  id: string;
+  name: string;
+  priority: number;
+}
+
+interface States {
+  country_id: string;
+  id: string;
+  name: string;
+  priority: number
+}
 
 @Injectable({
   providedIn: 'root'
 })
+
+
 export class CountriesService {
+  countriesCollection: AngularFirestoreCollection<Countries>
+  countries: Observable<Countries[]>
+  statesCollection: AngularFirestoreCollection<States>
+  states: Observable<States[]>
 
 
-  url: string = "https://raw.githubusercontent.com/sagarshirbhate/Country-State-City-Database/master/Contries.json";
+  usersCollections: AngularFirestoreCollection<any>;
+  users: Observable<any[]>
 
-  constructor(private http: HttpClient) { }
 
-  allCountries(): Observable<any> {
-    return this.http.get(this.url);
+
+  constructor(private db: AngularFirestore) {
+    this.countriesCollection = this.db.collection('countries')
+    this.countries = this.countriesCollection.valueChanges()
+
+    // this.statesCollection = this.db.collection(`states`)
+    // this.states = this.statesCollection.valueChanges()
   }
+
+
+  onChangeCountry(id) {
+
+    this.statesCollection = this.db.collection('states', ref => {
+      // Compose a query using multiple .where() methods
+      return ref
+        .where('country_id', '==', id)
+
+    });
+    this.states = this.statesCollection.valueChanges();
+  }
+
 }

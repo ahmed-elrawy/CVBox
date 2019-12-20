@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Renderer } from '@angular/core';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-profile-user',
@@ -8,7 +10,7 @@ import { Component, OnInit } from '@angular/core';
 export class ProfileUserComponent implements OnInit {
   public curentView: string = "resume-info";
 
-  constructor() { }
+  constructor(private render: Renderer, private auth: AuthService) { }
 
   ngOnInit() {
   }
@@ -23,6 +25,12 @@ export class ProfileUserComponent implements OnInit {
       console.log(this.curentView)
 
     }
+  }
+
+  public listClick(event: any) {
+    event.preventDefault();
+    this.render.setElementClass(event.target, "active", true);
+    // How to remove 'active' from siblings ?
   }
 
 }

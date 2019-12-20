@@ -1,4 +1,4 @@
-<header id="home-section" class="  text-center">
+<header id="home-section" class=" ">
 
     <div class="container">
         <div class="d-flex row-hl">
@@ -7,165 +7,70 @@
                     style=" color:#fff; margin-top: 40px; font-size: x-large;">HOME</a>
             </div>
 
-            <div class=" p-2 item-hl" style="margin-top: 40px;" *ngIf="currentUser else loggedOut">
-                <button type="button" [routerLink]="['/profile']" class="btn btn-outline-light">profile</button>
-                <button type="button" (click)="auth.logout()" class="btn btn-outline-light">signout</button>
-            </div>
-            <ng-template #loggedOut>
-                <div class=" p-2 item-hl" style="margin-top: 40px;">
-                    <button type=" button" [routerLink]="['/login']" class="btn btn-outline-light mr-4">login</button>
-                    <button type="button" [routerLink]="['/signup']" class="btn btn-outline-light mr-4">sign
-                        up</button>
-                </div>
-            </ng-template>
+
         </div>
     </div>
 
+
+    <div class="container">
+        <div class="row">
+            <div class="mx-auto ">
+                <div class="  container-profile">
+                    <div class="avatar-flip">
+                        <img src="http://media.idownloadblog.com/wp-content/uploads/2012/04/Phil-Schiller-headshot-e1362692403868.jpg"
+                            height="150" width="150">
+                        <img src="http://i1112.photobucket.com/albums/k497/animalsbeingdicks/abd-3-12-2015.gif~original"
+                            height="150" width="150">
+                    </div>
+                    <h2>Ahmed El rawy</h2>
+                    <h4>Front-end developer</h4>
+                </div>
+            </div>
+        </div>
+
+        <div class=" mx-4 mb-5 section2 mx-auto">
+            <div class="row mx-2">
+                <div class="col-md-5">
+                    <ul class="list-group">
+                        <li class="list-group-item " [routerLink]="['/profile/info']"
+                            (click)="view('personal-info'); listClick($event)"><span
+                                class="material-icons md-36">person</span>personal info
+                        </li>
+                        <li class="list-group-item" (click)="view('resume-info'); listClick($event)"><span
+                                class="material-icons md-36">assignment
+                            </span>resume info</li>
+                        <li class="list-group-item"><span class="material-icons md-48">https</span>change password</li>
+                        <li class="list-group-item"><span class="material-icons md-48">email</span>change email address
+                        </li>
+                        <li class="list-group-item" (click)="auth.logout()"><span
+                                class="material-icons md-48">exit_to_app
+                            </span>logout</li>
+
+
+                    </ul>
+                </div>
+
+                <div class="col-7">
+                    <ng-template [ngIf]="curentView == 'resume-info'">
+                        <img src="../../../assets/draw.png" alt="" style="width: 450px;">
+                        <button class="btn btn-primary">upload cv</button>
+                        <!-- <embed src="https://docs.google.com/gview?url=https://path.com/to/your/pdf.pdf&embedded=true"
+                            type="application/pdf" height="500px"> -->
+
+                    </ng-template>
+
+
+                    <ng-template [ngIf]="curentView == 'personal-info'">
+                        <app-personal-info></app-personal-info>
+
+                    </ng-template>
+
+                </div>
+            </div>
+        </div>
+    </div>
 
 </header>
 
-<div class="container">
-    <div class="row">
-        <div class="mx-auto ">
-            <div class="  container-profile">
-                <div class="avatar-flip">
-                    <img src="http://media.idownloadblog.com/wp-content/uploads/2012/04/Phil-Schiller-headshot-e1362692403868.jpg"
-                        height="150" width="150">
-                    <img src="http://i1112.photobucket.com/albums/k497/animalsbeingdicks/abd-3-12-2015.gif~original"
-                        height="150" width="150">
-                </div>
-                <h2>Ahmed El rawy</h2>
-                <h4>HOVER OVER CONTAINER</h4>
-            </div>
-        </div>
-    </div>
-
-    <div class=" mx-4 mb-5 section2 mx-auto">
-        <div class="row mx-2">
-            <div class="col-md-5">
-                <ul class="list-group">
-                    <li class="list-group-item active" (click)="view('personal-info')"><span
-                            class="material-icons md-36">person</span>personal info
-                    </li>
-                    <li class="list-group-item" (click)="view('resume-info')"><span
-                            class="material-icons md-36">assignment
-                        </span>resume info</li>
-                    <li class="list-group-item"><span class="material-icons md-48">https</span>change password</li>
-                    <li class="list-group-item"><span class="material-icons md-48">email</span>change email address</li>
-                    <li class="list-group-item"><span class="material-icons md-48">exit_to_app
-                        </span>logout</li>
-
-
-                </ul>
-            </div>
-
-            <div class="col-7   ">
-
-                <embed *ngIf="currentUser == 'resume-info'"
-                    src="https://docs.google.com/gview?url=https://path.com/to/your/pdf.pdf&embedded=true"
-                    type="application/pdf" height="500px">
-
-                <ng-template [ngIf]="curentView == 'personal-info'">
-                    <app-personal-info></app-personal-info>
-
-                </ng-template>
-
-            </div>
-        </div>
-    </div>
-</div>
-
 
 <div class="back" style="width: 100%; height: 100%;"></div>
-<!-- <div class="">
-
-    <div class="backgground">
-
-        <h4 style="color: white; z-index: 500; top: 150px;">home</h4>
-
-
-
-        <div class=" profile-page ">
-
-
-
-            <div class="main main-raised ">
-                <div class="profile-content">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-md-6 ml-auto mr-auto">
-                                <div class="profile">
-                                    <div class="avatar">
-                                        <img src="https://www.biography.com/.image/ar_1:1%2Cc_fill%2Ccs_srgb%2Cg_face%2Cq_auto:good%2Cw_300/MTU0NjQzOTk4OTQ4OTkyMzQy/ansel-elgort-poses-for-a-portrait-during-the-baby-driver-premiere-2017-sxsw-conference-and-festivals-on-march-11-2017-in-austin-texas-photo-by-matt-winkelmeyer_getty-imagesfor-sxsw-square.jpg"
-                                            alt="Circle Image" class="img-raised rounded-circle img-fluid">
-                                    </div>
-                                    <div class="name">
-                                        <h3 class="title">Christian Louboutin</h3>
-                                        <h6>Designer</h6>
-                                        <p>cairi Egipt</p>
-                                        <p><span>star </span> <span>view</span></p>
-                                        <a href="#pablo" class="btn btn-just-icon btn-link btn-dribbble"><i
-                                                class="fa fa-dribbble"></i></a>
-                                        <a href="#pablo" class="btn btn-just-icon btn-link btn-twitter"><i
-                                                class="fa fa-twitter"></i></a>
-                                        <a href="#pablo" class="btn btn-just-icon btn-link btn-pinterest"><i
-                                                class="fa fa-pinterest"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-
-
-                </div>
-
-
-            </div>
-            
-            <div class="container section2">
-                <div class="row mx-2">
-                    <div class="col-md-5 col-sm-12 part">
-                        <ul class="list-group">
-                            <li class="list-group-item active" (click)="view('personal-info')">personal-info</li>
-                            <li class="list-group-item" (click)="view('resume-info')">resume info</li>
-                            <li class="list-group-item">Morbi leo risus</li>
-                            <li class="list-group-item">Porta ac consectetur ac</li>
-                            <li class="list-group-item">Vestibulum at eros</li>
-                        </ul>
-                    </div>
-
-                    <div class="col-7   ">
-
-                        <embed *ngIf="currentUser == 'resume-info'"
-                            src="https://docs.google.com/gview?url=https://path.com/to/your/pdf.pdf&embedded=true"
-                            type="application/pdf" height="500px">
-
-                        <ng-template [ngIf]="curentView == 'personal-info'">
-                            <app-personal-info></app-personal-info>
-
-                        </ng-template>
-
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div> -->
-
-<!-- <div class="backgground">
-    <div class="profile">
-        <div class="container">
-            <div class="row">
-
-                <div class="avatar">
-                    <img src="https://www.biography.com/.image/ar_1:1%2Cc_fill%2Ccs_srgb%2Cg_face%2Cq_auto:good%2Cw_300/MTU0NjQzOTk4OTQ4OTkyMzQy/ansel-elgort-poses-for-a-portrait-during-the-baby-driver-premiere-2017-sxsw-conference-and-festivals-on-march-11-2017-in-austin-texas-photo-by-matt-winkelmeyer_getty-imagesfor-sxsw-square.jpg"
-                        alt="Circle Image" class="img-raised rounded-circle img-fluid">
-                </div>
-
-            </div>
-            <div class="row">
-                <div class="colx2"></div>
-            </div>
-        </div>
-    </div>
-</div> -->

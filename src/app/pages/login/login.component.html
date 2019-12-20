@@ -11,20 +11,14 @@
                         style=" color: #fff; margin-top: 40px; font-size: x-large;">HOME</a>
                 </div>
 
-                <div class=" p-2 item-hl" style="margin-top: 40px;" *ngIf="currentUser else loggedOut">
-                    <button type="button" [routerLink]="['/profile']" class="btn btn-outline-light">profile</button>
-                    <button type="button" (click)="auth.logout()" class="btn btn-outline-light">signout</button>
+
+
+                <div class=" p-2 item-hl" style="margin-top: 40px;">
+
+                    <button type="button" [routerLink]="['/signup']" class="btn btn-outline-light mr-4">sign
+                        up</button>
+
                 </div>
-                <ng-template #loggedOut>
-
-                    <div class=" p-2 item-hl" style="margin-top: 40px;">
-                        <button type=" button" [routerLink]="['/login']"
-                            class="btn btn-outline-light mr-4">login</button>
-                        <button type="button" [routerLink]="['/signup']" class="btn btn-outline-light mr-4">sign
-                            up</button>
-
-                    </div>
-                </ng-template>
 
             </div>
 

@@ -5,6 +5,7 @@ import { SignupComponent } from './pages/signup/signup.component';
 import { HomeComponent } from './pages/home/home.component';
 import { ProfileUserComponent } from './pages/profile-user/profile-user.component';
 import { PersonalInfoComponent } from './pages/personal-info/personal-info.component';
+import { AuthGuard } from './core/auth.guard';
 
 
 const routes: Routes = [
@@ -13,7 +14,11 @@ const routes: Routes = [
   { path: 'signup', component: SignupComponent },
   { path: 'home', component: HomeComponent },
   { path: 'profile', component: ProfileUserComponent },
-  { path: 'personal-info', component: PersonalInfoComponent },
+  { path: 'profile/info', component: ProfileUserComponent, canActivate: [AuthGuard] },
+
+  // {
+  //   path: 'personal-info', component: PersonalInfoComponent, canActivate: [AuthGuard],
+  // },
   { path: '**', redirectTo: '/login' },
 
 ];

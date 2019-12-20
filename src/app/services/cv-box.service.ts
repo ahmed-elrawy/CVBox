@@ -1,39 +1,52 @@
 import { Injectable } from '@angular/core';
 import { Observable, BehaviorSubject, of } from "rxjs";
 import { switchMap, map } from 'rxjs/operators';
-import { AngularFirestore, AngularFirestoreDocument } from "@angular/fire/firestore";
+import { AngularFirestore, AngularFirestoreDocument, AngularFirestoreCollection } from "@angular/fire/firestore";
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class CvBoxService {
-  public category: any
-  public test: Observable<any>;
-  public departments
+  public categories: Observable<any>;
+  // public departments: Observable<any>;
 
-  public selectedCategory: Observable<any>;
-  public changeCategory: BehaviorSubject<string | null> = new BehaviorSubject(null);
+  departmentCollection: AngularFirestoreCollection<any>;
+  departments: Observable<any[]>
 
+  usersCollections: AngularFirestoreCollection<any>;
+  users: Observable<any[]>
 
   constructor(
     private db: AngularFirestore,
 
   ) {
-
-    this.test = this.db.collection<any>('categories').valueChanges();
-
-    this.db.collection<any>('departments').valueChanges()
-      .subscribe(res => {
-        this.departments = res
-      });
-
-    // this.db.collection<any>('categories').valueChanges()
-    //   .subscribe(rea => {
-    //     this.category = rea
-    //     console.log(this.category)
-    //   });
-
+    this.categories = this.db.collection<any>('categories').valueChanges();
+    // this.departments = this.db.collection<any>('departments').valueChanges()
 
   }
+
+
+  getDepartments(id) {
+    this.departmentCollection = this.db.collection('departments', ref => {
+      // Compose a query using multiple .where() methods
+      return ref
+        .where('category_id', '==', id)
+    });
+    this.departments = this.departmentCollection.valueChanges();
+
+  }
+
+  getUsers(id) {
+
+    this.usersCollections = this.db.collection('users', ref => {
+      // Compose a query using multiple .where() methods
+      return ref
+        .where('category', '==', id)
+
+    });
+    this.users = this.usersCollections.valueChanges();
+  }
+
+
 }

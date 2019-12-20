@@ -41,7 +41,7 @@
                 <div class="form-group ">
                     <label for="phoneId">phone</label>
                     <div class="col-md-12">
-                        <input class="form-control" id="phoneId" type="tel" placeholder="phone (required)"
+                        <input class="form-control" id="phoneId" type="number" placeholder="phone (required)"
                             formControlName="phone" [ngClass]="{'is-invalid': (infoForm.get('phone').touched ||
                                                                 infoForm.get('phone').dirty) &&
                                                                 !infoForm.get('phone').valid }" />
@@ -53,6 +53,44 @@
                         </span>
                     </div>
                 </div>
+
+                <div class="form-group ">
+                    <label for="ageId">Age</label>
+                    <div class="col-md-12">
+                        <input class="form-control" id="ageId" type="number" placeholder="age (required)"
+                            formControlName="age" [ngClass]="{'is-invalid': (infoForm.get('age').touched ||
+                                                                    infoForm.get('age').dirty) &&
+                                                                    !infoForm.get('age').valid }" />
+                        <span class="invalid-feedback">
+                            <span *ngIf="infoForm.get('age').errors?.required">
+                                Please enter your age.
+                            </span>
+
+                        </span>
+                    </div>
+                </div>
+
+                <div class="form-group ">
+                    <label for="genderId">Gender</label>
+                    <div class="col-md-12">
+                        <select class="form-control" id="genderId" placeholder="gender (required)"
+                            formControlName="gender" [ngClass]="{'is-invalid': (infoForm.get('gender').touched ||
+                                        infoForm.get('gender').dirty) &&
+                                        !infoForm.get('gender').valid }">
+                            <option>--Select gender--</option>
+                            <option>Male</option>
+                            <option>Female</option>
+                        </select>
+
+                        <span class="invalid-feedback">
+                            <span *ngIf="infoForm.get('gender').errors?.required">
+                                Please enter gender.
+                            </span>
+
+                        </span>
+                    </div>
+                </div>
+
             </div>
 
         </div>
@@ -67,9 +105,9 @@
                     <div class="col-md-12">
                         <input class="form-control" id="jobTitleId" type="tel" placeholder="job Title (required)"
                             formControlName="jobTitle"
-                            [ngClass]="{'is-invalid': (job.controls.jobTitle.touched || job.controls.jobTitle.dirty) &&!job.controls.jobTitle.valid }" />
+                            [ngClass]="{'is-invalid': (infoForm.get('jobTitle').touched || infoForm.get('jobTitle').dirty) &&!infoForm.get('jobTitle').valid }" />
                         <span class="invalid-feedback">
-                            <span *ngIf="job.controls.jobTitle.errors?.required">
+                            <span *ngIf="infoForm.get('jobTitle').errors?.required">
                                 Please enter your jobTitle.
                             </span>
 
@@ -81,11 +119,20 @@
                 <div class="form-group">
                     <label for="categoryId">category</label>
                     <div class="col-md-12">
-                        <input class="form-control" id="categoryId" type="text" placeholder=" category (required)"
-                            formControlName="category"
-                            [ngClass]="{'is-invalid': (job.controls.category.touched || job.controls.category.dirty) &&!job.controls.category.valid }" />
+
+                        <select class="form-control" (change)="cv.getDepartments($event.target.value)" id="categoryId"
+                            placeholder="category (required)" formControlName="category" [ngClass]="{'is-invalid': (infoForm.get('category').touched ||
+                                    infoForm.get('category').dirty) &&
+                                    !infoForm.get('category').valid }">
+                            <option>--Select category--</option>
+
+                            <option *ngFor="let category of cv.categories |async" [(value)]="userdata.category">
+                                {{category.name}}</option>
+                        </select>
+
+
                         <span class="invalid-feedback">
-                            <span *ngIf="job.controls.category.errors?.required">
+                            <span *ngIf="infoForm.get('category').errors?.required">
                                 Please enter your category.
                             </span>
 
@@ -96,11 +143,22 @@
                 <div class="form-group ">
                     <label for="departmentyId">department</label>
                     <div class="col-md-12">
-                        <input class="form-control" id="departmentId" type="text" placeholder=" department (required)"
-                            formControlName="department"
-                            [ngClass]="{'is-invalid': (job.controls.department.touched || job.controls.department.dirty) &&!job.controls.department.valid }" />
+                        <select class="form-control" id="departmentId" placeholder="department (required)"
+                            formControlName="departments" [ngClass]="{'is-invalid': (infoForm.get('departments').touched ||
+                                    infoForm.get('departments').dirty) &&
+                                    !infoForm.get('departments').valid }">
+                            <div></div>
+
+                            <option>--Select department--</option>
+
+                            <option *ngFor="let department of cv.departments |async  " [(value)]="userdata.departments">
+                                {{department.name}}</option>
+
+
+                        </select>
+
                         <span class="invalid-feedback">
-                            <span *ngIf="job.controls.department.errors?.required">
+                            <span *ngIf="infoForm.get('departments').errors?.required">
                                 Please enter department.
                             </span>
 
@@ -113,16 +171,17 @@
                         Eperience</label>
                     <div class="col-md-12">
                         <input class="form-control" id="yearsOfEperienceId" type="text"
-                            placeholder=" yearsOfEperience (required)" formControlName="yearsOfEperience"
-                            [ngClass]="{'is-invalid': (job.controls.yearsOfEperience.touched || job.controls.yearsOfEperience.dirty) &&!job.controls.yearsOfEperience.valid }" />
+                            placeholder=" years Of Eperience (required)" formControlName="year_experience"
+                            [ngClass]="{'is-invalid': (infoForm.get('year_experience').touched || infoForm.get('year_experience').dirty) &&!infoForm.get('year_experience').valid }" />
                         <span class="invalid-feedback">
-                            <span *ngIf="job.controls.yearsOfEperience.errors?.required">
+                            <span *ngIf="infoForm.get('year_experience').errors?.required">
                                 Please enter years Of Eperience.
                             </span>
 
                         </span>
                     </div>
                 </div>
+
             </div>
 
         </div>
@@ -136,12 +195,14 @@
                 <div class="form-group ">
                     <label for="nameId">Country</label>
                     <div class="col-md-12">
-                        <select class="form-control" id="countryId" (change)="onChangeCountry($event.target.value)"
-                            placeholder="Country (required)" formControlName="country" [ngClass]="{'is-invalid': (infoForm.get('country').touched ||
+                        <select class="form-control" (change)="country.onChangeCountry($event.target.value)" id="
+                            countryId" placeholder="Country (required)" formControlName="country" [ngClass]="{'is-invalid': (infoForm.get('country').touched ||
                                     infoForm.get('country').dirty) &&
                                     !infoForm.get('country').valid }">
-                            <option *ngFor="let country of countryInfo; let i = index" value="{{i}}">
-                                {{country.CountryName}}</option>
+                            <option>--Select country--</option>
+
+                            <option *ngFor="let country of country.countries |async" [value]="country.name">
+                                {{country.name}}</option>
                         </select>
                         <span class="invalid-feedback">
                             <span *ngIf="infoForm.get('country').errors?.required">
@@ -156,12 +217,12 @@
                     <label for="stateId">State</label>
                     <div class="col-md-12">
 
-                        <select class="form-control" (change)="onChangeState($event.target.value)" id="stateId"
-                            placeholder="state (required)" formControlName="state" [ngClass]="{'is-invalid': (infoForm.get('state').touched ||
+                        <select class="form-control" id="stateId" placeholder="state (required)" formControlName="state"
+                            [ngClass]="{'is-invalid': (infoForm.get('state').touched ||
                                         infoForm.get('state').dirty) &&
                                         !infoForm.get('state').valid }">
-                            <option *ngIf="stateInfo == ''" value="-1">--Select State--</option>
-                            <option *ngFor="let state of stateInfo; let j = index" value="{{j}}">{{state.StateName}}
+                            <option>--Select State--</option>
+                            <option *ngFor="let state of country.states | async">{{state.name}}
                             </option>
                         </select>
                         <span class="invalid-feedback">
@@ -171,7 +232,7 @@
                         </span>
                     </div>
                 </div>
-
+                <!-- 
                 <div class="form-group ">
                     <label for="cityId">City</label>
                     <div class="col-md-12">
@@ -190,6 +251,7 @@
                         </span>
                     </div>
                 </div>
+                 -->
             </div>
 
         </div>
@@ -203,10 +265,15 @@
                 <div class="form-group ">
                     <label for="MaritalId">Marital Status</label>
                     <div class="col-md-12">
-                        <input class="form-control" id="MaritalId" type="text" placeholder="Marital Status (required)"
+
+                        <select class="form-control" id="MaritalId" placeholder="Marital Status (required)"
                             formControlName="marital" [ngClass]="{'is-invalid': (infoForm.get('marital').touched ||
-                                                                    infoForm.get('marital').dirty) &&
-                                                                    !infoForm.get('marital').valid }" />
+                                        infoForm.get('marital').dirty) &&
+                                        !infoForm.get('marital').valid }">
+                            <option>Unspecified</option>
+                            <option>Single</option>
+                            <option>Married</option>
+                        </select>
                         <span class="invalid-feedback">
                             <span *ngIf="infoForm.get('marital').errors?.required">
                                 Please enter your name.
@@ -217,10 +284,16 @@
                 <div class="form-group ">
                     <label for="MilitaryId">Military Status</label>
                     <div class="col-md-12">
-                        <input class="form-control" id="MilitaryId" type="text" placeholder="Military Status (required)"
+
+                        <select class="form-control" id="MilitaryId" placeholder="Marital Status (required)"
                             formControlName="military" [ngClass]="{'is-invalid': (infoForm.get('military').touched ||
-                                                                        infoForm.get('military').dirty) &&
-                                                                        !infoForm.get('military').valid }" />
+                                        infoForm.get('military').dirty) &&
+                                        !infoForm.get('military').valid }">
+                            <option>Not Applicable</option>
+                            <option>Exempted</option>
+                            <option>Completed</option>
+                            <option>Postponed</option>
+                        </select>
                         <span class="invalid-feedback">
                             <span *ngIf="infoForm.get('military').errors?.required">
                                 Please enter your name.
@@ -231,236 +304,16 @@
             </div>
         </div>
     </div>
+
+
     <div class="form-group row mb-2" style="float: right;">
         <div class="offset-md-2 col-md-4">
             <button class="btn btn-primary mr-3" type="submit" style="width:80px"
                 [title]="infoForm.valid ? 'Save your entered data' : 'Disabled until the form data is valid'"
-                [disabled]="!infoForm.valid">
+                (click)="onSubmit(infoForm)">
                 Save
             </button>
 
         </div>
     </div>
 </form>
-
-
-
-<!-- <app-nav></app-nav>
-<div class="container">
-
-
-    <div class="card">
-        <div class="card-header">
-            Personal information
-        </div>
-
-        <div class="card-body">
-            <form novalidate [formGroup]="infoForm" class="mx-5">
-
-                <h4 class="display-2 mb-4">basic informatiopn</h4>
-                <div class="form-group row mb-2">
-                    <label class="col-md-2 col-form-label" for="nameId">Name</label>
-                    <div class="col-md-8">
-                        <input class="form-control" id="nameId" type="text" placeholder="Name (required)"
-                            formControlName="name" [ngClass]="{'is-invalid': (infoForm.get('name').touched ||
-                            infoForm.get('name').dirty) &&
-                            !infoForm.get('name').valid }" />
-                        <span class="invalid-feedback">
-                            <span *ngIf="infoForm.get('name').errors?.required">
-                                Please enter your name.
-                            </span>
-                        </span>
-                    </div>
-                </div>
-
-                <div class="form-group row mb-2">
-                    <label class="col-md-2 col-form-label" for="emailId">Email</label>
-                    <div class="col-md-8">
-                        <input class="form-control" id="emailId" type="email" placeholder="email (required)"
-                            formControlName="email" [ngClass]="{'is-invalid': (infoForm.get('email').touched ||
-                                    infoForm.get('email').dirty) &&
-                                    !infoForm.get('email').valid }" />
-                        <span class="invalid-feedback">
-                            <span *ngIf="infoForm.get('email').errors?.required">
-                                Please enter your email.
-                            </span>
-                            <span *ngIf="infoForm.get('email').errors?.email">
-                                Please enter valid email.
-                            </span>
-                        </span>
-                    </div>
-                </div>
-
-                <div class="form-group row mb-2">
-                    <label class="col-md-2 col-form-label" for="phoneId">phone</label>
-                    <div class="col-md-8">
-                        <input class="form-control" id="phoneId" type="tel" placeholder="phone (required)"
-                            formControlName="phone" [ngClass]="{'is-invalid': (infoForm.get('phone').touched ||
-                                        infoForm.get('phone').dirty) &&
-                                        !infoForm.get('phone').valid }" />
-                        <span class="invalid-feedback">
-                            <span *ngIf="infoForm.get('phone').errors?.required">
-                                Please enter your phone.
-                            </span>
-
-                        </span>
-                    </div>
-                </div>
-                <br>
-                <div>
-                    <h4 class=" display-2 mb-4">Work Exppeience</h4>
-
-                    <div formArrayName="jobs">
-                        <div [formGroupName]="i" *ngFor="let job of jobs.controls; let i=index">
-                            <div class="form-group row mb-2">
-                                <label class="col-md-2 col-form-label" for="jobTitleId">job Title</label>
-                                <div class="col-md-8">
-                                    <input class="form-control" id="jobTitleId" type="tel"
-                                        placeholder="job Title (required)" formControlName="jobTitle"
-                                        [ngClass]="{'is-invalid': (job.controls.jobTitle.touched || job.controls.jobTitle.dirty) &&!job.controls.jobTitle.valid }" />
-                                    <span class="invalid-feedback">
-                                        <span *ngIf="job.controls.jobTitle.errors?.required">
-                                            Please enter your jobTitle.
-                                        </span>
-
-                                    </span>
-                                </div>
-                            </div>
-                            <div class="form-group row mb-2">
-                                <label class="col-md-2 col-form-label" for="categoryId">category</label>
-                                <div class="col-md-8">
-                                    <input class="form-control" id="categoryId" type="text"
-                                        placeholder=" category (required)" formControlName="category"
-                                        [ngClass]="{'is-invalid': (job.controls.category.touched || job.controls.category.dirty) &&!job.controls.category.valid }" />
-                                    <span class="invalid-feedback">
-                                        <span *ngIf="job.controls.category.errors?.required">
-                                            Please enter your category.
-                                        </span>
-
-                                    </span>
-                                </div>
-                            </div>
-
-                            <div class="form-group row mb-2">
-                                <label class="col-md-2 col-form-label" for="departmentyId">department</label>
-                                <div class="col-md-8">
-                                    <input class="form-control" id="departmentId" type="text"
-                                        placeholder=" department (required)" formControlName="department"
-                                        [ngClass]="{'is-invalid': (job.controls.department.touched || job.controls.department.dirty) &&!job.controls.department.valid }" />
-                                    <span class="invalid-feedback">
-                                        <span *ngIf="job.controls.department.errors?.required">
-                                            Please enter department.
-                                        </span>
-
-                                    </span>
-                                </div>
-                            </div>
-
-                            <div class="form-group row mb-2">
-                                <label class="col-md-2 col-form-label" for="yearsOfEperienceId">years Of
-                                    Eperience</label>
-                                <div class="col-md-8">
-                                    <input class="form-control" id="yearsOfEperienceId" type="text"
-                                        placeholder=" yearsOfEperience (required)" formControlName="yearsOfEperience"
-                                        [ngClass]="{'is-invalid': (job.controls.yearsOfEperience.touched || job.controls.yearsOfEperience.dirty) &&!job.controls.yearsOfEperience.valid }" />
-                                    <span class="invalid-feedback">
-                                        <span *ngIf="job.controls.yearsOfEperience.errors?.required">
-                                            Please enter years Of Eperience.
-                                        </span>
-
-                                    </span>
-                                </div>
-                            </div>
-                            <br>
-                        </div>
-
-                        <div class="form-group row mb-2">
-                            <div class="col-md-4">
-                                <button class="btn btn-outline-primary" type="button"
-                                    [title]="jobs.valid ? 'Add another mailing job' : 'Disabled until the existing jobs data is valid'"
-                                    [disabled]="!jobs.valid" (click)="addJob()">
-                                    Add Another job
-                                </button>
-                            </div>
-
-                        </div>
-                    </div>
-
-                </div>
-                <div class="my-5">
-                    <h4 class=" display-2 mb-4">Address</h4>
-
-                    <div class="form-group row mb-2">
-                        <label class="col-md-2 col-form-label" for="nameId">Country</label>
-                        <div class="col-md-8">
-                            <select class="form-control" id="countryId" (change)="onChangeCountry($event.target.value)"
-                                placeholder="Country (required)" formControlName="country" [ngClass]="{'is-invalid': (infoForm.get('country').touched ||
-                                    infoForm.get('country').dirty) &&
-                                    !infoForm.get('country').valid }">
-                                <option *ngFor="let country of countryInfo; let i = index" value="{{i}}">
-                                    {{country.CountryName}}</option>
-                            </select>
-                            <span class="invalid-feedback">
-                                <span *ngIf="infoForm.get('country').errors?.required">
-                                    Please enter your country.
-                                </span>
-                            </span>
-                        </div>
-                    </div>
-
-                    <div class="form-group row mb-2">
-                        <label class="col-md-2 col-form-label" for="stateId">State</label>
-                        <div class="col-md-8">
-
-                            <select class="form-control" (change)="onChangeState($event.target.value)" id="stateId"
-                                placeholder="state (required)" formControlName="state" [ngClass]="{'is-invalid': (infoForm.get('state').touched ||
-                                        infoForm.get('state').dirty) &&
-                                        !infoForm.get('state').valid }">
-                                <option *ngIf="stateInfo == ''" value="-1">--Select State--</option>
-                                <option *ngFor="let state of stateInfo; let j = index" value="{{j}}">{{state.StateName}}
-                                </option>
-                            </select>
-                            <span class="invalid-feedback">
-                                <span *ngIf="infoForm.get('state').errors?.required">
-                                    Please enter your state.
-                                </span>
-                            </span>
-                        </div>
-                    </div>
-
-                    <div class="form-group row mb-2">
-                        <label class="col-md-2 col-form-label" for="cityId">City</label>
-                        <div class="col-md-8">
-
-                            <select class="form-control" id="cityId" placeholder="city (required)"
-                                formControlName="city" [ngClass]="{'is-invalid': (infoForm.get('city').touched ||
-                                            infoForm.get('city').dirty) &&
-                                            !infoForm.get('city').valid }">
-                                <option *ngIf="cityInfo == ''" value="-1">--Select CIty--</option>
-                                <option *ngFor="let city of cityInfo; let k = index" value="{{k}}">{{city}}</option>
-                            </select>
-                            <span class="invalid-feedback">
-                                <span *ngIf="infoForm.get('city').errors?.required">
-                                    Please enter your city.
-                                </span>
-                            </span>
-                        </div>
-                    </div>
-
-                </div>
-                <div class="form-group row mb-2" style="float: right;">
-                    <div class="offset-md-2 col-md-4">
-                        <button class="btn btn-primary mr-3" type="submit" style="width:80px"
-                            [title]="infoForm.valid ? 'Save your entered data' : 'Disabled until the form data is valid'"
-                            [disabled]="!infoForm.valid">
-                            Save
-                        </button>
-
-                    </div>
-                </div>
-            </form>
-        </div>
-
-    </div>
-
-</div> -->

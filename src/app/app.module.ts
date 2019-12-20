@@ -34,6 +34,7 @@ import { AuthService } from './services/auth.service';
 import { PersonalInfoComponent } from './pages/personal-info/personal-info.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CountriesService } from './services/countries.service';
+import { LoadingSpinnerComponent } from './ui/loading-spinner/loading-spinner.component';
 
 
 
@@ -45,7 +46,8 @@ import { CountriesService } from './services/countries.service';
     LoginComponent,
     SignupComponent,
     ProfileUserComponent,
-    PersonalInfoComponent
+    PersonalInfoComponent,
+    LoadingSpinnerComponent
   ],
   imports: [
     BrowserModule,
