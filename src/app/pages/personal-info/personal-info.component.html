@@ -41,7 +41,7 @@
                 <div class="form-group ">
                     <label for="phoneId">phone</label>
                     <div class="col-md-12">
-                        <input class="form-control" id="phoneId" type="number" placeholder="phone (required)"
+                        <input class="form-control" id="phoneId" type="tel" placeholder="phone (required)"
                             formControlName="phone" [ngClass]="{'is-invalid': (infoForm.get('phone').touched ||
                                                                 infoForm.get('phone').dirty) &&
                                                                 !infoForm.get('phone').valid }" />
@@ -126,9 +126,10 @@
                                     !infoForm.get('category').valid }">
                             <option>--Select category--</option>
 
-                            <option *ngFor="let category of cv.categories |async" [(value)]="userdata.category">
+                            <option *ngFor="let category of cv.categories |async" [value]="category.name">
                                 {{category.name}}</option>
                         </select>
+
 
 
                         <span class="invalid-feedback">
@@ -151,7 +152,7 @@
 
                             <option>--Select department--</option>
 
-                            <option *ngFor="let department of cv.departments |async  " [(value)]="userdata.departments">
+                            <option *ngFor="let department of cv.departments |async" [value]="department.name">
                                 {{department.name}}</option>
 
 
@@ -222,7 +223,7 @@
                                         infoForm.get('state').dirty) &&
                                         !infoForm.get('state').valid }">
                             <option>--Select State--</option>
-                            <option *ngFor="let state of country.states | async">{{state.name}}
+                            <option *ngFor="let state of country.states | async" [value]="state.name">{{state.name}}
                             </option>
                         </select>
                         <span class="invalid-feedback">
@@ -232,26 +233,28 @@
                         </span>
                     </div>
                 </div>
-                <!-- 
+
                 <div class="form-group ">
                     <label for="cityId">City</label>
                     <div class="col-md-12">
 
-                        <select class="form-control" id="cityId" placeholder="city (required)" formControlName="city"
-                            [ngClass]="{'is-invalid': (infoForm.get('city').touched ||
-                                            infoForm.get('city').dirty) &&
-                                            !infoForm.get('city').valid }">
-                            <option *ngIf="cityInfo == ''" value="-1">--Select CIty--</option>
-                            <option *ngFor="let city of cityInfo; let k = index" value="{{k}}">{{city}}</option>
-                        </select>
+
+                        <input class="form-control" id="jobTitleId" type="tel" id="cityId" placeholder="city (required)"
+                            formControlName="city" [ngClass]="{'is-invalid': (infoForm.get('city').touched ||
+                        infoForm.get('city').dirty) &&
+                        !infoForm.get('city').valid }" />
                         <span class="invalid-feedback">
                             <span *ngIf="infoForm.get('city').errors?.required">
                                 Please enter your city.
                             </span>
+
                         </span>
+
+
+
                     </div>
                 </div>
-                 -->
+
             </div>
 
         </div>

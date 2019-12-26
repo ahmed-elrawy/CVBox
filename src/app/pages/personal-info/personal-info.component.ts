@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, Validators, FormBuilder, FormArray, NgForm } from '@angular/forms';
 import { CountriesService } from 'src/app/services/countries.service';
 import { CvBoxService } from 'src/app/services/cv-box.service';
-import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { AuthService } from 'src/app/services/auth.service';
 
 
@@ -18,6 +18,7 @@ export class PersonalInfoComponent implements OnInit {
   emailMessage: string;
 
   userdata: any = {}
+  departmentCollection: AngularFirestoreCollection<any>;
 
 
   private validationMessages = {
@@ -72,11 +73,15 @@ export class PersonalInfoComponent implements OnInit {
     //   country: this.userdata.country,
     //   state: this.userdata.state,
     // })
+
+
+
+
   }
 
   populateTestDate() {
-
-    console.log(this.userdata)
+    this.cv.getDepartments(this.userdata.category)
+    this.country.onChangeCountry(this.userdata.country)
 
     this.infoForm.patchValue({
       name: this.userdata.name,
@@ -102,6 +107,7 @@ export class PersonalInfoComponent implements OnInit {
   }
 
   onSubmit(form: NgForm) {
+    alert("info updated")
     let data = Object.assign({}, form.value);
     delete data.id;
     if (this.auth.userData.uid == null)

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable, BehaviorSubject, of } from "rxjs";
 import { switchMap, map } from 'rxjs/operators';
 import { AngularFirestore, AngularFirestoreDocument, AngularFirestoreCollection } from "@angular/fire/firestore";
+import { AuthService } from './auth.service';
 
 
 @Injectable({
@@ -12,17 +13,21 @@ export class CvBoxService {
   // public departments: Observable<any>;
 
   departmentCollection: AngularFirestoreCollection<any>;
-  departments: Observable<any[]>
+  departments: Observable<any[] | string>
 
   usersCollections: AngularFirestoreCollection<any>;
   users: Observable<any[]>
-
+  userdata: any = {}
   constructor(
+    private auth: AuthService,
     private db: AngularFirestore,
 
   ) {
+
+
     this.categories = this.db.collection<any>('categories').valueChanges();
     // this.departments = this.db.collection<any>('departments').valueChanges()
+
 
   }
 
@@ -49,4 +54,16 @@ export class CvBoxService {
   }
 
 
+  fun() {
+
+
+
+    this.departmentCollection = this.db.collection('departments', ref => {
+      // Compose a query using multiple .where() methods
+      return ref
+        .where('category_id', '==', this.userdata.category)
+    });
+    this.departments = this.departmentCollection.valueChanges();
+
+  }
 }
