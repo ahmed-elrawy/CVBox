@@ -7,6 +7,8 @@ import { LoadingService } from 'src/app/servies/loading.service';
 import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
 import { Router, ActivatedRoute } from '@angular/router';
+import { switchMap } from 'rxjs/operators';
+
 
 @Component({
   selector: 'app-login',
@@ -31,7 +33,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/chat';
+    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/home';
   }
 
   private createForm(): void {
@@ -55,9 +57,10 @@ export class LoginComponent implements OnInit, OnDestroy {
           if (success) {
             this.router.navigateByUrl(this.returnUrl);
           } else {
-            this.displayFailedLogin()
+            // this.displayFailedLogin()
           }
           this.loadingService.isLoading.next(false);
+          console.log(success)
         })
       );
     } else {

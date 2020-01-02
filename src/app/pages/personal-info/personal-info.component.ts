@@ -80,8 +80,11 @@ export class PersonalInfoComponent implements OnInit {
   }
 
   populateTestDate() {
-    this.cv.getDepartments(this.userdata.category)
-    this.country.onChangeCountry(this.userdata.country)
+
+    if (this.userdata.category && this.userdata.country) {
+      this.cv.getDepartments(this.userdata.category)
+      this.country.onChangeCountry(this.userdata.country)
+    }
 
     this.infoForm.patchValue({
       name: this.userdata.name,

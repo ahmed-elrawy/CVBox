@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, NgZone } from '@angular/core';
 import { Router } from "@angular/router";
 import { User } from "../classes/user";
 import { Alert } from "../classes/alert";
@@ -9,6 +9,7 @@ import { AngularFirestore, AngularFirestoreDocument } from "@angular/fire/firest
 import { switchMap } from 'rxjs/operators';
 import { from } from 'rxjs';
 import * as firebase from 'firebase';
+import { AlertType } from 'src/app/enum/alert-type.enum';
 
 @Injectable({
   providedIn: 'root'
@@ -23,7 +24,8 @@ export class AuthService {
     private router: Router,
     private alertService: AlertService,
     private afAuth: AngularFireAuth,
-    private db: AngularFirestore
+    private db: AngularFirestore,
+    public ngZone: NgZone
   ) {
     this.currentUser = this.afAuth.authState.pipe(
       switchMap((user) => {
@@ -42,23 +44,17 @@ export class AuthService {
     this.setCurrentUserSnapshot()
   }
 
-  public signup(firstName: string, lastName: string, email: string, password: string, phone: string): Observable<boolean> {
+  public signup(name: string, lastName: string, email: string, password: string, phone: string): Observable<boolean> {
     const promise = this.afAuth.auth.createUserWithEmailAndPassword(email, password)
       .then((user) => {
-        const userRef: AngularFirestoreDocument<User> = this.db.doc(`users/${user.user.uid}`);
-        const updatedUser = {
-          id: user.user.uid,
-          email: user.user.email,
-          firstName,
-          lastName,
-          photoUrl: 'https://firebasestorage.googleapis.com/v0/b/chat-4f314.appspot.com/o/default_profile_pic.jpg?alt=media&token=15171a5a-45fa-4e7e-9a4a-522bb330f2ba',
-          phone
-        }
-
-        userRef.set(updatedUser);
+        this.SendVerificationMail();
+        this.SetUserData(user, name, lastName, password, phone)
         return true;
       })
-      .catch((err) => false)
+      .catch((err) => {
+        window.alert(err.message)
+        return false
+      })
     return from(promise);
 
 
@@ -66,9 +62,42 @@ export class AuthService {
   }
 
 
+  // public login(email: string, password: string): Observable<boolean> {
+  //   const promise = this.afAuth.auth.signInWithEmailAndPassword(email, password)
+  //     .then((user) => {
+
+  //       if (this.afAuth.auth.currentUser.emailVerified) {
+  //         this.ngZone.run(() => {
+  //           console.log()
+  //         });
+  //       } else {
+  //         alert("this email not verified")
+  //         this.router.navigate(['verify-email-address']);
+
+  //       }
+  //       const userRef: AngularFirestoreDocument<User> = this.db.doc(`users/${user.user.uid}`);
+  //       const updatedUser = {
+  //         uid: user.user.uid,
+  //         email: user.user.email,
+  //         emailVerified: user.user.emailVerified
+  //       }
+
+  //       userRef.set(updatedUser, {
+  //         merge: true
+  //       });
+
+  //       return true
+  //     })
+  //     .catch((err) => {
+  //       window.alert(err.message)
+  //       return false
+  //     })
+  //   return from(promise);
+
+  // }
   public login(email: string, password: string): Observable<boolean> {
     const promise = this.afAuth.auth.signInWithEmailAndPassword(email, password)
-      .then((user) => this.router.navigate(['/home']))
+      .then((user) => true)
       .catch((user) => false)
     return from(promise);
 
@@ -86,12 +115,32 @@ export class AuthService {
   private setCurrentUserSnapshot(): void {
     this.currentUser.subscribe(user => this.currentUserSnapshot = user)
   }
+  SetUserData(user, name?: string, lastName?: string, password?: string, phone?: string) {
+    console.log(user.user.emailVerified)
+    const userRef: AngularFirestoreDocument<User> = this.db.doc(`users/${user.user.uid}`);
+    const updatedUser = {
+      uid: user.user.uid,
+      email: user.user.email,
+      name,
+      lastName,
+      photoUrl: 'https://firebasestorage.googleapis.com/v0/b/chat-4f314.appspot.com/o/default_profile_pic.jpg?alt=media&token=15171a5a-45fa-4e7e-9a4a-522bb330f2ba',
+      phone,
+      password,
+      emailVerified: user.user.emailVerified
 
+    }
+
+    userRef.set(updatedUser, {
+      merge: true
+    });
+  }
+
+  // Send email verfificaiton when new user sign up
   // Send email verfificaiton when new user sign up
   SendVerificationMail() {
     return this.afAuth.auth.currentUser.sendEmailVerification()
       .then(() => {
-        this.router.navigate(['<!-- enter your route name here -->']);
+        this.router.navigate(['verify-email-address']);
       })
   }
 
@@ -103,4 +152,17 @@ export class AuthService {
       .catch((error) => console.log(error))
   }
 
+  ForgotPassword(passwordResetEmail) {
+    return this.afAuth.auth.sendPasswordResetEmail(passwordResetEmail)
+      .then(() => {
+        window.alert('Password reset email sent, check your inbox.');
+      }).catch((error) => {
+        window.alert(error)
+      })
+  }
+
+  private displayFailedLogin(message): void {
+    const faildLoginAlert = new Alert(message, AlertType.Danger)
+    this.alertService.alerts.next(faildLoginAlert);
+  }
 }

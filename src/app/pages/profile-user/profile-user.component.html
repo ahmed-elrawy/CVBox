@@ -52,70 +52,31 @@
 
                 <div class="col-7">
                     <ng-template [ngIf]="curentView == 'resume-info'">
-                        <img src="../../../assets/draw.png" alt="" style="width: 450px;">
+                        <img *ngIf="!PDFURL" src="../../../assets/draw.png" alt="" style="width: 450px;">
+                        <div *ngIf="PDFURL">
 
-                        <div class="dropzone" dropZone (hovered)="toggleHover($event)" (dropped)="startUpload($event)"
-                            [class.hovering]="isHovering">
+                            <embed [src]="PDFURL | safe" type="application/pdf" height="500px" width="450px">
+                            <a [href]="PDFURL" target="_blank" rel="noopener">Download Me!</a>
+                        </div>
 
-
-
-                            <h3>AngularFire Drop Zone</h3>
-
-                            <div class="file">
-                                <label class="file-label">
+                        <div class="file">
+                            <label class="file-label">
 
 
-                                    <input class="file-input" type="file" (change)="startUpload($event.target.files)"
-                                        accept="application/pdf">
+                                <input class="file-input" type="file" (change)="startUpload($event.target.files)"
+                                    accept="application/pdf">
 
 
-                                    <span class="file-cta">
-                                        <span class="file-icon">
-                                            <i class="fa fa-upload"></i>
-                                        </span>
-                                        <span class="file-label">
-                                            or choose a file…
-                                        </span>
+                                <span class="file-cta">
+                                    <span class="file-icon">
+                                        <i class="fa fa-upload"></i>
                                     </span>
-                                </label>
-                            </div>
+                                    <span class="file-label">
+                                        or choose a file…
+                                    </span>
+                                </span>
+                            </label>
                         </div>
-
-
-                        <div *ngIf="percentage | async as pct">
-
-                            <progress class="progress is-info" [value]="pct" max="100">
-                            </progress>
-
-                            {{ pct | number }}%
-
-                        </div>
-
-
-                        <div *ngIf="snapshot | async as snap">
-                            <!-- {{ snap.bytesTransferred | fileSize }} of {{ snap.totalBytes | fileSize }} -->
-
-                            <div *ngIf="downloadURL | async as url">
-                                <h3>Results!</h3>
-                                <embed [src]="url" type="application/pdf" height="500px">
-                                <a [href]="url" target="_blank" rel="noopener">Download Me!</a>
-                            </div>
-
-                            <button (click)="task.pause()" class="button is-warning"
-                                [disabled]="!isActive(snap)">Pause</button>
-                            <button (click)="task.cancel()" class="button is-danger"
-                                [disabled]="!isActive(snap)">Cancel</button>
-                            <button (click)="task.resume()" class="button is-info"
-                                [disabled]="!(snap?.state === 'paused')">Resume</button>
-
-                        </div>
-
-
-                        <!-- <input type="file" (change)="upload($event)" />
-                        <div>{{ uploadPercent | async }}</div>
-                        <a [href]="downloadURL | async">{{ downloadURL | async }}</a> -->
-
-
 
                     </ng-template>
 
@@ -129,13 +90,7 @@
             </div>
         </div>
     </div>
-    <object
-        data="https://firebasestorage.googleapis.com/v0/b/cvstore-73c98.appspot.com/o/CV-F.pdf?alt=media&token=9aa92407-d068-4222-8bb1-1a89361259c0"
-        type="application/pdf" width="100%" height="100%">
-        <p>Your browser does not support PDFs.
-            <a [href]="userdata.pdfUrl">Download the PDF</a>.</p>
-    </object>
-    <h1><a [href]="userdata.pdfUrl">pdfUrl</a></h1>
+
 </header>
 
 

@@ -6,7 +6,7 @@ import { AngularFireStorageReference, AngularFireUploadTask, AngularFireStorage 
 import { Observable } from 'rxjs';
 import { finalize } from 'rxjs/operators';
 import { AngularFirestore, AngularFirestoreCollection } from "@angular/fire/firestore";
-import { map, tap } from "rxjs/operators";
+import { User } from "../../classes/user";
 @Component({
   selector: 'app-profile-user',
   templateUrl: './profile-user.component.html',
@@ -15,43 +15,32 @@ import { map, tap } from "rxjs/operators";
 export class ProfileUserComponent implements OnInit {
   public curentView: string = "resume-info";
 
-  usersRef: AngularFirestoreCollection<any>;
-  data: Observable<any[]>;
-
+  user: User
 
   task: AngularFireUploadTask;
 
-  // Progress monitoring
-  percentage: Observable<number>;
-
-  snapshot: Observable<any>;
-
-  // Download URL
-  downloadURL: Observable<string>;
-
-  // State for dropzone CSS toggling
-  isHovering: boolean;
+  PDFURL: string;
 
 
 
-  uploadPercent: Observable<number>;
-  userdata: any = {}
   constructor(
     private render: Renderer,
-    private auth: AuthService,
     private afStorage: AngularFireStorage,
-    private db: AngularFirestore
+    private db: AngularFirestore,
+    private firestore: AngularFirestore,
+    private auth: AuthService
   ) {
+    this.user = JSON.parse(localStorage.getItem('user'));
+    console.log(this.user.uid)
+
 
 
   }
 
   ngOnInit() {
-    this.db.doc<any>(`users/${this.auth.userData.uid}`).valueChanges().subscribe(
+    this.db.doc<User>(`users/${this.user.uid}`).valueChanges().subscribe(
       user => {
-        this.userdata = user;
-
-        console.log(this.userdata)
+        this.PDFURL = user.pdfUrl;
       }, (error) => {
         console.log(error);
       }
@@ -77,7 +66,7 @@ export class ProfileUserComponent implements OnInit {
   }
 
   startUpload(event: FileList) {
-    const filePath = '/' + event.item(0).name;
+    const filePath = 'cv/' + event.item(0).name;
     const fileRef = this.afStorage.ref(filePath);
 
     return new Promise<any>((resolve, reject) => {
@@ -86,7 +75,10 @@ export class ProfileUserComponent implements OnInit {
       task.snapshotChanges().pipe(
         finalize(() => fileRef.getDownloadURL().subscribe(
           res => resolve(
-            this.usersRef.doc(this.auth.userData.uid).update({ filePath, pdfUrl: res })
+            this.firestore
+              .collection("users")
+              .doc(this.user.uid)
+              .set({ filePath, pdfUrl: res }, { merge: true })
 
           ),
           err => reject(err))
@@ -95,56 +87,7 @@ export class ProfileUserComponent implements OnInit {
     })
   }
 
-  // startUpload(event: FileList) {
 
 
-
-  //   const file = event.item(0);
-  //   const filePath = `ahmed.pdf`;
-
-  //   this.afStorage.upload(`cvs/${filePath}`, file).task.snapshot.ref.getDownloadURL().then(downloadURL => {
-  //     console.log(downloadURL);
-  //     this.usersRef.doc(this.auth.userData.uid).update({ filePath, downloadURL }).then(task=>{
-
-  //     })
-
-  //   });
-
-
-  //   // this.uploadPercent = task.percentageChanges();
-  //   // get notified when the download URL is available
-
-
-  //   // this.task.snapshotChanges().pipe(
-  //   //   finalize(() => {
-  //   //     this.downloadURL = fileRef.getDownloadURL()
-
-  //   //     console.log(this.downloadURL)
-
-  //   //   })
-
-  //   // )
-  //   //   .subscribe(url => {
-  //   //     console.log(url.downloadURL + "url................")
-  //   //   }
-  //   //   )
-
-  //   // this.snapshot = this.task.snapshotChanges().pipe(
-  //   //   tap(snap => {
-  //   //     if (snap.bytesTransferred === snap.totalBytes) {
-  //   //       // Update firestore on completion
-  //   //       // this.db.collection('users/' + this.auth.userData.uid).add({ filePath, size: snap.totalBytes })
-  //   //       this.usersRef.doc(this.auth.userData.uid).update({ filePath, size: snap.totalBytes })
-  //   //     }
-  //   //   })
-  //   // )
-  // }
-
-
-
-
-  isActive(snapshot) {
-    return snapshot.state === 'running' && snapshot.bytesTransferred < snapshot.totalBytes
-  }
 
 }

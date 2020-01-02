@@ -4,8 +4,9 @@ import { LoginComponent } from './pages/login/login.component';
 import { SignupComponent } from './pages/signup/signup.component';
 import { HomeComponent } from './pages/home/home.component';
 import { ProfileUserComponent } from './pages/profile-user/profile-user.component';
-import { PersonalInfoComponent } from './pages/personal-info/personal-info.component';
 import { AuthGuard } from './core/auth.guard';
+import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
+import { VerifyEmailComponent } from './components/verify-email/verify-email.component';
 
 
 const routes: Routes = [
@@ -15,6 +16,12 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'profile', component: ProfileUserComponent },
   { path: 'profile/info', component: ProfileUserComponent, canActivate: [AuthGuard] },
+  { path: 'forgot-password', component: ForgotPasswordComponent },
+  { path: 'verify-email-address', component: VerifyEmailComponent },
+
+
+
+
 
   // {
   //   path: 'personal-info', component: PersonalInfoComponent, canActivate: [AuthGuard],

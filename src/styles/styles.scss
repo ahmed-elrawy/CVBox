@@ -2,6 +2,8 @@
 @import'variabales';
 @import '../../node_modules/bootstrap/scss/bootstrap';
 
+
+
 body {
     color: $secondary;
 }
@@ -9,3 +11,71 @@ body {
 .container-wrapper {
     height: calc(100vh - 80px) !important;
 }
+
+
+
+.back {
+    position: fixed;
+    left: 0px;
+    top: 0px;
+    
+    z-index: -1;
+  
+    background-color: #e4e5f0;
+  
+  }
+  #home-section {
+      position: relative;
+      max-width: 100%;
+      background: url(../assets/bg.png);
+      background-repeat: no-repeat;
+      background-size: cover;
+      height: 220px;
+      padding-bottom: 8rem;
+    }
+h2 {
+    color: $secondary;
+    margin-bottom: 1em;
+}
+
+.form-wrapper {
+    min-width: 40%;
+    margin-bottom: 10%;
+    border: 2px solid $light-grey;
+    padding: 1em 2em;
+}
+
+.first-name {
+    margin-right: 0.5em;
+}
+
+.last-name {
+    margin-left: 0.5em;
+}
+
+form button {
+    width: 100%;
+    &.btn {
+        border-radius: 0;
+        &:focus {
+            box-shadow: none;
+        }
+    }
+}
+
+#home-section {
+    position: relative;
+    max-width: 100%;
+    background: url(../assets/bg.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 220;
+    padding-bottom: 8rem;
+  }
+
+  .findbox {
+    display: inline-block;
+    height: 35px;
+    border-radius: 10px;
+  }
+ 

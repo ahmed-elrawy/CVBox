@@ -2,10 +2,11 @@
 
 .alert-wrapper {
     position: relative;
+    z-index: 5;
 
     alert {
         position: absolute;
-        top: $navbar-height;
+        // top: $navbar-height;
         width: 100%;
     }
 }
