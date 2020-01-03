@@ -11,7 +11,7 @@ import { AuthService } from './auth.service';
 export class CvBoxService {
   public categories: Observable<any>;
   // public departments: Observable<any>;
-
+  loading: boolean = false
   departmentCollection: AngularFirestoreCollection<any>;
   departments: Observable<any[] | string>
 
@@ -25,10 +25,10 @@ export class CvBoxService {
   ) {
 
 
-    this.categories = this.db.collection<any>('categories').valueChanges();
+    this.categories = this.db.collection<any>('categories').valueChanges()
     // this.departments = this.db.collection<any>('departments').valueChanges()
 
-
+    this.categories.subscribe(res => this.loading = false)
   }
 
 

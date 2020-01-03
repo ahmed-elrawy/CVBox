@@ -17,13 +17,17 @@
             <div class="mx-auto ">
                 <div class="  container-profile">
                     <div class="avatar-flip">
-                        <img src="http://media.idownloadblog.com/wp-content/uploads/2012/04/Phil-Schiller-headshot-e1362692403868.jpg"
-                            height="150" width="150">
-                        <img src="http://i1112.photobucket.com/albums/k497/animalsbeingdicks/abd-3-12-2015.gif~original"
-                            height="150" width="150">
+                        <div *ngIf="photoUrl">
+                            <img [src]="photoUrl | safe" height="150" width="150">
+
+                        </div>
+
                     </div>
-                    <h2>Ahmed El rawy</h2>
-                    <h4>Front-end developer</h4>
+                    <div *ngIf="userData">
+                        <h2>{{userData.name }} {{userData.lastName}}</h2>
+                        <h4>{{userData.departments}}</h4>
+                    </div>
+
                 </div>
             </div>
         </div>
@@ -39,8 +43,10 @@
                         <li class="list-group-item" (click)="view('resume-info'); listClick($event)"><span
                                 class="material-icons md-36">assignment
                             </span>resume info</li>
-                        <li class="list-group-item"><span class="material-icons md-48">https</span>change password</li>
-                        <li class="list-group-item"><span class="material-icons md-48">email</span>change email address
+                        <li class="list-group-item" [routerLink]="['/forgot-password']"><span
+                                class="material-icons md-48">https</span>change password</li>
+                        <li class="list-group-item" [routerLink]="['/forgot-password']"><span
+                                class="material-icons md-48">email</span>change email address
                         </li>
                         <li class="list-group-item" (click)="auth.logout()"><span
                                 class="material-icons md-48">exit_to_app

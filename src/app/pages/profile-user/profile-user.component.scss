@@ -10,15 +10,15 @@
     background-color: #e2e4e7;
   
   }
-  #home-section {
-      position: relative;
-      max-width: 100%;
-      background: url(../../../assets/bg.png);
-      background-repeat: no-repeat;
-      background-size: cover;
-      height: 220px;
-      padding-bottom: 8rem;
-    }
+  // #home-section {
+  //     position: relative;
+  //     max-width: 100%;
+  //     background: url(../../../assets/bg.png);
+  //     background-repeat: no-repeat;
+  //     background-size: cover;
+  //     height: 220px;
+  //     padding-bottom: 8rem;
+  //   }
   
   
   .section2 {
@@ -47,16 +47,16 @@ body {
   -moz-box-shadow: 0 2px 5px rgba(0,0,0,0.075);
   text-align: center;
 }
-.container:hover .avatar-flip {
-  transform: rotateY(180deg);
-  -webkit-transform: rotateY(180deg);
-}
-.container:hover .avatar-flip img:first-child {
-  opacity: 0;
-}
-.container:hover .avatar-flip img:last-child {
-  opacity: 1;
-}
+// .container:hover .avatar-flip {
+//   transform: rotateY(180deg);
+//   -webkit-transform: rotateY(180deg);
+// }
+// .container:hover .avatar-flip img:first-child {
+//   opacity: 0;
+// }
+// .container:hover .avatar-flip img:last-child {
+//   opacity: 1;
+// }
 .avatar-flip {
   border-radius: 100px;
   overflow: hidden;
@@ -72,24 +72,25 @@ body {
   -webkit-box-shadow: 0 0 0 13px #f0f0f0;
   -moz-box-shadow: 0 0 0 13px #f0f0f0;
 }
-.avatar-flip img {
-  position: absolute;
-  left: 0;
-  top: 0;
-  border-radius: 100px;
-  transition: all 0.3s ease-in-out;
-  -webkit-transition: all 0.3s ease-in-out;
-  -moz-transition: all 0.3s ease-in-out;
-}
+// .avatar-flip img {
+//   position: absolute;
+//   left: 0;
+//   top: 0;
+//   border-radius: 100px;
+//   transition: all 0.3s ease-in-out;
+//   -webkit-transition: all 0.3s ease-in-out;
+//   -moz-transition: all 0.3s ease-in-out;
+// }
 .avatar-flip img:first-child {
   z-index: 1;
 }
-.avatar-flip img:last-child {
-  z-index: 0;
-  transform: rotateY(180deg);
-  -webkit-transform: rotateY(180deg);
-  opacity: 0;
-}
+// .avatar-flip img:last-child {
+//   z-index: 0;
+//   transform: rotateY(180deg);
+//   -webkit-transform: rotateY(180deg);
+//   opacity: 0;
+// }
+
 h2 {
   position: relative;
 

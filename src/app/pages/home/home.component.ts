@@ -20,6 +20,7 @@ export class HomeComponent implements OnInit {
   user: boolean = false;
   showSpinner: boolean = true;
   token
+
   constructor(
     public cv: CvBoxService,
     public db: AngularFirestore,

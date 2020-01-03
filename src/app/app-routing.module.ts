@@ -7,17 +7,18 @@ import { ProfileUserComponent } from './pages/profile-user/profile-user.componen
 import { AuthGuard } from './core/auth.guard';
 import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
 import { VerifyEmailComponent } from './components/verify-email/verify-email.component';
+import { SecureInnerPagesGuard } from './core/secure-inner-pages.guard';
 
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: '/login' },
-  { path: 'login', component: LoginComponent },
-  { path: 'signup', component: SignupComponent },
+  { path: 'login', component: LoginComponent, canActivate: [SecureInnerPagesGuard] },
+  { path: 'signup', component: SignupComponent, canActivate: [SecureInnerPagesGuard] },
   { path: 'home', component: HomeComponent },
   { path: 'profile', component: ProfileUserComponent },
   { path: 'profile/info', component: ProfileUserComponent, canActivate: [AuthGuard] },
   { path: 'forgot-password', component: ForgotPasswordComponent },
-  { path: 'verify-email-address', component: VerifyEmailComponent },
+  { path: 'verify-email-address', component: VerifyEmailComponent, canActivate: [SecureInnerPagesGuard] },
 
 
 

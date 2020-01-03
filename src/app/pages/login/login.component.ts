@@ -54,7 +54,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 
       this.subscriptions.push(
         this.auth.login(email, password).subscribe(success => {
-          if (success) {
+          if (success && this.auth.afAuth.auth.currentUser.emailVerified) {
             this.router.navigateByUrl(this.returnUrl);
           } else {
             // this.displayFailedLogin()

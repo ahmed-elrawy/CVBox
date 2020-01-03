@@ -17,13 +17,13 @@ import { AlertType } from 'src/app/enum/alert-type.enum';
 export class AuthService {
   public currentUser: Observable<User | null>;
   public currentUserSnapshot: User
-  public userData: any; // User data var
+  public userData: User; // User data var
 
 
   constructor(
     private router: Router,
     private alertService: AlertService,
-    private afAuth: AngularFireAuth,
+    public afAuth: AngularFireAuth,
     private db: AngularFirestore,
     public ngZone: NgZone
   ) {
@@ -62,46 +62,48 @@ export class AuthService {
   }
 
 
-  // public login(email: string, password: string): Observable<boolean> {
-  //   const promise = this.afAuth.auth.signInWithEmailAndPassword(email, password)
-  //     .then((user) => {
-
-  //       if (this.afAuth.auth.currentUser.emailVerified) {
-  //         this.ngZone.run(() => {
-  //           console.log()
-  //         });
-  //       } else {
-  //         alert("this email not verified")
-  //         this.router.navigate(['verify-email-address']);
-
-  //       }
-  //       const userRef: AngularFirestoreDocument<User> = this.db.doc(`users/${user.user.uid}`);
-  //       const updatedUser = {
-  //         uid: user.user.uid,
-  //         email: user.user.email,
-  //         emailVerified: user.user.emailVerified
-  //       }
-
-  //       userRef.set(updatedUser, {
-  //         merge: true
-  //       });
-
-  //       return true
-  //     })
-  //     .catch((err) => {
-  //       window.alert(err.message)
-  //       return false
-  //     })
-  //   return from(promise);
-
-  // }
   public login(email: string, password: string): Observable<boolean> {
     const promise = this.afAuth.auth.signInWithEmailAndPassword(email, password)
-      .then((user) => true)
-      .catch((user) => false)
+      .then((user) => {
+
+        if (this.afAuth.auth.currentUser.emailVerified) {
+          this.ngZone.run(() => {
+            console.log()
+          });
+        } else {
+          // alert("this email not verified")
+          this.displayFailedLogin("this email not verified");
+          this.router.navigate(['verify-email-address']);
+
+        }
+        const userRef: AngularFirestoreDocument<User> = this.db.doc(`users/${user.user.uid}`);
+        const updatedUser = {
+          uid: user.user.uid,
+          email: user.user.email,
+          emailVerified: user.user.emailVerified
+        }
+
+        userRef.set(updatedUser, {
+          merge: true
+        });
+
+        return true
+      })
+      .catch((err) => {
+        // window.alert(err.message)
+        this.displayFailedLogin(err.message)
+        return false
+      })
     return from(promise);
 
   }
+  // public login(email: string, password: string): Observable<boolean> {
+  //   const promise = this.afAuth.auth.signInWithEmailAndPassword(email, password)
+  //     .then((user) => true)
+  //     .catch((user) => false)
+  //   return from(promise);
+
+  // }
 
   public logout(): void {
     this.afAuth.auth.signOut()
@@ -112,6 +114,10 @@ export class AuthService {
       })
   }
 
+  get isLoggedIn(): boolean {
+    const user = JSON.parse(localStorage.getItem('user'));
+    return (user !== null && user.emailVerified !== false) ? true : false;
+  }
   private setCurrentUserSnapshot(): void {
     this.currentUser.subscribe(user => this.currentUserSnapshot = user)
   }
@@ -123,7 +129,7 @@ export class AuthService {
       email: user.user.email,
       name,
       lastName,
-      photoUrl: 'https://firebasestorage.googleapis.com/v0/b/chat-4f314.appspot.com/o/default_profile_pic.jpg?alt=media&token=15171a5a-45fa-4e7e-9a4a-522bb330f2ba',
+      photoUrl: 'https://firebasestorage.googleapis.com/v0/b/cvstore-73c98.appspot.com/o/user.png?alt=media&token=6f4d9594-5e91-42ae-b790-62ebb08b043d',
       phone,
       password,
       emailVerified: user.user.emailVerified

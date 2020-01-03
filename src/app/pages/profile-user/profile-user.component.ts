@@ -16,11 +16,11 @@ export class ProfileUserComponent implements OnInit {
   public curentView: string = "resume-info";
 
   user: User
-
+  userData
   task: AngularFireUploadTask;
 
-  PDFURL: string;
-
+  PDFURL: string | null;
+  photoUrl: string
 
 
   constructor(
@@ -31,9 +31,6 @@ export class ProfileUserComponent implements OnInit {
     private auth: AuthService
   ) {
     this.user = JSON.parse(localStorage.getItem('user'));
-    console.log(this.user.uid)
-
-
 
   }
 
@@ -41,6 +38,10 @@ export class ProfileUserComponent implements OnInit {
     this.db.doc<User>(`users/${this.user.uid}`).valueChanges().subscribe(
       user => {
         this.PDFURL = user.pdfUrl;
+        this.photoUrl = user.photoUrl
+        this.userData = user
+        console.log(this.photoUrl)
+
       }, (error) => {
         console.log(error);
       }
