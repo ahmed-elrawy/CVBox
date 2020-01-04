@@ -5,7 +5,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { AngularFireStorageReference, AngularFireUploadTask, AngularFireStorage } from "@angular/fire/storage";
 import { Observable } from 'rxjs';
 import { finalize } from 'rxjs/operators';
-import { AngularFirestore, AngularFirestoreCollection } from "@angular/fire/firestore";
+import { AngularFirestore } from "@angular/fire/firestore";
 import { User } from "../../classes/user";
 @Component({
   selector: 'app-profile-user',

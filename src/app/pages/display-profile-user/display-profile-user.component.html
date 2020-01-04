@@ -1,0 +1,85 @@
+<header id="home-section" class=" ">
+
+    <div class="container">
+        <div class="d-flex row-hl">
+            <div class="mr-auto p-2 item-hl">
+                <a class="navbar-brand" [routerLink]="['/home']"
+                    style=" color:#fff; margin-top: 40px; font-size: x-large;">HOME</a>
+            </div>
+
+
+        </div>
+    </div>
+
+
+    <div class="container">
+        <div class="row">
+            <div class="mx-auto ">
+                <div class="  container-profile">
+                    <div class="avatar-flip">
+                        <div *ngIf="user">
+                            <img [src]="user.photoUrl | safe" height="150" width="150">
+
+                        </div>
+
+                    </div>
+                    <div *ngIf="user">
+                        <h2>{{user.name }} {{user.lastName}}</h2>
+                        <h4>{{user.departments}}</h4>
+                    </div>
+                    <div class="row">
+                        <div class="col-6 border-top border-right mb-0"
+                            (click)="view('personal-info'); listClick($event)">personal info</div>
+                        <div class="col-6 border-top" (click)="view('resume-info'); listClick($event)">resume info</div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+
+        <div class=" mx-4 mb-5 section2 mx-auto">
+            <div class="row mx-2">
+                <!-- <div class="col-md-5">
+                    <ul class="list-group">
+                        <li class="list-group-item " [routerLink]="['/profile/info']"
+                            (click)="view('personal-info'); listClick($event)"><span
+                                class="material-icons md-36">person</span>personal info
+                        </li>
+                        <li class="list-group-item" (click)="view('resume-info'); listClick($event)"><span
+                                class="material-icons md-36">assignment
+                            </span>resume info</li>
+
+
+
+                    </ul>
+                </div> -->
+
+                <div class="col-12">
+                    <ng-template [ngIf]="curentView == 'resume-info'">
+                        <img *ngIf="!user.pdfUrl" src="../../../assets/draw.png" alt="" style="width: 450px;">
+                        <div *ngIf="user.pdfUrl">
+
+                            <embed [src]="user
+                            .pdfUrl | safe" type="application/pdf" height="700px" width="100%">
+                            <a [href]="PDFURL" target="_blank" rel="noopener">Download Me!</a>
+                        </div>
+
+
+                    </ng-template>
+
+
+                    <ng-template [ngIf]="curentView == 'personal-info'">
+                        <app-personal-info></app-personal-info>
+
+                    </ng-template>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</header>
+
+
+<div class="back" style="width: 100%; height: 100%;"></div>

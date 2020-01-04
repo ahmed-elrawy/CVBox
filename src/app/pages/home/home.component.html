@@ -79,6 +79,7 @@
 
                 <ng-template [ngIf]="department">
                     <ng-container *ngFor="let department of cv.departments | async">
+
                         <div class="col-md-4 col-sm-6 ">
                             <div class="card card-block m-3 py-5  align-items-center"
                                 (click)="getUsers(department.category_id)">
@@ -90,13 +91,25 @@
 
                 <ng-template [ngIf]="user">
                     <ng-container *ngFor="let user of cv.users | async">
-                        <div class="col-md-4 col-sm-6 ">
-                            <div class="card card-block m-3 py-5  align-items-center">
+                        <div class="col-md-3 col-sm-6  ">
+                            <!-- <div class="card card-block m-3 py-5  align-items-center">
                                 <h4>name: {{user.name}}</h4>
                                 <h4>category: {{user.category}}</h4>
                                 <h4>age: {{user.age}}</h4>
                                 <h4>city: {{user.city}}</h4>
 
+                            </div> -->
+                            <div class="frontside">
+                                <div class="card">
+                                    <div class="card-body text-center">
+                                        <p><img class=" img-fluid" [src]="user.photoUrl" alt="card image"></p>
+                                        <h4 class="card-title">{{user.name}} {{user.lastName}}</h4>
+                                        <p class="card-text">{{user.category}}</p>
+                                        <a class="btn btn-primary "
+                                            [routerLink]="['/display-profile-use/', user.uid]"><i
+                                                class="fa fa-plus"></i></a>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </ng-container>

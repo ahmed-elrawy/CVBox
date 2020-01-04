@@ -38,6 +38,7 @@ import { CountriesService } from './services/countries.service';
 import { AuthGuard } from './core/auth.guard';
 import { AlertService } from './servies/alert.service';
 import { LoadingService } from './servies/loading.service';
+import { DisplayProfileUserComponent } from './pages/display-profile-user/display-profile-user.component';
 
 
 
@@ -52,7 +53,8 @@ import { LoadingService } from './servies/loading.service';
     LoadingSpinnerComponent,
     SafePipe,
     ForgotPasswordComponent,
-    VerifyEmailComponent
+    VerifyEmailComponent,
+    DisplayProfileUserComponent
 
   ],
   imports: [

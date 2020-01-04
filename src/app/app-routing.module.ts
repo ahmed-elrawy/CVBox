@@ -8,6 +8,7 @@ import { AuthGuard } from './core/auth.guard';
 import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
 import { VerifyEmailComponent } from './components/verify-email/verify-email.component';
 import { SecureInnerPagesGuard } from './core/secure-inner-pages.guard';
+import { DisplayProfileUserComponent } from './pages/display-profile-user/display-profile-user.component';
 
 
 const routes: Routes = [
@@ -19,6 +20,8 @@ const routes: Routes = [
   { path: 'profile/info', component: ProfileUserComponent, canActivate: [AuthGuard] },
   { path: 'forgot-password', component: ForgotPasswordComponent },
   { path: 'verify-email-address', component: VerifyEmailComponent, canActivate: [SecureInnerPagesGuard] },
+  { path: 'display-profile-use/:id', component: DisplayProfileUserComponent },
+
 
 
 
@@ -27,7 +30,7 @@ const routes: Routes = [
   // {
   //   path: 'personal-info', component: PersonalInfoComponent, canActivate: [AuthGuard],
   // },
-  { path: '**', redirectTo: '/login' },
+  // { path: '**', redirectTo: '/login' },
 
 ];
 
