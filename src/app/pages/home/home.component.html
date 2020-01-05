@@ -11,9 +11,14 @@
                         style=" color:#fff; margin-top: 40px; font-size: x-large;">HOME</a>
                 </div>
 
-                <div class=" p-2 item-hl" style="margin-top: 40px;" *ngIf="currentUser else loggedOut">
-                    <button type="button" [routerLink]="['/profile']" class="btn btn-outline-light">profile</button>
+                <div style=" margin-top: 40px; ">
+                    <a class="" [routerLink]="['/profile']">
+                        <img [src]="currentUser.photoUrl" class=" profileImg rounded-circle">
+                    </a>
                 </div>
+                <!-- <div class=" p-2 item-hl" style="margin-top: 40px;" *ngIf="currentUser else loggedOut">
+                    <button type="button" [routerLink]="['/profile']" class="btn btn-outline-light">profile</button>
+                </div> -->
                 <ng-template #loggedOut>
 
                     <div class=" p-2 item-hl" style="margin-top: 40px;">
@@ -48,12 +53,16 @@
 
 
                 <div class="mx-auto my-auto  mb-5">
-                    <div *ngIf="!category">
+                    <div *ngIf="!category  && !user" (click)="onClick('category')">
                         <a> categories>department</a>
 
                     </div>
                     <div *ngIf="category">
                         <a> categories> </a>
+                    </div>
+
+                    <div *ngIf="user" (click)="onClick('department')">
+                        <a> categories> department> user</a>
                     </div>
 
                 </div>
@@ -80,9 +89,9 @@
                 <ng-template [ngIf]="department">
                     <ng-container *ngFor="let department of cv.departments | async">
 
-                        <div class="col-md-4 col-sm-6 ">
+                        <div class="col-xl-4  col-md-6   ">
                             <div class="card card-block m-3 py-5  align-items-center"
-                                (click)="getUsers(department.category_id)">
+                                (click)="getUsers(department.name)">
                                 <h4>{{department.name}}</h4>
                             </div>
                         </div>
@@ -90,15 +99,13 @@
                 </ng-template>
 
                 <ng-template [ngIf]="user">
-                    <ng-container *ngFor="let user of cv.users | async">
-                        <div class="col-md-3 col-sm-6  ">
-                            <!-- <div class="card card-block m-3 py-5  align-items-center">
-                                <h4>name: {{user.name}}</h4>
-                                <h4>category: {{user.category}}</h4>
-                                <h4>age: {{user.age}}</h4>
-                                <h4>city: {{user.city}}</h4>
 
-                            </div> -->
+                    <ng-container *ngFor="let user of cv.users | async">
+
+
+                        <div class="col-md-3 col-sm-6  ">
+
+
                             <div class="frontside">
                                 <div class="card">
                                     <div class="card-body text-center">

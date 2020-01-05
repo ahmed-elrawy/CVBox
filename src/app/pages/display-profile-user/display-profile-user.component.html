@@ -28,9 +28,9 @@
                         <h4>{{user.departments}}</h4>
                     </div>
                     <div class="row">
-                        <div class="col-6 border-top border-right mb-0"
-                            (click)="view('personal-info'); listClick($event)">personal info</div>
-                        <div class="col-6 border-top" (click)="view('resume-info'); listClick($event)">resume info</div>
+                        <div class="col-6 border-top border-right mb-0" (click)="view('personal-info')">personal info
+                        </div>
+                        <div class="col-6 border-top" (click)="view('resume-info'); ">resume info</div>
                     </div>
                 </div>
 
@@ -70,7 +70,7 @@
 
 
                     <ng-template [ngIf]="curentView == 'personal-info'">
-                        <app-personal-info></app-personal-info>
+                        <app-personal-info [childMessage]="userID"></app-personal-info>
 
                     </ng-template>
 

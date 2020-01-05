@@ -21,6 +21,7 @@ export class ProfileUserComponent implements OnInit {
 
   PDFURL: string | null;
   photoUrl: string
+  isCollapsed = true;
 
 
   constructor(

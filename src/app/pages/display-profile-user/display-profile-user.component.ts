@@ -12,10 +12,11 @@ import { AngularFirestore } from "@angular/fire/firestore";
 export class DisplayProfileUserComponent implements OnInit {
 
   public curentView: string = "personal-info";
+  parentMessage = ""
 
   user: User;
 
-  userID: string
+  userID: string = ""
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -40,6 +41,9 @@ export class DisplayProfileUserComponent implements OnInit {
         console.log(error);
       }
     );
+  }
+  onclick() {
+    this.parentMessage = "message from parent"
   }
 
   view(key: string): void {

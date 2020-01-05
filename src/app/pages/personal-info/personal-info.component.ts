@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup, Validators, FormBuilder, FormArray, NgForm } from '@angular/forms';
 import { CountriesService } from 'src/app/services/countries.service';
 import { CvBoxService } from 'src/app/services/cv-box.service';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { AuthService } from 'src/app/services/auth.service';
-
+import { User } from "../../classes/user";
 
 @Component({
   selector: 'app-personal-info',
@@ -12,6 +12,8 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./personal-info.component.scss']
 })
 export class PersonalInfoComponent implements OnInit {
+  @Input() childMessage: string;
+  user: User
 
 
   infoForm: FormGroup;
@@ -32,7 +34,14 @@ export class PersonalInfoComponent implements OnInit {
     private cv: CvBoxService,
     private firestore: AngularFirestore,
     private auth: AuthService) {
-    this.db.doc<any>(`users/${this.auth.userData.uid}`).valueChanges().subscribe(
+    this.user = JSON.parse(localStorage.getItem('user'));
+
+
+  }
+
+  ngOnInit() {
+    console.log(this.childMessage)
+    this.db.doc<any>(`users/${this.childMessage}`).valueChanges().subscribe(
       user => {
         this.userdata = user;
         this.populateTestDate()
@@ -41,13 +50,9 @@ export class PersonalInfoComponent implements OnInit {
       }, (error) => {
         console.log(error);
       }
+
+
     );
-  }
-
-  ngOnInit() {
-
-
-
 
     this.infoForm = this.fb.group({
       name: ['', [Validators.required, Validators.minLength(3)]],
@@ -79,9 +84,12 @@ export class PersonalInfoComponent implements OnInit {
 
   }
 
+
+
   populateTestDate() {
 
     if (this.userdata.category && this.userdata.country) {
+      this.cv.getCategories()
       this.cv.getDepartments(this.userdata.category)
       this.country.onChangeCountry(this.userdata.country)
     }
@@ -104,10 +112,10 @@ export class PersonalInfoComponent implements OnInit {
     })
   }
 
-  get cat() {
-    return this.userdata.category;
+  // get cat() {
+  //   return this.userdata.category;
 
-  }
+  // }
 
   onSubmit(form: NgForm) {
     alert("info updated")

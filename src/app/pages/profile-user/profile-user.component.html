@@ -6,10 +6,34 @@
                 <a class="navbar-brand" [routerLink]="['/home']"
                     style=" color:#fff; margin-top: 40px; font-size: x-large;">HOME</a>
             </div>
+            <li ngbDropdown class="d-inline-block" style=" margin-top: 40px; ">
+                <a class="nav-link dropdown-toggle" id="dropdownMenuButton" ngbDropdownToggle>
+                    <img [src]="photoUrl | safe" width="50" height="50" class="rounded-circle">
+                </a>
+                <div class="dropdown-menu" ngbDropdownMenu aria-labelledby="dropdownMenuButton">
+
+
+            <li class="dropdown-item" [routerLink]="['/forgot-password']"><span
+                    class="material-icons md-48">https</span>change password</li>
+            <li class="dropdown-item" [routerLink]="['/forgot-password']"><span
+                    class="material-icons md-48">email</span>change email address
+            </li>
+            <li class="dropdown-item" (click)="auth.logout()"><span class="material-icons md-48">exit_to_app
+                </span>logout</li>
 
 
         </div>
+        </li>
+
     </div>
+    </div>
+
+
+
+
+
+
+
 
 
     <div class="container">
@@ -34,7 +58,7 @@
 
         <div class=" mx-4 mb-5 section2 mx-auto">
             <div class="row mx-2">
-                <div class="col-md-5">
+                <!-- <div class="col-md-5">
                     <ul class="list-group">
                         <li class="list-group-item " [routerLink]="['/profile/info']"
                             (click)="view('personal-info'); listClick($event)"><span
@@ -54,7 +78,7 @@
 
 
                     </ul>
-                </div>
+                </div> -->
 
                 <div class="col-7">
                     <ng-template [ngIf]="curentView == 'resume-info'">
@@ -88,7 +112,7 @@
 
 
                     <ng-template [ngIf]="curentView == 'personal-info'">
-                        <app-personal-info></app-personal-info>
+                        <app-personal-info [childMessage]="user.uid"></app-personal-info>
 
                     </ng-template>
 

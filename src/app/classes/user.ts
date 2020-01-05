@@ -5,6 +5,8 @@ export class User {
     photoUrl?: string
     pdfUrl?: string;
     phone?: string;
+    category?: string;
+    departments?: string;
     emailVerified?: boolean;
 
     // constructor({ firstName, lastName, photoUrl }) {

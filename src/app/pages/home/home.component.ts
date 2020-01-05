@@ -14,48 +14,71 @@ import { AngularFireAuth } from '@angular/fire/auth';
 })
 export class HomeComponent implements OnInit {
   public currentUser: User = null;
-
   category: boolean = true
   department: boolean = false
   user: boolean = false;
-  showSpinner: boolean = true;
-  token
-
+  showSpinner;
+  noCV
+  idTemp
   constructor(
     public cv: CvBoxService,
     public db: AngularFirestore,
     public auth: AuthService) {
 
 
+
   }
 
   ngOnInit() {
-    // this.afAuth.auth.currentUser.getIdToken().then((token: string) => {
-    //   this.token = token; console.log(this.token)
-    // }).catch(error => console.log(error))
-
+    this.cv.getCategories()
+    this.cv.currentLoadState.subscribe(state => {
+      this.showSpinner = state
+    })
     this.auth.currentUser.subscribe(user => {
       this.currentUser = user;
     })
 
-    this.cv.categories.subscribe(() => this.showSpinner = false)
+
+
 
   }
 
 
+  onClick(key: string) {
+    if (key == "category") {
+      this.cv.getCategories()
+
+      this.category = true
+      this.department = false;
+      this.user = false
+    } if (key === "department") {
+      this.getDepartments(this.idTemp)
+      this.category = false
+      this.user = false
+    }
+
+  }
 
   getDepartments(id) {
+    this.idTemp = id
+    this.showSpinner = true
     this.department = !this.department
     this.category = !this.category
     this.cv.getDepartments(id)
+    this.cv.departments.subscribe(() => this.showSpinner = false)
+
   }
 
   getUsers(id) {
+    this.showSpinner = true
+
     this.department = false
     this.category = false
     this.user = true
 
     this.cv.getUsers(id)
+    this.cv.users.subscribe(() => this.showSpinner = false)
+
 
   }
 
@@ -63,3 +86,6 @@ export class HomeComponent implements OnInit {
 
 
 }
+
+
+

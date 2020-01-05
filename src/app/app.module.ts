@@ -39,6 +39,7 @@ import { AuthGuard } from './core/auth.guard';
 import { AlertService } from './servies/alert.service';
 import { LoadingService } from './servies/loading.service';
 import { DisplayProfileUserComponent } from './pages/display-profile-user/display-profile-user.component';
+import { CvBoxService } from './services/cv-box.service';
 
 
 
@@ -81,7 +82,8 @@ import { DisplayProfileUserComponent } from './pages/display-profile-user/displa
     LoadingService,
     AuthService,
     AuthGuard,
-    CountriesService
+    CountriesService,
+    CvBoxService
   ],
   bootstrap: [AppComponent]
 })

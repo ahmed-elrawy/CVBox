@@ -12,7 +12,7 @@ import { DisplayProfileUserComponent } from './pages/display-profile-user/displa
 
 
 const routes: Routes = [
-  { path: '', pathMatch: 'full', redirectTo: '/login' },
+  { path: '', pathMatch: 'full', redirectTo: '/home' },
   { path: 'login', component: LoginComponent, canActivate: [SecureInnerPagesGuard] },
   { path: 'signup', component: SignupComponent, canActivate: [SecureInnerPagesGuard] },
   { path: 'home', component: HomeComponent },
@@ -20,7 +20,7 @@ const routes: Routes = [
   { path: 'profile/info', component: ProfileUserComponent, canActivate: [AuthGuard] },
   { path: 'forgot-password', component: ForgotPasswordComponent },
   { path: 'verify-email-address', component: VerifyEmailComponent, canActivate: [SecureInnerPagesGuard] },
-  { path: 'display-profile-use/:id', component: DisplayProfileUserComponent },
+  { path: 'display-profile-use/:id', component: DisplayProfileUserComponent, canActivate: [AuthGuard] },
 
 
 
