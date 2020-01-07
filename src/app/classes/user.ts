@@ -1,6 +1,7 @@
 export class User {
     uid: string
     name?: string;
+    email: string;
     lastName?: string;
     photoUrl?: string
     pdfUrl?: string;

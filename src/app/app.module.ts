@@ -3,12 +3,18 @@ import { NgModule } from '@angular/core';
 // components
 import { AppComponent } from './app.component';
 import { HomeComponent } from './pages/home/home.component';
-import { LoginComponent } from './pages/login/login.component';
-import { SignupComponent } from './pages/signup/signup.component';
+import { LoginComponent } from './components/login/login.component';
+import { SignupComponent } from './components/signup/signup.component';
 import { ProfileUserComponent } from './pages/profile-user/profile-user.component';
 import { LoadingSpinnerComponent } from './ui/loading-spinner/loading-spinner.component';
 import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
 import { VerifyEmailComponent } from './components/verify-email/verify-email.component';
+import { DepartmentsComponent } from './pages/departments/departments.component';
+import { UsersComponent } from './pages/users/users.component';
+
+import { DialogOverviewCropeImgComponent } from './components/dialog-overview-crope-img/dialog-overview-crope-img.component';
+
+
 
 //pipe
 import { SafePipe } from "./core/safe.pipe";
@@ -22,6 +28,7 @@ import { NgbModule, NgbCollapseModule, NgbDropdownModule } from '@ng-bootstrap/n
 import { CarouselModule } from 'ngx-bootstrap/carousel';
 import { MaterialModule } from './material/material.module';
 import { HttpClientModule } from '@angular/common/http';
+import { ImageCropperModule } from 'ngx-image-cropper';
 
 //firebase
 import { environment } from "../environments/environment";
@@ -55,9 +62,13 @@ import { CvBoxService } from './services/cv-box.service';
     SafePipe,
     ForgotPasswordComponent,
     VerifyEmailComponent,
-    DisplayProfileUserComponent
+    DisplayProfileUserComponent,
+    DepartmentsComponent,
+    UsersComponent,
+    DialogOverviewCropeImgComponent
 
   ],
+  entryComponents: [DialogOverviewCropeImgComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -75,7 +86,8 @@ import { CvBoxService } from './services/cv-box.service';
     NgbDropdownModule,
     BrowserAnimationsModule,
     MaterialModule,
-    HttpClientModule
+    HttpClientModule,
+    ImageCropperModule
   ],
   providers: [
     AlertService,
@@ -83,7 +95,7 @@ import { CvBoxService } from './services/cv-box.service';
     AuthService,
     AuthGuard,
     CountriesService,
-    CvBoxService
+    CvBoxService,
   ],
   bootstrap: [AppComponent]
 })

@@ -1,0 +1,87 @@
+<div class="back" style="width: 100%; height: 100%;"></div>
+
+<div class="">
+    <header id="home-section" class=" text-white text-center">
+
+        <div class="container">
+
+            <div class="d-flex row-hl">
+                <div class="mr-auto p-2 item-hl">
+                    <a class="navbar-brand" [routerLink]="['/home']"
+                        style=" color:#fff; margin-top: 40px; font-size: x-large;">HOME</a>
+                </div>
+
+                <div style=" margin-top: 40px; " *ngIf="currentUser else loggedOut">
+                    <a class="" [routerLink]="['/profile']">
+                        <img [src]="currentUser.photoUrl " class=" profileImg rounded-circle">
+                    </a>
+                </div>
+
+                <ng-template #loggedOut>
+
+                    <div class=" p-2 item-hl" style="margin-top: 40px;">
+                        <button type=" button" [routerLink]="['/login']"
+                            class="btn btn-outline-light mr-4">login</button>
+                        <button type="button" [routerLink]="['/signup']" class="btn btn-outline-light mr-4">sign
+                            up</button>
+
+                    </div>
+                </ng-template>
+
+            </div>
+
+
+
+        </div>
+
+
+
+    </header>
+
+    <section>
+        <div class="container">
+
+            <div class="row mt-4 ">
+
+
+                <div class="mx-auto my-auto  mb-5">
+                    <div *ngIf="!category  && !user" (click)="onClick('category')">
+                        <a> categories>department</a>
+
+                    </div>
+                    <div *ngIf="category">
+                        <a> categories> </a>
+                    </div>
+
+                    <div *ngIf="user" (click)="onClick('department')">
+                        <a> categories> department> user</a>
+                    </div>
+
+                </div>
+
+            </div>
+            <div class="mx-auto my-auto  mb-5">
+                <loading-spinner *ngIf="showSpinner"></loading-spinner>
+
+            </div>
+
+            <div class="row list ">
+
+
+
+                <ng-container *ngFor="let department of cv.departments | async">
+
+                    <div class="col-xl-4  col-md-6   ">
+                        <div class="card card-block m-3 py-5  align-items-center"
+                            [routerLink]="['/users/', department.name]">
+                            <h4>{{department.name}}</h4>
+                        </div>
+                    </div>
+                </ng-container>
+
+            </div>
+        </div>
+    </section>
+</div>
+
+<div class="back" style="width: 100%; height: 100%;"></div>

@@ -1,0 +1,31 @@
+<h1 mat-dialog-title>Change Profile image</h1>
+<div mat-dialog-content>
+    <div class="row" style="margin-top: 5%;">
+        <div class="text-center col-md-8">
+
+            <div class="row" style="margin-top: 5%;" [style.display]="showCropper ? 'none'  :  null">
+                <div class="text-center col-md-12">
+
+
+                    <button type="button" mat-button (click)="fileInput.click()">Choose File</button>
+                    <input hidden (change)="fileChangeEvent($event)" #fileInput type="file" id="file">
+
+
+                    <!-- <input type="file" (change)="fileChangeEvent($event)" /> -->
+                </div>
+            </div>
+            <image-cropper [imageChangedEvent]="imageChangedEvent" [maintainAspectRatio]="true"
+                [containWithinAspectRatio]="containWithinAspectRatio" [aspectRatio]="4 / 4" [resizeToWidth]="128"
+                [cropperMinWidth]="128" [onlyScaleDown]="true" [roundCropper]="false" format="png" outputType="base64"
+                (imageCropped)="imageCropped($event)" (imageLoaded)="imageLoaded()" (cropperReady)="cropperReady()"
+                (loadImageFailed)="loadImageFailed()" [style.display]="showCropper ? null : 'none'"
+                [alignImage]="'left'">
+            </image-cropper>
+        </div>
+        <div class="text-center col-md-4 " [style.display]="showCropper ? null : 'none'">
+            <h5>Preview</h5>
+            <img class="mx-auto" [src]="croppedImage" style="display: block;" width="250px">
+            <button class="btn btn-primary m-3" (click)="updatePhoto()">change</button>
+        </div>
+    </div>
+</div>

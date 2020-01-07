@@ -11,9 +11,9 @@
                         style=" color:#fff; margin-top: 40px; font-size: x-large;">HOME</a>
                 </div>
 
-                <div style=" margin-top: 40px; ">
+                <div style=" margin-top: 40px; " *ngIf="currentUser else loggedOut">
                     <a class="" [routerLink]="['/profile']">
-                        <img [src]="currentUser.photoUrl" class=" profileImg rounded-circle">
+                        <img [src]="currentUser.photoUrl " class=" profileImg rounded-circle">
                     </a>
                 </div>
                 <!-- <div class=" p-2 item-hl" style="margin-top: 40px;" *ngIf="currentUser else loggedOut">
@@ -75,17 +75,31 @@
 
             <div class="row list ">
 
-                <ng-template [ngIf]="category">
+                <!-- <ng-template [ngIf]="category">
                     <ng-container *ngFor="let categorie of cv.categories | async">
+
                         <div class="col-md-4 col-sm-6 ">
                             <div class="card card-block m-3  align-items-center" (click)="getDepartments(categorie.id)">
                                 <img [src]="categorie.image">
                                 <h4 class="card-title mt-3 mb-3">{{categorie.id}}</h4>
                             </div>
                         </div>
+
+                    </ng-container>
+                </ng-template> -->
+                <ng-template [ngIf]="category">
+                    <ng-container *ngFor="let categorie of cv.categories | async">
+
+                        <div class="col-md-4 col-sm-6 ">
+                            <div class="card card-block m-3  align-items-center"
+                                [routerLink]="['/department/', categorie.id]">
+                                <img [src]="categorie.image">
+                                <h4 class="card-title mt-3 mb-3">{{categorie.id}}</h4>
+                            </div>
+                        </div>
+
                     </ng-container>
                 </ng-template>
-
                 <ng-template [ngIf]="department">
                     <ng-container *ngFor="let department of cv.departments | async">
 

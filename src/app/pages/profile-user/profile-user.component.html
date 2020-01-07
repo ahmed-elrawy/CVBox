@@ -40,17 +40,40 @@
         <div class="row">
             <div class="mx-auto ">
                 <div class="  container-profile">
-                    <div class="avatar-flip">
-                        <div *ngIf="photoUrl">
-                            <img [src]="photoUrl | safe" height="150" width="150">
 
-                        </div>
+
+
+                    <div class="image-upload">
+                        <label for="file-input">
+                            <div class="avatar-flip">
+                                <div *ngIf="photoUrl">
+                                    <img [src]="photoUrl | safe" height="150" width="150">
+
+                                </div>
+                            </div>
+                        </label>
+                        <!-- 
+                        <input id="file-input" type="file" accept="image/x-png,image/gif,image/jpeg"
+                            (change)="imageUpload($event.target.files)" /> -->
 
                     </div>
+
+
+
+
+
+
                     <div *ngIf="userData">
                         <h2>{{userData.name }} {{userData.lastName}}</h2>
                         <h4>{{userData.departments}}</h4>
                     </div>
+
+                    <div class="container">
+
+                        <button mat-button (click)="openDialog()">Cgange profile image</button>
+
+                    </div>
+
 
                 </div>
             </div>
@@ -58,7 +81,7 @@
 
         <div class=" mx-4 mb-5 section2 mx-auto">
             <div class="row mx-2">
-                <!-- <div class="col-md-5">
+                <div class="col-md-5">
                     <ul class="list-group">
                         <li class="list-group-item " [routerLink]="['/profile/info']"
                             (click)="view('personal-info'); listClick($event)"><span
@@ -78,7 +101,7 @@
 
 
                     </ul>
-                </div> -->
+                </div>
 
                 <div class="col-7">
                     <ng-template [ngIf]="curentView == 'resume-info'">
@@ -92,11 +115,16 @@
                         <div class="file">
                             <label class="file-label">
 
+                                <button type="button" mat-raised-button color="primary"
+                                    (click)="fileInput.click()">upload/update pdf</button>
+                                <input hidden (change)="startUpload($event.target.files)" #fileInput type="file"
+                                    id="file" accept="application/pdf">
 
-                                <input class="file-input" type="file" (change)="startUpload($event.target.files)"
-                                    accept="application/pdf">
 
+                                <!-- <input class="file-input" type="file" (change)="startUpload($event.target.files)"
+                                    accept="application/pdf"> -->
 
+                                <!-- 
                                 <span class="file-cta">
                                     <span class="file-icon">
                                         <i class="fa fa-upload"></i>
@@ -104,7 +132,7 @@
                                     <span class="file-label">
                                         or choose a file…
                                     </span>
-                                </span>
+                                </span> -->
                             </label>
                         </div>
 
@@ -121,7 +149,10 @@
         </div>
     </div>
 
+
+
 </header>
+
 
 
 <div class="back" style="width: 100%; height: 100%;"></div>

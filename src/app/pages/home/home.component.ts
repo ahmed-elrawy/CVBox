@@ -17,8 +17,8 @@ export class HomeComponent implements OnInit {
   category: boolean = true
   department: boolean = false
   user: boolean = false;
-  showSpinner;
-  noCV
+  showSpinner
+
   idTemp
   constructor(
     public cv: CvBoxService,

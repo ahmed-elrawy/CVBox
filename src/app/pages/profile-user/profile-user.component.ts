@@ -1,18 +1,29 @@
 import { Component, OnInit } from '@angular/core';
 import { Renderer } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
-
-import { AngularFireStorageReference, AngularFireUploadTask, AngularFireStorage } from "@angular/fire/storage";
-import { Observable } from 'rxjs';
+import { AngularFireUploadTask, AngularFireStorage } from "@angular/fire/storage";
 import { finalize } from 'rxjs/operators';
 import { AngularFirestore } from "@angular/fire/firestore";
 import { User } from "../../classes/user";
+
+import { MatDialog } from '@angular/material/dialog';
+
+import { DialogOverviewCropeImgComponent } from 'src/app/components/dialog-overview-crope-img/dialog-overview-crope-img.component';
+
+
+export interface DialogData {
+  profileImg: 'image';
+}
+
+
+
 @Component({
   selector: 'app-profile-user',
   templateUrl: './profile-user.component.html',
   styleUrls: ['./profile-user.component.scss']
 })
 export class ProfileUserComponent implements OnInit {
+
   public curentView: string = "resume-info";
 
   user: User
@@ -21,19 +32,29 @@ export class ProfileUserComponent implements OnInit {
 
   PDFURL: string | null;
   photoUrl: string
-  isCollapsed = true;
-
 
   constructor(
     private render: Renderer,
     private afStorage: AngularFireStorage,
     private db: AngularFirestore,
     private firestore: AngularFirestore,
-    private auth: AuthService
+    private auth: AuthService,
+    public dialog: MatDialog
   ) {
     this.user = JSON.parse(localStorage.getItem('user'));
 
   }
+
+
+  openDialog() {
+    this.dialog.open(DialogOverviewCropeImgComponent, {
+      data: {
+        profileImg: 'image'
+      }
+    });
+  }
+
+
 
   ngOnInit() {
     this.db.doc<User>(`users/${this.user.uid}`).valueChanges().subscribe(
@@ -89,6 +110,12 @@ export class ProfileUserComponent implements OnInit {
     })
   }
 
+
+
+  // resizeOptions: ResizeOptions = {
+  //   resizeMaxHeight: 74,
+  //   resizeMaxWidth: 74
+  // };
 
 
 

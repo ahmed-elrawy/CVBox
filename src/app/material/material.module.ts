@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import * as Material from '@angular/material'
+import { MatDialogRef } from '@angular/material';
 
 const material = [
   Material.MatButtonModule,
@@ -18,7 +19,9 @@ const material = [
   Material.MatSortModule,
   Material.MatPaginatorModule,
   Material.MatDialogModule,
-  Material.MatStepperModule
+  Material.MatStepperModule,
+  Material.MatDialogModule,
+
 ]
 @NgModule({
   imports: [material],

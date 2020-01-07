@@ -40,7 +40,7 @@ export class PersonalInfoComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.childMessage)
+    // console.log(this.childMessage)
     this.db.doc<any>(`users/${this.childMessage}`).valueChanges().subscribe(
       user => {
         this.userdata = user;
@@ -97,6 +97,7 @@ export class PersonalInfoComponent implements OnInit {
     this.infoForm.patchValue({
       name: this.userdata.name,
       email: this.userdata.email,
+      // lastName: this.userdata.lastName,
       phone: this.userdata.phone,
       age: this.userdata.age,
       gender: this.userdata.gender,
@@ -120,11 +121,11 @@ export class PersonalInfoComponent implements OnInit {
   onSubmit(form: NgForm) {
     alert("info updated")
     let data = Object.assign({}, form.value);
-    delete data.id;
+    // delete data.id;
     if (this.auth.userData.uid == null)
       this.firestore.collection('users').add(data);
     else
-      this.firestore.doc('users/' + this.auth.userData.uid).update(data);
+      this.firestore.doc('users/' + this.user.uid).update(data).catch(err => console.log(err + " errrrrrrrrrrrrrrrrrrrrrrrr"))
 
   }
 
