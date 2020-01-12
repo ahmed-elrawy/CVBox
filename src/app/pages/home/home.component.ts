@@ -1,11 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { CvBoxService } from 'src/app/services/cv-box.service';
-import { Observable } from 'rxjs';
-import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
-import { filter } from 'rxjs/operators';
+import { AngularFirestore } from '@angular/fire/firestore';
 import { AuthService } from 'src/app/services/auth.service';
 import { User } from 'src/app/classes/user';
-import { AngularFireAuth } from '@angular/fire/auth';
+
+import { MatDialog } from '@angular/material/dialog';
+import { FilterCvComponent } from "../filter-cv/filter-cv.component";
+
+export interface DialogData {
+  profileImg: 'image';
+}
+
 
 @Component({
   selector: 'app-home',
@@ -23,7 +28,9 @@ export class HomeComponent implements OnInit {
   constructor(
     public cv: CvBoxService,
     public db: AngularFirestore,
-    public auth: AuthService) {
+    public auth: AuthService,
+    public dialog: MatDialog
+  ) {
 
 
 
@@ -37,11 +44,21 @@ export class HomeComponent implements OnInit {
     this.auth.currentUser.subscribe(user => {
       this.currentUser = user;
     })
-
-
-
-
   }
+
+
+  openDialog() {
+    const dialogRef = this.dialog.open(FilterCvComponent, {
+      width: '800px',
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
+  }
+
+
+
 
 
   onClick(key: string) {

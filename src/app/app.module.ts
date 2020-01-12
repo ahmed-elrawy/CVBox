@@ -11,7 +11,6 @@ import { ForgotPasswordComponent } from './components/forgot-password/forgot-pas
 import { VerifyEmailComponent } from './components/verify-email/verify-email.component';
 import { DepartmentsComponent } from './pages/departments/departments.component';
 import { UsersComponent } from './pages/users/users.component';
-
 import { DialogOverviewCropeImgComponent } from './components/dialog-overview-crope-img/dialog-overview-crope-img.component';
 
 
@@ -29,6 +28,7 @@ import { CarouselModule } from 'ngx-bootstrap/carousel';
 import { MaterialModule } from './material/material.module';
 import { HttpClientModule } from '@angular/common/http';
 import { ImageCropperModule } from 'ngx-image-cropper';
+import { Ng5SliderModule } from 'ng5-slider';
 
 //firebase
 import { environment } from "../environments/environment";
@@ -47,6 +47,7 @@ import { AlertService } from './servies/alert.service';
 import { LoadingService } from './servies/loading.service';
 import { DisplayProfileUserComponent } from './pages/display-profile-user/display-profile-user.component';
 import { CvBoxService } from './services/cv-box.service';
+import { FilterCvComponent } from './pages/filter-cv/filter-cv.component';
 
 
 
@@ -65,7 +66,8 @@ import { CvBoxService } from './services/cv-box.service';
     DisplayProfileUserComponent,
     DepartmentsComponent,
     UsersComponent,
-    DialogOverviewCropeImgComponent
+    DialogOverviewCropeImgComponent,
+    FilterCvComponent
 
   ],
   entryComponents: [DialogOverviewCropeImgComponent],
@@ -87,7 +89,8 @@ import { CvBoxService } from './services/cv-box.service';
     BrowserAnimationsModule,
     MaterialModule,
     HttpClientModule,
-    ImageCropperModule
+    ImageCropperModule,
+    Ng5SliderModule
   ],
   providers: [
     AlertService,

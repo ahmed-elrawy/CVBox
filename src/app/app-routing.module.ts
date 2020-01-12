@@ -11,6 +11,7 @@ import { SecureInnerPagesGuard } from './core/secure-inner-pages.guard';
 import { DisplayProfileUserComponent } from './pages/display-profile-user/display-profile-user.component';
 import { DepartmentsComponent } from './pages/departments/departments.component';
 import { UsersComponent } from './pages/users/users.component';
+import { FilterCvComponent } from './pages/filter-cv/filter-cv.component';
 
 
 const routes: Routes = [
@@ -19,12 +20,14 @@ const routes: Routes = [
   { path: 'signup', component: SignupComponent, canActivate: [SecureInnerPagesGuard] },
   { path: 'home', component: HomeComponent },
   { path: 'department/:id', component: DepartmentsComponent },
+  { path: 'users', component: UsersComponent },
   { path: 'users/:id', component: UsersComponent },
   { path: 'profile', component: ProfileUserComponent },
   { path: 'profile/info', component: ProfileUserComponent, canActivate: [AuthGuard] },
   { path: 'forgot-password', component: ForgotPasswordComponent },
   { path: 'verify-email-address', component: VerifyEmailComponent, canActivate: [SecureInnerPagesGuard] },
   { path: 'display-profile-use/:id', component: DisplayProfileUserComponent, canActivate: [AuthGuard] },
+  { path: 'filter-cv', component: FilterCvComponent },
 
 
 

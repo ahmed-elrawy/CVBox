@@ -49,7 +49,7 @@ export class SignupComponent implements OnInit, OnDestroy {
       this.subscription.push(
         this.auth.signup(firstName, lastName, email, password, phone).subscribe(success => {
           if (success) {
-            this.router.navigate(['/chat'])
+            this.router.navigate(['/home'])
           } else {
             const failedSignupAlert = new Alert('There was a problem signing up, try again.', AlertType.Danger);
             this.alertService.alerts.next(failedSignupAlert);

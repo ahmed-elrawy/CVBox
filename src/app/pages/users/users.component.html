@@ -34,10 +34,12 @@
 
         </div>
 
+
         <div class="row mt-5">
             <div class="mx-auto ">
                 <div class="findbox">
-                    <span>s </span> <span>find CV</span>
+                    <!-- <span>s </span> <span>find CV</span> -->
+                    <button class="btn btn-light" (click)="openDialog()">Find CV</button>
                 </div>
             </div>
         </div>
@@ -76,7 +78,7 @@
 
 
 
-                <ng-container *ngFor="let user of cv.users | async">
+                <ng-container *ngFor="let user of cv.data | async">
 
 
                     <div class="col-md-3 col-sm-6  ">
