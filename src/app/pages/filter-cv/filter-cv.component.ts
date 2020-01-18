@@ -43,12 +43,12 @@ export class FilterCvComponent implements OnInit {
 
 
   constructor(
-    private fb: FormBuilder,
-    private country: CountriesService,
-    private cv: CvBoxService,
-    private router: Router,
-    private alertService: AlertService,
-    private loadingService: LoadingService,
+    public fb: FormBuilder,
+    public country: CountriesService,
+    public cv: CvBoxService,
+    public router: Router,
+    public alertService: AlertService,
+    public loadingService: LoadingService,
     public dialog: MatDialog,
     @Inject(MAT_DIALOG_DATA) public data: DialogData) {
     this.cv.getCategories()

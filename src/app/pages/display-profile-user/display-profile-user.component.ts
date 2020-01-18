@@ -18,9 +18,11 @@ export class DisplayProfileUserComponent implements OnInit {
 
   userID: string = ""
 
+  changeColor: string = ""
+
   constructor(
-    private activatedRoute: ActivatedRoute,
-    private db: AngularFirestore,
+    public activatedRoute: ActivatedRoute,
+    public db: AngularFirestore,
 
   ) {
     this.activatedRoute.params.subscribe(params => {

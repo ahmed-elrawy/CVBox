@@ -28,9 +28,14 @@
                         <h4>{{user.departments}}</h4>
                     </div>
                     <div class="row">
-                        <div class="col-6 border-top border-right mb-0" (click)="view('personal-info')">personal info
+                        <div class="col-6 border-top border-right mb-0" (click)="view('personal-info')"
+                            [ngStyle]="{'background-color':curentView === 'personal-info' ? '#2f2dc0' : 'white'}">
+                            personal
+                            info
                         </div>
-                        <div class="col-6 border-top" (click)="view('resume-info'); ">resume info</div>
+                        <div class="col-6 border-top" (click)="view('resume-info')"
+                            [ngStyle]="{'background-color':curentView === 'resume-info' ? '#2f2dc0' : 'white' }">resume
+                            info</div>
                     </div>
                 </div>
 
@@ -51,7 +56,8 @@
 
                             <embed [src]="user 
                                 .pdfUrl | safe" type="application/pdf" class="pdf">
-                            <a [href]="PDFURL" target="_blank" rel="noopener">Download Me!</a>
+                            <a [href]="user 
+                            .pdfUrl" target="_blank" rel="noopener">Download Me!</a>
                         </div>
 
 

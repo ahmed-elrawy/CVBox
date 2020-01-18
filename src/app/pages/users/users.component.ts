@@ -24,8 +24,8 @@ export class UsersComponent implements OnInit {
 
 
   constructor(
-    private cv: CvBoxService,
-    private activetedRouter: ActivatedRoute,
+    public cv: CvBoxService,
+    public activetedRouter: ActivatedRoute,
     public auth: AuthService,
     public dialog: MatDialog
   ) { }

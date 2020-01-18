@@ -17,8 +17,8 @@ export class DepartmentsComponent implements OnInit {
   showSpinner: boolean = true
 
   constructor(
-    private cv: CvBoxService,
-    private activetedRouter: ActivatedRoute,
+    public cv: CvBoxService,
+    public activetedRouter: ActivatedRoute,
     public auth: AuthService) { }
 
   ngOnInit() {

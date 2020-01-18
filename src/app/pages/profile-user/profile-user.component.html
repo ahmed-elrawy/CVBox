@@ -73,42 +73,30 @@
                         <button mat-button (click)="openDialog()">Cgange profile image</button>
 
                     </div>
-
+                    <div class="row">
+                        <div class="col-6 border-top border-right mb-0" (click)="view('personal-info')"
+                            [ngStyle]="{'background-color':curentView === 'personal-info' ? '#2f2dc0' : 'white'}">
+                            personal
+                            info
+                        </div>
+                        <div class="col-6 border-top" (click)="view('resume-info')"
+                            [ngStyle]="{'background-color':curentView === 'resume-info' ? '#2f2dc0' : 'white' }">resume
+                            info</div>
+                    </div>
 
                 </div>
             </div>
         </div>
 
-        <div class=" mx-4 mb-5 section2 mx-auto">
-            <div class="row mx-2">
-                <div class="col-md-5">
-                    <ul class="list-group">
-                        <li class="list-group-item " [routerLink]="['/profile/info']"
-                            (click)="view('personal-info'); listClick($event)"><span
-                                class="material-icons md-36">person</span>personal info
-                        </li>
-                        <li class="list-group-item" (click)="view('resume-info'); listClick($event)"><span
-                                class="material-icons md-36">assignment
-                            </span>resume info</li>
-                        <li class="list-group-item" [routerLink]="['/forgot-password']"><span
-                                class="material-icons md-48">https</span>change password</li>
-                        <li class="list-group-item" [routerLink]="['/forgot-password']"><span
-                                class="material-icons md-48">email</span>change email address
-                        </li>
-                        <li class="list-group-item" (click)="auth.logout()"><span
-                                class="material-icons md-48">exit_to_app
-                            </span>logout</li>
+        <div class="row ">
+            <div class=" mx-auto ">
 
-
-                    </ul>
-                </div>
-
-                <div class="col-7">
+                <div class="container-display">
                     <ng-template [ngIf]="curentView == 'resume-info'">
                         <img *ngIf="!PDFURL" src="../../../assets/draw.png" alt="" style="width: 450px;">
-                        <div *ngIf="PDFURL">
+                        <div *ngIf="PDFURL" class="pdf">
 
-                            <embed [src]="PDFURL | safe" type="application/pdf" height="500px" width="450px">
+                            <embed [src]="PDFURL | safe" type="application/pdf" class="pdf">
                             <a [href]="PDFURL" target="_blank" rel="noopener">Download Me!</a>
                         </div>
 
@@ -121,18 +109,7 @@
                                     id="file" accept="application/pdf">
 
 
-                                <!-- <input class="file-input" type="file" (change)="startUpload($event.target.files)"
-                                    accept="application/pdf"> -->
 
-                                <!-- 
-                                <span class="file-cta">
-                                    <span class="file-icon">
-                                        <i class="fa fa-upload"></i>
-                                    </span>
-                                    <span class="file-label">
-                                        or choose a file…
-                                    </span>
-                                </span> -->
                             </label>
                         </div>
 

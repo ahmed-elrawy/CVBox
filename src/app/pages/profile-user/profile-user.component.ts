@@ -38,7 +38,7 @@ export class ProfileUserComponent implements OnInit {
     private afStorage: AngularFireStorage,
     private db: AngularFirestore,
     private firestore: AngularFirestore,
-    private auth: AuthService,
+    public auth: AuthService,
     public dialog: MatDialog
   ) {
     this.user = JSON.parse(localStorage.getItem('user'));

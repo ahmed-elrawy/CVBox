@@ -28,12 +28,12 @@ export class PersonalInfoComponent implements OnInit {
     email: 'Please enter a valid email address.'
   };
   constructor(
-    private fb: FormBuilder,
-    private country: CountriesService,
-    private db: AngularFirestore,
-    private cv: CvBoxService,
-    private firestore: AngularFirestore,
-    private auth: AuthService) {
+    public fb: FormBuilder,
+    public country: CountriesService,
+    public db: AngularFirestore,
+    public cv: CvBoxService,
+    public firestore: AngularFirestore,
+    public auth: AuthService) {
     this.user = JSON.parse(localStorage.getItem('user'));
 
 
@@ -78,10 +78,6 @@ export class PersonalInfoComponent implements OnInit {
     //   country: this.userdata.country,
     //   state: this.userdata.state,
     // })
-
-
-
-
   }
 
 
@@ -118,7 +114,7 @@ export class PersonalInfoComponent implements OnInit {
 
   // }
 
-  onSubmit(form: NgForm) {
+  onSubmit(form) {
     alert("info updated")
     let data = Object.assign({}, form.value);
     // delete data.id;
