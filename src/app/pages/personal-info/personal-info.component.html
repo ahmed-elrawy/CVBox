@@ -141,14 +141,42 @@
                     </div>
                 </div>
 
-                <div class="form-group ">
+                <div>
+                    <div class="form-group ">
+                        <label for="departmentyId">department</label>
+                        <div class="col-md-12">
+
+                            <select class="form-control" id="departmentId" placeholder="department (required)"
+                                [ngClass]="{'is-invalid': (infoForm.get('department').touched ||
+                                    infoForm.get('department').dirty) &&
+                                    !infoForm.get('department').valid }" formControlName="department">
+
+                                <option>--Select department--</option>
+
+                                <option *ngFor="let department of cv.departments |async" [value]="department.name">
+                                    {{department.name}}</option>
+
+
+                            </select>
+
+                            <span class="invalid-feedback">
+                                <span *ngIf="infoForm.get('department').errors?.required">
+                                    Please enter department.
+                                </span>
+
+                            </span>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- <div class="form-group " formArrayName="departments">
                     <label for="departmentyId">department</label>
                     <div class="col-md-12">
+
                         <select class="form-control" id="departmentId" placeholder="department (required)"
-                            formControlName="departments" [ngClass]="{'is-invalid': (infoForm.get('departments').touched ||
-                                    infoForm.get('departments').dirty) &&
-                                    !infoForm.get('departments').valid }">
-                            <div></div>
+                            (change)="onChange($event.target.value)" [ngClass]="{'is-invalid': (infoForm.get('departments').touched ||
+                                infoForm.get('departments').dirty) &&
+                                !infoForm.get('departments').valid }" [formControlName]="">
 
                             <option>--Select department--</option>
 
@@ -167,11 +195,14 @@
                     </div>
                 </div>
 
+            </div> -->
+
+
                 <div class="form-group ">
                     <label for="yearsOfEperienceId">years Of
                         Eperience</label>
                     <div class="col-md-12">
-                        <input class="form-control" id="yearsOfEperienceId" type="text"
+                        <input class="form-control" id="yearsOfEperienceId" type="number"
                             placeholder=" years Of Eperience (required)" formControlName="year_experience"
                             [ngClass]="{'is-invalid': (infoForm.get('year_experience').touched || infoForm.get('year_experience').dirty) &&!infoForm.get('year_experience').valid }" />
                         <span class="invalid-feedback">
@@ -309,14 +340,16 @@
     </div>
 
 
-    <div *ngIf="userdata.uid == auth.userData.uid">
+    <div *ngIf="userdata.user_id == auth.userData.user_id">
         <div class="form-group row mb-2" style="float: right;">
             <div class="offset-md-2 col-md-4">
-                <button class="btn btn-primary mr-3" type="submit" style="width:80px"
+                <button class="btn btn-primary mr-3" type="button" style="width:80px"
                     [title]="infoForm.valid ? 'Save your entered data' : 'Disabled until the form data is valid'"
-                    (click)="onSubmit(infoForm)" [disabled]="!infoForm.valid">
+                    (click)="onSubmit(infoForm)">
                     Save
                 </button>
+
+                <!-- [disabled]="!infoForm.valid" -->
 
             </div>
         </div>

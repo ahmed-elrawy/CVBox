@@ -43,6 +43,7 @@ export class HomeComponent implements OnInit {
     })
     this.auth.currentUser.subscribe(user => {
       this.currentUser = user;
+      console.log(user)
     })
   }
 

@@ -51,10 +51,11 @@ export class DialogOverviewCropeImgComponent {
 
   uploadImageToStorage(base64Data): AngularFireUploadTask {
     //let path='THIS WILL BE YOUR IMAGE NAME AND PATH';
-    console.log(this.auth.userData.email)
-    let path = ` Images/${this.auth.userData.email} MyImage.jpg `;
+    // `cv/${this.user.user_id}/${event.item(0).name}`
+    let path = ` profile/${this.auth.userData.user_id}/ profile-Image.jpg `;
     var imageRef = this.afStorage.ref(path);
     return imageRef.putString(base64Data, 'data_url');
+
   }
 
 
@@ -76,8 +77,8 @@ export class DialogOverviewCropeImgComponent {
 
       this.firestore
         .collection("users")
-        .doc(this.user.uid)
-        .set({ imagePath, photoUrl: imageUrl }, { merge: true })
+        .doc(this.user.user_id)
+        .set({ imagePath, profile_image: imageUrl }, { merge: true })
 
     } catch (err) {
       err => console.log(err)//handle error

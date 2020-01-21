@@ -30,8 +30,13 @@ export class AuthService {
     this.currentUser = this.afAuth.authState.pipe(
       switchMap((user) => {
         if (user) {
-          this.userData = user; // Setting up user data in userData var
-          localStorage.setItem('user', JSON.stringify(this.userData));
+          const userData = {
+            user_id: user.uid,
+            email: user.email,
+            emailVerified: user.emailVerified,
+          };
+          this.userData = userData// Setting up user data in userData var
+          localStorage.setItem('user', JSON.stringify(userData));
           JSON.parse(localStorage.getItem('user'));
           return this.db.doc<User>(`users/${user.uid}`).valueChanges();
         } else {
@@ -44,11 +49,11 @@ export class AuthService {
     this.setCurrentUserSnapshot()
   }
 
-  public signup(name: string, lastName: string, email: string, password: string, phone: string): Observable<boolean> {
+  public signup(name: string, email: string, password: string, phone: string): Observable<boolean> {
     const promise = this.afAuth.auth.createUserWithEmailAndPassword(email, password)
       .then((user) => {
         this.SendVerificationMail();
-        this.SetUserData(user, name, lastName, password, phone)
+        this.SetUserData(user, name, password, phone, [null])
         return true;
       })
       .catch((err) => {
@@ -78,7 +83,7 @@ export class AuthService {
         }
         const userRef: AngularFirestoreDocument<User> = this.db.doc(`users/${user.user.uid}`);
         const updatedUser = {
-          uid: user.user.uid,
+          user_id: user.user.uid,
           email: user.user.email,
           emailVerified: user.user.emailVerified
         }
@@ -121,18 +126,21 @@ export class AuthService {
   private setCurrentUserSnapshot(): void {
     this.currentUser.subscribe(user => this.currentUserSnapshot = user)
   }
-  SetUserData(user, name?: string, lastName?: string, password?: string, phone?: string) {
+  SetUserData(user, name?: string, password?: string, phone?: string, departments?: [string]) {
     console.log(user.user.emailVerified)
     const userRef: AngularFirestoreDocument<User> = this.db.doc(`users/${user.user.uid}`);
     const updatedUser = {
-      uid: user.user.uid,
+      user_id: user.user.uid,
       email: user.user.email,
       name,
-      lastName,
-      photoUrl: 'https://firebasestorage.googleapis.com/v0/b/cvstore-73c98.appspot.com/o/user.png?alt=media&token=6f4d9594-5e91-42ae-b790-62ebb08b043d',
+      profile_image: 'https://firebasestorage.googleapis.com/v0/b/cvstore-73c98.appspot.com/o/%20profile%2Fuser.png?alt=media&token=ac2e28d3-33d1-4878-9ae4-b946bd39ce76',
       phone,
       password,
-      emailVerified: user.user.emailVerified
+      departments,
+      emailVerified: user.user.emailVerified,
+      cv_ready: false,
+      profile_ready: false,
+      created_at: firebase.firestore.FieldValue.serverTimestamp()
 
     }
 

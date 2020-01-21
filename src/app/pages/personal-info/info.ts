@@ -7,7 +7,7 @@ export class Info {
     public jobTitle = '',
     public category: '',
     public department: '',
-    public yearsOfEperience: '',
+    public year_experience: '',
     public country = '',
     public state: '',
     public city: '') { }

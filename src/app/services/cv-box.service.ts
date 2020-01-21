@@ -5,6 +5,7 @@ import { User } from '../classes/user';
 import { BehaviorSubject } from 'rxjs';
 import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 import { Router, ActivatedRoute } from '@angular/router';
+import { FormArray } from '@angular/forms';
 
 
 @Injectable({
@@ -74,7 +75,7 @@ export class CvBoxService {
     this.usersCollections = this.db.collection('users', ref => {
       // Compose a query using multiple .where() methods
       return ref
-        .where('departments', '==', id)
+        .where('departments', '==', [id])
 
     });
     this.data = this.usersCollections.valueChanges();
@@ -82,11 +83,13 @@ export class CvBoxService {
   }
 
   cvFilter(category, departments, gender, country, state, marital, military, minExprience, maxExprience) {
+    console.log(category, departments, gender, country, state, marital, military, minExprience, maxExprience)
     this.usersCollections = this.db.collection('users', ref => {
       // Compose a query using multiple .where() methods
+      console.log(`QUERY${maxExprience}+ ${minExprience}`)
       return ref
         .where('category', '==', category)
-        .where('departments', '==', departments)
+        .where('departments', 'array-contains', departments)
         .where('year_experience', '<', maxExprience)
         .where('year_experience', '>', minExprience)
         .where('gender', '==', gender)
@@ -94,6 +97,8 @@ export class CvBoxService {
         .where('state', '==', state)
         .where('marital', '==', marital)
         .where('military', '==', military)
+        .where('cv_ready', '==', true)
+        .where('profile_ready', '==', true)
     });
     this.data = this.usersCollections.valueChanges()
 
@@ -114,8 +119,11 @@ export class CvBoxService {
   public submit(filterForm, minExperience, maxExperience): void {
 
     if (filterForm.valid) {
-      console.log(filterForm.value)
       const { category, departments, gender, country, state, marital, military } = filterForm.value;
+
+      // const department = [departments];
+
+      console.log(filterForm.value)
       this.cvFilter(category, departments, gender, country, state, marital, military, minExperience, maxExperience);
 
       this.dialog.closeAll()

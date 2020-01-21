@@ -57,10 +57,10 @@ export class ProfileUserComponent implements OnInit {
 
 
   ngOnInit() {
-    this.db.doc<User>(`users/${this.user.uid}`).valueChanges().subscribe(
+    this.db.doc<User>(`users/${this.user.user_id}`).valueChanges().subscribe(
       user => {
-        this.PDFURL = user.pdfUrl;
-        this.photoUrl = user.photoUrl
+        this.PDFURL = user.eslam;
+        this.photoUrl = user.profile_image
         this.userData = user
         console.log(this.photoUrl)
 
@@ -89,7 +89,9 @@ export class ProfileUserComponent implements OnInit {
   }
 
   startUpload(event: FileList) {
-    const filePath = 'cv/' + event.item(0).name;
+
+    const filePath = `cv/${this.user.user_id}/${event.item(0).name}`
+    // const filePath = 'cv/' + event.item(0).name;
     const fileRef = this.afStorage.ref(filePath);
 
     return new Promise<any>((resolve, reject) => {
@@ -100,8 +102,8 @@ export class ProfileUserComponent implements OnInit {
           res => resolve(
             this.firestore
               .collection("users")
-              .doc(this.user.uid)
-              .set({ filePath, pdfUrl: res }, { merge: true })
+              .doc(this.user.user_id)
+              .set({ filePath, eslam: res, cv_ready: true }, { merge: true })
 
           ),
           err => reject(err))

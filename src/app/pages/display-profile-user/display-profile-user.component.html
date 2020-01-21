@@ -18,13 +18,13 @@
                 <div class="  container-profile">
                     <div class="avatar-flip">
                         <div *ngIf="user">
-                            <img [src]="user.photoUrl | safe" height="150" width="150">
+                            <img [src]="user.profile_image | safe" height="150" width="150">
 
                         </div>
 
                     </div>
                     <div *ngIf="user">
-                        <h2>{{user.name }} {{user.lastName}}</h2>
+                        <h2>{{user.name }} </h2>
                         <h4>{{user.departments}}</h4>
                     </div>
                     <div class="row">
@@ -51,13 +51,13 @@
 
                 <div class="container-display">
                     <ng-template [ngIf]="curentView == 'resume-info'">
-                        <img *ngIf="!user.pdfUrl" src="../../../assets/draw.png" alt="">
-                        <div *ngIf="user.pdfUrl" class="pdf">
+                        <img *ngIf="!user.eslam" src="../../../assets/draw.png" alt="">
+                        <div *ngIf="user.eslam" class="pdf">
 
                             <embed [src]="user 
-                                .pdfUrl | safe" type="application/pdf" class="pdf">
+                                .eslam | safe" type="application/pdf" class="pdf">
                             <a [href]="user 
-                            .pdfUrl" target="_blank" rel="noopener">Download Me!</a>
+                            .eslam" target="_blank" rel="noopener">Download Me!</a>
                         </div>
 
 

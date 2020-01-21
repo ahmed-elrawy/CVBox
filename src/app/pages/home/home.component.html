@@ -12,7 +12,7 @@ overflow-x: hidden;">
 
                 <div style=" margin-top: 40px; " *ngIf="currentUser else loggedOut">
                     <a class="" [routerLink]="['/profile']">
-                        <img [src]="currentUser.photoUrl " class=" profileImg rounded-circle">
+                        <img [src]="currentUser.profile_image | safe" class=" profileImg rounded-circle">
                     </a>
                 </div>
                 <!-- <div class=" p-2 item-hl" style="margin-top: 40px;" *ngIf="currentUser else loggedOut">

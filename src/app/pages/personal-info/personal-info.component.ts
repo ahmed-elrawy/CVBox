@@ -1,11 +1,11 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { FormGroup, Validators, FormBuilder, FormArray, NgForm } from '@angular/forms';
+import { FormGroup, Validators, FormBuilder, FormArray, NgForm, FormControl } from '@angular/forms';
 import { CountriesService } from 'src/app/services/countries.service';
 import { CvBoxService } from 'src/app/services/cv-box.service';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { AuthService } from 'src/app/services/auth.service';
 import { User } from "../../classes/user";
-
+import { Observable } from "rxjs";
 @Component({
   selector: 'app-personal-info',
   templateUrl: './personal-info.component.html',
@@ -14,8 +14,8 @@ import { User } from "../../classes/user";
 export class PersonalInfoComponent implements OnInit {
   @Input() childMessage: string;
   user: User
-
-
+  departValue: Observable<string>;
+  f: NgForm;
   infoForm: FormGroup;
   emailMessage: string;
 
@@ -27,6 +27,13 @@ export class PersonalInfoComponent implements OnInit {
     required: 'Please enter your email address.',
     email: 'Please enter a valid email address.'
   };
+
+  // get departments(): FormArray {
+  //   return this.infoForm.get('departments') as FormArray;
+  // }
+  get department() {
+    return this.infoForm.get('department');
+  }
   constructor(
     public fb: FormBuilder,
     public country: CountriesService,
@@ -50,9 +57,8 @@ export class PersonalInfoComponent implements OnInit {
       }, (error) => {
         console.log(error);
       }
-
-
     );
+
 
     this.infoForm = this.fb.group({
       name: ['', [Validators.required, Validators.minLength(3)]],
@@ -62,23 +68,21 @@ export class PersonalInfoComponent implements OnInit {
       gender: ['', [Validators.required]],
       jobTitle: ['', Validators.required],
       category: ['', Validators.required],
-      departments: ['', Validators.required],
+      department: ['', Validators.required],
       year_experience: ['', Validators.required],
       country: ['', [Validators.required]],
       state: ['', [Validators.required]],
       city: ['', [Validators.required]],
       marital: ['', [Validators.required]],
-      military: ['', [Validators.required],]
+      military: ['', [Validators.required],],
 
     })
 
-    // this.infoForm.patchValue({
-    //   category: this.userdata.category,
-    //   departments: this.userdata.departments,
-    //   country: this.userdata.country,
-    //   state: this.userdata.state,
-    // })
   }
+
+
+
+
 
 
 
@@ -89,42 +93,80 @@ export class PersonalInfoComponent implements OnInit {
       this.cv.getDepartments(this.userdata.category)
       this.country.onChangeCountry(this.userdata.country)
     }
+    console.log(this.userdata)
 
     this.infoForm.patchValue({
       name: this.userdata.name,
       email: this.userdata.email,
-      // lastName: this.userdata.lastName,
       phone: this.userdata.phone,
       age: this.userdata.age,
       gender: this.userdata.gender,
       jobTitle: this.userdata.jobTitle,
       category: this.userdata.category,
-      departments: this.userdata.departments,
+      department: this.userdata.departments[0],
       year_experience: this.userdata.year_experience,
       country: this.userdata.country,
       state: this.userdata.state,
       city: this.userdata.city,
       marital: this.userdata.marital,
-      military: this.userdata.military
+      military: this.userdata.military,
     })
+
+
+
   }
 
-  // get cat() {
-  //   return this.userdata.category;
 
-  // }
 
   onSubmit(form) {
+
     alert("info updated")
-    let data = Object.assign({}, form.value);
-    // delete data.id;
-    if (this.auth.userData.uid == null)
-      this.firestore.collection('users').add(data);
-    else
-      this.firestore.doc('users/' + this.user.uid).update(data).catch(err => console.log(err + " errrrrrrrrrrrrrrrrrrrrrrrr"))
+    console.log(form.value)
+    const department = new FormArray([this.department]);
+    console.log(department)
+    // const departments = this.infoForm.setControl("departments", department);
+    const departments = department.value
+
+    console.log(departments)
+
+    const {
+      name,
+      email,
+      password,
+      phone,
+      age,
+      gender,
+      jobTitle,
+      category,
+      year_experience,
+      country,
+      state,
+      city,
+      marital,
+      military,
+    } = form.value;
+
+    // const customForm = {
+    //   name, email, password, phone, age, gender, jobTitle, category, departments, year_experience, country, state, city, marital, military
+    // }
+    // console.log(customForm)
+
+    let data = Object.assign({ profile_ready: true, departments }, form.value);
+    delete data.department;
+    // // if (this.auth.userData.uid == null)
+    // //   this.firestore.collection('users').add(data);
+    // // else
+    this.firestore.doc('users/' + this.user.user_id).update(data).catch(err => console.log(err + " errrrrrrrrrrrrrrrrrrrrrrrr"))
 
   }
 
+  // onChange(va) {
+  //   this.departValue = va
+  //   this.infoForm.setControl('departments', this.fb.array([va]));
+  //   console.log(va)
+  //   // console.log(va)
+
+  // }
 
 
 

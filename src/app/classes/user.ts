@@ -1,14 +1,17 @@
 export class User {
-    uid: string
+    user_id: string
     name?: string;
     email: string;
-    lastName?: string;
-    photoUrl?: string
-    pdfUrl?: string;
+    profile_image?: string
+    eslam?: string;
     phone?: string;
     category?: string;
-    departments?: string;
+    departments?: [string];
     emailVerified?: boolean;
+    avg_rating?: number;
+    marital_status?: string;
+    cv_ready?: boolean;
+    profile_ready?: boolean;
 
     // constructor({ firstName, lastName, photoUrl }) {
     //     this.firstName = firstName;
