@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
 import { User } from "../../classes/user";
 import { AngularFirestore } from "@angular/fire/firestore";
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-display-profile-user',
@@ -10,6 +11,7 @@ import { AngularFirestore } from "@angular/fire/firestore";
   styleUrls: ['./display-profile-user.component.scss']
 })
 export class DisplayProfileUserComponent implements OnInit {
+  public currentUser: User = null;
 
   public curentView: string = "personal-info";
   parentMessage = ""
@@ -23,6 +25,7 @@ export class DisplayProfileUserComponent implements OnInit {
   constructor(
     public activatedRoute: ActivatedRoute,
     public db: AngularFirestore,
+    public auth: AuthService
 
   ) {
     this.activatedRoute.params.subscribe(params => {
@@ -32,7 +35,9 @@ export class DisplayProfileUserComponent implements OnInit {
   }
 
   ngOnInit() {
-
+    this.auth.currentUser.subscribe(user => {
+      this.currentUser = user;
+    })
 
     this.db.doc<User>(`users/${this.userID}`).valueChanges().subscribe(
       user => {

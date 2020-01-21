@@ -1,206 +1,230 @@
-@import '../../../styles/variabales.scss';
+  @import '../../../styles/variabales.scss';
 
 
 
-  .findbox {
-    display: inline-block;
-    width: 370px;
-    height: 45px;
-    border-radius: 10px;
-    background-color: #ffffff;
+    .findbox {
+      display: inline-block;
+      width: 370px;
+      height: 45px;
+      border-radius: 10px;
+      background-color: #ffffff;
+    }
+    .findbox span {
+      font-size: x-large;
+      color: slategray;;
+    }
+
+
+  .card {
+    max-width: 300px;
   }
-  .findbox span {
-    font-size: x-large;
-    color: slategray;;
+
+  /////////@at-root
+  img{
+    height:120px;
+    width:120px;
   }
 
+  // div [class^="col-"]{
+  //   padding-left:5px;
+  //   padding-right:5px;
+  // }
 
- 
+  .card{
+    transition:0.5s;
+    cursor:pointer;
+    box-shadow: 0 0 5px;
+  }
+  .card-title{
+    font-size:15px;
+    transition:1s;
+    cursor:pointer;
+  }
+  .card-title i{
+    font-size:15px;
+    transition:1s;
+    cursor:pointer;
+    color:#ffa710
+  }
+  .card-title i:hover{
+    transform: scale(1.25) rotate(100deg);
+    color:#18d4ca;
 
-/////////@at-root
-img{
-  height:120px;
-  width:120px;
-}
+  }
+  .card:hover{
+    transform: scale(1.05);
+    box-shadow: 10px 10px 15px rgba(0,0,0,0.3);
+  }
+  .card-text{
+    height:80px;
+  }
 
-div [class^="col-"]{
-  padding-left:5px;
-  padding-right:5px;
-}
-.card{
-  transition:0.5s;
-  cursor:pointer;
-  box-shadow: 0 0 5px;
-}
-.card-title{  
-  font-size:15px;
-  transition:1s;
-  cursor:pointer;
-}
-.card-title i{  
-  font-size:15px;
-  transition:1s;
-  cursor:pointer;
-  color:#ffa710
-}
-.card-title i:hover{
-  transform: scale(1.25) rotate(100deg); 
-  color:#18d4ca;
-  
-}
-.card:hover{
-  transform: scale(1.05);
-  box-shadow: 10px 10px 15px rgba(0,0,0,0.3);
-}
-.card-text{
-  height:80px;  
-}
-
-.card::before, .card::after {
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  transform: scale3d(0, 0, 1);
-  transition: transform .3s ease-out 0s;
-  background: rgba(255, 255, 255, 0.1);
-  content: '';
-  pointer-events: none;
-}
-.card::before {
-  transform-origin: left top;
-}
-.card::after {
-  transform-origin: right bottom;
-}
-.card:hover::before, .card:hover::after, .card:focus::before, .card:focus::after {
-  transform: scale3d(1, 1, 1);
-}
-  
-
-
-//user card
-
-/* FontAwesome for working BootSnippet :> */
-
-@import url('https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');
-#team {
-    background: #eee !important;
-}
-
-.btn-primary:hover,
-.btn-primary:focus {
-    background-color: #108d6f;
-    border-color: #108d6f;
-    box-shadow: none;
-    outline: none;
-}
-
-.btn-primary {
-    color: #fff;
-    // background-color: #007b5e;
-    // border-color: #007b5e;
-}
-
-section {
-    padding: 60px 0;
-}
-
-section .section-title {
-    text-align: center;
-    color: #007b5e;
-    margin-bottom: 50px;
-    text-transform: uppercase;
-}
-
-#team .card {
-    border: none;
-    background: #ffffff;
-}
-
-.image-flip:hover .backside,
-.image-flip.hover .backside {
-    -webkit-transform: rotateY(0deg);
-    -moz-transform: rotateY(0deg);
-    -o-transform: rotateY(0deg);
-    -ms-transform: rotateY(0deg);
-    transform: rotateY(0deg);
-    border-radius: .25rem;
-}
-
-.image-flip:hover .frontside,
-.image-flip.hover .frontside {
-    -webkit-transform: rotateY(180deg);
-    -moz-transform: rotateY(180deg);
-    -o-transform: rotateY(180deg);
-    transform: rotateY(180deg);
-}
-
-.mainflip {
-    -webkit-transition: 1s;
-    -webkit-transform-style: preserve-3d;
-    -ms-transition: 1s;
-    -moz-transition: 1s;
-    -moz-transform: perspective(1000px);
-    -moz-transform-style: preserve-3d;
-    -ms-transform-style: preserve-3d;
-    transition: 1s;
-    transform-style: preserve-3d;
-    position: relative;
-}
-
-.frontside {
-    position: relative;
-    -webkit-transform: rotateY(0deg);
-    -ms-transform: rotateY(0deg);
-    z-index: 2;
-    margin-bottom: 30px;
-}
-
-.backside {
+  .card::before, .card::after {
     position: absolute;
     top: 0;
+    right: 0;
+    bottom: 0;
     left: 0;
-    background: white;
-    -webkit-transform: rotateY(-180deg);
-    -moz-transform: rotateY(-180deg);
-    -o-transform: rotateY(-180deg);
-    -ms-transform: rotateY(-180deg);
-    transform: rotateY(-180deg);
-    -webkit-box-shadow: 5px 7px 9px -4px rgb(158, 158, 158);
-    -moz-box-shadow: 5px 7px 9px -4px rgb(158, 158, 158);
-    box-shadow: 5px 7px 9px -4px rgb(158, 158, 158);
-}
-
-.frontside,
-
-.frontside .card,
-.backside .card {
-    min-height: 312px;
-}
-
-.backside .card a {
-    font-size: 18px;
-    color: #007b5e !important;
-}
-
-.frontside .card .card-title,
-.backside .card .card-title {
-    color: $primary !important;
-}
-
-.frontside .card .card-body img {
-    width: 120px;
-    height: 120px;
-    border-radius: 50%;
-}
+    transform: scale3d(0, 0, 1);
+    transition: transform .3s ease-out 0s;
+    background: rgba(255, 255, 255, 0.1);
+    content: '';
+    pointer-events: none;
+  }
+  .card::before {
+    transform-origin: left top;
+  }
+  .card::after {
+    transform-origin: right bottom;
+  }
+  .card:hover::before, .card:hover::after, .card:focus::before, .card:focus::after {
+    transform: scale3d(1, 1, 1);
+  }
 
 
-////profile img 
+
+  //user card
+
+  /* FontAwesome for working BootSnippet :> */
+
+  @import url('https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');
+  #team {
+      background: #eee !important;
+  }
+
+  .btn-primary:hover,
+  .btn-primary:focus {
+      background-color: #108d6f;
+      border-color: #108d6f;
+      box-shadow: none;
+      outline: none;
+  }
+
+  .btn-primary {
+      color: #fff;
+      // background-color: #007b5e;
+      // border-color: #007b5e;
+  }
+
+  section {
+      padding: 45px 0;
+  }
+
+  // section .section-title {
+  //     text-align: center;
+  //     color: #007b5e;
+  //     margin-bottom: 50px;
+  //     text-transform: uppercase;
+  // }
+
+  // #team .card {
+  //     border: none;
+  //     background: #ffffff;
+  // }
+
+  // .image-flip:hover .backside,
+  // .image-flip.hover .backside {
+  //     -webkit-transform: rotateY(0deg);
+  //     -moz-transform: rotateY(0deg);
+  //     -o-transform: rotateY(0deg);
+  //     -ms-transform: rotateY(0deg);
+  //     transform: rotateY(0deg);
+  //     border-radius: .25rem;
+  // }
+
+  // .image-flip:hover .frontside,
+  // .image-flip.hover .frontside {
+  //     -webkit-transform: rotateY(180deg);
+  //     -moz-transform: rotateY(180deg);
+  //     -o-transform: rotateY(180deg);
+  //     transform: rotateY(180deg);
+  // }
+
+  // .mainflip {
+  //     -webkit-transition: 1s;
+  //     -webkit-transform-style: preserve-3d;
+  //     -ms-transition: 1s;
+  //     -moz-transition: 1s;
+  //     -moz-transform: perspective(1000px);
+  //     -moz-transform-style: preserve-3d;
+  //     -ms-transform-style: preserve-3d;
+  //     transition: 1s;
+  //     transform-style: preserve-3d;
+  //     position: relative;
+  // }
+
+  // .frontside {
+  //     position: relative;
+  //     -webkit-transform: rotateY(0deg);
+  //     -ms-transform: rotateY(0deg);
+  //     z-index: 2;
+  //     margin-bottom: 30px;
+  // }
+
+  // .backside {
+  //     position: absolute;
+  //     top: 0;
+  //     left: 0;
+  //     background: white;
+  //     -webkit-transform: rotateY(-180deg);
+  //     -moz-transform: rotateY(-180deg);
+  //     -o-transform: rotateY(-180deg);
+  //     -ms-transform: rotateY(-180deg);
+  //     transform: rotateY(-180deg);
+  //     -webkit-box-shadow: 5px 7px 9px -4px rgb(158, 158, 158);
+  //     -moz-box-shadow: 5px 7px 9px -4px rgb(158, 158, 158);
+  //     box-shadow: 5px 7px 9px -4px rgb(158, 158, 158);
+  // }
+
+  .frontside,
+
+  // .frontside .card,
+  // .backside .card {
+  //     min-height: 312px;
+  // }
+
+  // .backside .card a {
+  //     font-size: 18px;
+  //     color: #007b5e !important;
+  // }
+
+  // .frontside .card .card-title,
+  // .backside .card .card-title {
+  //     color: $primary !important;
+  // }
+
+  // .frontside .card .card-body img {
+  //     width: 120px;
+  //     height: 120px;
+  //     border-radius: 50%;
+  // }
 
 
-.profileImg {
-  width: 60px;
-  height: 60px;
-}
+  ////profile img
+
+
+  .profileImg {
+    width: 60px;
+    height: 60px;
+  }
+
+
+  @media only screen and (max-width: 450px) {
+    .card{
+      padding: 10px;
+      margin: auto;
+      width: 150px;
+      height: 160px;
+      border-radius: 10px;
+    }
+    .card img{
+      width: 80px;
+      height: 80px;
+    }
+    .card h4 {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: large;
+      font-weight: bolder;
+
+    }
+  }

@@ -31,7 +31,9 @@ export class UsersComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-
+    this.auth.currentUser.subscribe(user => {
+      this.currentUser = user;
+    })
     this.cv.currentLoadState.subscribe(ststs => {
       this.showSpinner = ststs
     })

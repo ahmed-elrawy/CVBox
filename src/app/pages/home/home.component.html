@@ -37,9 +37,10 @@ overflow-x: hidden;">
 
         <div class="row mt-5">
             <div class="mx-auto ">
-                <div class="findbox">
+                <div class="">
                     <!-- <span>s </span> <span>find CV</span> -->
-                    <button class="btn btn-light" (click)="openDialog()">Find CV</button>
+                    <button class="btn btn-light" style="width:300px; height: 40px;" (click)="openDialog()">Find
+                        CV</button>
                 </div>
             </div>
         </div>
@@ -49,49 +50,19 @@ overflow-x: hidden;">
     <section>
         <div class="container">
 
-            <div class="row mt-4 ">
 
-
-                <div class="mx-auto my-auto  mb-5">
-                    <div *ngIf="!category  && !user" (click)="onClick('category')">
-                        <a> categories>department</a>
-
-                    </div>
-                    <div *ngIf="category">
-                        <a> categories> </a>
-                    </div>
-
-                    <div *ngIf="user" (click)="onClick('department')">
-                        <a> categories> department> user</a>
-                    </div>
-
-                </div>
-
-            </div>
-            <div class="mx-auto my-auto  mb-5">
+            <!-- <div class="mx-auto my-auto  mb-5">
                 <loading-spinner *ngIf="showSpinner"></loading-spinner>
 
-            </div>
+            </div> -->
 
             <div class="row list ">
 
-                <!-- <ng-template [ngIf]="category">
-                    <ng-container *ngFor="let categorie of cv.categories | async">
-
-                        <div class="col-md-4 col-sm-6 ">
-                            <div class="card card-block m-3  align-items-center" (click)="getDepartments(categorie.id)">
-                                <img [src]="categorie.image">
-                                <h4 class="card-title mt-3 mb-3">{{categorie.id}}</h4>
-                            </div>
-                        </div>
-
-                    </ng-container>
-                </ng-template> -->
                 <ng-template [ngIf]="category">
                     <ng-container *ngFor="let categorie of cv.categories | async">
 
-                        <div class="col-md-4 col-sm-6 ">
-                            <div class="card card-block m-3  align-items-center"
+                        <div class="col-md-4 col-6 ">
+                            <div class="card card-block mb-3 align-items-center"
                                 [routerLink]="['/department/', categorie.id]">
                                 <img [src]="categorie.image">
                                 <h4 class="card-title mt-3 mb-3">{{categorie.id}}</h4>
@@ -100,41 +71,7 @@ overflow-x: hidden;">
 
                     </ng-container>
                 </ng-template>
-                <ng-template [ngIf]="department">
-                    <ng-container *ngFor="let department of cv.departments | async">
 
-                        <div class="col-xl-4  col-md-6   ">
-                            <div class="card card-block m-3 py-5  align-items-center"
-                                (click)="getUsers(department.name)">
-                                <h4>{{department.name}}</h4>
-                            </div>
-                        </div>
-                    </ng-container>
-                </ng-template>
-
-                <ng-template [ngIf]="user">
-
-                    <ng-container *ngFor="let user of cv.users | async">
-
-
-                        <div class="col-md-3 col-sm-6  ">
-
-
-                            <div class="frontside">
-                                <div class="card">
-                                    <div class="card-body text-center">
-                                        <p><img class=" img-fluid" [src]="user.photoUrl" alt="card image"></p>
-                                        <h4 class="card-title">{{user.name}} {{user.lastName}}</h4>
-                                        <p class="card-text">{{user.category}}</p>
-                                        <a class="btn btn-primary "
-                                            [routerLink]="['/display-profile-use/', user.uid]"><i
-                                                class="fa fa-plus"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </ng-container>
-                </ng-template>
 
             </div>
         </div>

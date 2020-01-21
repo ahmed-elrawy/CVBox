@@ -1,6 +1,6 @@
 <div class="back" style="width: 100%; height: 100%;"></div>
-
-<div class="">
+<div class="" style="
+overflow-x: hidden;">
     <header id="home-section" class=" text-white text-center">
 
         <div class="container">
@@ -11,9 +11,16 @@
                         style=" color:#fff; margin-top: 40px; font-size: x-large;">HOME</a>
                 </div>
 
+
+
+
+
+
+
+
                 <div style=" margin-top: 40px; " *ngIf="currentUser else loggedOut">
                     <a class="" [routerLink]="['/profile']">
-                        <img [src]="currentUser.photoUrl " class=" profileImg rounded-circle">
+                        <img [src]="currentUser.profile_image " class=" profileImg rounded-circle">
                     </a>
                 </div>
 
@@ -91,8 +98,7 @@
                                     <h4 class="card-title">{{user.name}}</h4>
                                     <p class="card-text">{{user.category}}</p>
                                     <a class="btn btn-primary "
-                                        [routerLink]="['/display-profile-use/', user.user_id]"><i
-                                            class="fa fa-plus"></i></a>
+                                        [routerLink]="['/display-profile-use/', user.user_id]">open</a>
                                 </div>
                             </div>
                         </div>

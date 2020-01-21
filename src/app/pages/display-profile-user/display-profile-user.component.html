@@ -6,7 +6,21 @@
                 <a class="navbar-brand" [routerLink]="['/home']"
                     style=" color:#fff; margin-top: 40px; font-size: x-large;">HOME</a>
             </div>
+            <div style=" margin-top: 40px; " *ngIf="currentUser else loggedOut">
+                <a class="" [routerLink]="['/profile']">
+                    <img [src]="currentUser.profile_image " class=" profileImg rounded-circle">
+                </a>
+            </div>
 
+            <ng-template #loggedOut>
+
+                <div class=" p-2 item-hl" style="margin-top: 40px;">
+                    <button type=" button" [routerLink]="['/login']" class="btn btn-outline-light mr-4">login</button>
+                    <button type="button" [routerLink]="['/signup']" class="btn btn-outline-light mr-4">sign
+                        up</button>
+
+                </div>
+            </ng-template>
 
         </div>
     </div>
@@ -15,7 +29,7 @@
     <div class="container">
         <div class="row">
             <div class="mx-auto ">
-                <div class="  container-profile">
+                <div class="container-profile">
                     <div class="avatar-flip">
                         <div *ngIf="user">
                             <img [src]="user.profile_image | safe" height="150" width="150">

@@ -13,7 +13,7 @@
 
                 <div style=" margin-top: 40px; " *ngIf="currentUser else loggedOut">
                     <a class="" [routerLink]="['/profile']">
-                        <img [src]="currentUser.photoUrl " class=" profileImg rounded-circle">
+                        <img [src]="currentUser.profile_image " class=" profileImg rounded-circle">
                     </a>
                 </div>
 
@@ -41,25 +41,7 @@
     <section>
         <div class="container">
 
-            <div class="row mt-4 ">
 
-                <!-- 
-                <div class="mx-auto my-auto  mb-5">
-                    <div *ngIf="!category  && !user" (click)="onClick('category')">
-                        <a> categories>department</a>
-
-                    </div>
-                    <div *ngIf="category">
-                        <a> categories> </a>
-                    </div>
-
-                    <div *ngIf="user" (click)="onClick('department')">
-                        <a> categories> department> user</a>
-                    </div>
-
-                </div> -->
-
-            </div>
             <div class="mx-auto my-auto  mb-5">
                 <loading-spinner *ngIf="showSpinner"></loading-spinner>
 
@@ -71,8 +53,8 @@
 
                 <ng-container *ngFor="let department of cv.departments | async">
 
-                    <div class="col-xl-4  col-md-6   ">
-                        <div class="card card-block m-3 py-5  align-items-center"
+                    <div class="col-xl-4  col-md-6 card-block  ">
+                        <div class="card card-block m-3 py-md-5  align-items-center"
                             [routerLink]="['/users/', department.name]">
                             <h4>{{department.name}}</h4>
                         </div>
