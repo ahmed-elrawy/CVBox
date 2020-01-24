@@ -46,7 +46,7 @@ export class SignupComponent implements OnInit, OnDestroy {
       const { name, email, password, phone } = this.signupForm.value;
 
       this.subscription.push(
-        this.auth.signup(name, email, password, phone).subscribe(success => {
+        this.auth.signup(name, email, password, phone, 'employee').subscribe(success => {
           if (success) {
             // this.router.navigate(['/home'])
           } else {

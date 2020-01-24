@@ -21,7 +21,7 @@ export interface DialogData {
 })
 export class DialogOverviewCropeImgComponent {
 
-
+  imageIsReady: boolean = false;
   imageChangedEvent: any = '';
   croppedImage: any = '';
   showCropper = false;
@@ -105,14 +105,17 @@ export class DialogOverviewCropeImgComponent {
   imageLoaded() {
     this.showCropper = true;
     console.log('Image loaded');
+    this.imageIsReady = true
   }
 
   cropperReady() {
     console.log('Cropper ready');
+    this.imageIsReady = false
 
   }
 
   loadImageFailed() {
+
     console.log('Load failed');
   }
 

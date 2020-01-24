@@ -65,13 +65,13 @@
 
                 <div class="container-display">
                     <ng-template [ngIf]="curentView == 'resume-info'">
-                        <img *ngIf="!user.eslam" src="../../../assets/draw.png" alt="">
+                        <img *ngIf="!user.eslam" src="../../../assets/draw.png" alt="pdfImage" class="pdf">
                         <div *ngIf="user.eslam" class="pdf">
 
                             <embed [src]="user 
                                 .eslam | safe" type="application/pdf" class="pdf">
                             <a [href]="user 
-                            .eslam" target="_blank" rel="noopener">Download Me!</a>
+                            .eslam" target="_blank" rel="noopener">Download PDF!</a>
                         </div>
 
 

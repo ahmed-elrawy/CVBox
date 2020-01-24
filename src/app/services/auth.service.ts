@@ -49,11 +49,13 @@ export class AuthService {
     this.setCurrentUserSnapshot()
   }
 
-  public signup(name: string, email: string, password: string, phone: string): Observable<boolean> {
+  public signup(name: string, email: string, password: string, phone: string, user_type: string): Observable<boolean> {
     const promise = this.afAuth.auth.createUserWithEmailAndPassword(email, password)
       .then((user) => {
+        this.logout()
         this.SendVerificationMail();
-        this.SetUserData(user, name, password, phone, [null])
+        this.SetUserData(user, name, password, phone, [null], user_type)
+
         return true;
       })
       .catch((err) => {
@@ -126,22 +128,25 @@ export class AuthService {
   private setCurrentUserSnapshot(): void {
     this.currentUser.subscribe(user => this.currentUserSnapshot = user)
   }
-  SetUserData(user, name?: string, password?: string, phone?: string, departments?: [string]) {
+  SetUserData(user, name?: string, password?: string, phone?: string, departments?: [string], user_type?: string) {
     console.log(user.user.emailVerified)
     const userRef: AngularFirestoreDocument<User> = this.db.doc(`users/${user.user.uid}`);
     const updatedUser = {
       user_id: user.user.uid,
       email: user.user.email,
+      emailVerified: user.user.emailVerified,
+      created_at: firebase.firestore.FieldValue.serverTimestamp(),
       name,
       profile_image: 'https://firebasestorage.googleapis.com/v0/b/cvstore-73c98.appspot.com/o/%20profile%2Fuser.png?alt=media&token=ac2e28d3-33d1-4878-9ae4-b946bd39ce76',
       phone,
       password,
       departments,
-      emailVerified: user.user.emailVerified,
+      user_type,
       cv_ready: false,
       profile_ready: false,
-      created_at: firebase.firestore.FieldValue.serverTimestamp()
-
+      rate: 0,
+      avg_rating: 0,
+      views: 0
     }
 
     userRef.set(updatedUser, {

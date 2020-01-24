@@ -40,7 +40,7 @@ h2 {
 
 .form-wrapper {
     min-width: 40%;
-    margin-bottom: 10%;
+    margin-bottom: 15%;
     border: 2px solid $light-grey;
     padding: 1em 2em;
 }
@@ -73,9 +73,28 @@ form button {
     padding-bottom: 8rem;
   }
 
-  .findbox {
+  .findbox img{
     display: inline-block;
-    height: 35px;
+    width: 300px;
+      height: 120px;
     border-radius: 10px;
   }
  
+
+
+  
+  @media only screen and (max-width: 450px) {
+    .findbox img
+    {
+      padding: 10px;
+      margin: auto;
+      width: 300px;
+      height: 100px;
+    }
+    .form-wrapper {
+        min-width: 40%;
+        margin-bottom: 40%;
+        border: 2px solid $light-grey;
+        padding: 1em 2em;
+    }
+  }

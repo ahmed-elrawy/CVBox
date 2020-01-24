@@ -103,7 +103,7 @@
                 <div class="form-group ">
                     <label for="jobTitleId">job Title</label>
                     <div class="col-md-12">
-                        <input class="form-control" id="jobTitleId" type="tel" placeholder="job Title (required)"
+                        <input class="form-control" id="jobTitleId" type="text" placeholder="job Title (required)"
                             formControlName="jobTitle"
                             [ngClass]="{'is-invalid': (infoForm.get('jobTitle').touched || infoForm.get('jobTitle').dirty) &&!infoForm.get('jobTitle').valid }" />
                         <span class="invalid-feedback">
@@ -270,8 +270,8 @@
                     <div class="col-md-12">
 
 
-                        <input class="form-control" id="jobTitleId" type="tel" id="cityId" placeholder="city (required)"
-                            formControlName="city" [ngClass]="{'is-invalid': (infoForm.get('city').touched ||
+                        <input class="form-control" id="jobTitleId" type="text" id="cityId"
+                            placeholder="city (required)" formControlName="city" [ngClass]="{'is-invalid': (infoForm.get('city').touched ||
                         infoForm.get('city').dirty) &&
                         !infoForm.get('city').valid }" />
                         <span class="invalid-feedback">
