@@ -21,6 +21,8 @@ const material = [
   Material.MatDialogModule,
   Material.MatStepperModule,
   Material.MatDialogModule,
+  Material.MatExpansionModule,
+  Material.MatCardModule
 
 ]
 @NgModule({

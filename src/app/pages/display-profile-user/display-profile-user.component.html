@@ -41,6 +41,8 @@
                         <h2>{{user.name }} </h2>
                         <h4>{{user.departments}}</h4>
                     </div>
+                    <a class="btn btn-primary " [routerLink]="['/chats/', user.user_id]">message</a>
+
                     <div class="row">
                         <div class="col-6 border-top border-right mb-0" (click)="view('personal-info')"
                             [ngStyle]="{'background-color':curentView === 'personal-info' ? '#2f2dc0' : 'white'}">

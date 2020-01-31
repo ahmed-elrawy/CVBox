@@ -82,9 +82,11 @@ overflow-x: hidden;">
 
             <div class="row list ">
 
+                <div class=" my-auto mx-auto">
+                    <h1 *ngIf="(cv.data | async)?.length==0">No cvs found.</h1>
+                </div>
 
-
-
+                <!-- <h1 *ngIf="cv.data.legnth| async">empty ehjkjkjkjkjkjjhjhhjbvjl, </h1> -->
                 <ng-container *ngFor="let user of cv.data | async">
 
 

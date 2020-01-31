@@ -7,6 +7,7 @@ import { Observable } from "rxjs";
 import { MatDialog } from '@angular/material';
 import { FilterCvComponent } from "../filter-cv/filter-cv.component";
 
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-users',
@@ -20,7 +21,8 @@ export class UsersComponent implements OnInit {
   showSpinner: boolean = true
 
 
-  public dataList$: Observable<any[]>;
+  // public dataList$: Observable<any[]>;
+  data: Observable<any>
 
 
   constructor(
@@ -31,6 +33,19 @@ export class UsersComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+
+    this.cv.data.subscribe(data => {
+      data.map(count => {
+        if (count >= 0) {
+          console.log('is aempty')
+        }
+      })
+    })
+
+
+
+    // .map(count => count > 0).defaultIfEmpty(false);
+
     this.auth.currentUser.subscribe(user => {
       this.currentUser = user;
     })
@@ -52,7 +67,7 @@ export class UsersComponent implements OnInit {
     })
 
     this.cv.data.subscribe(data => {
-      console.log(data)
+      console.log(data.length)
     })
   }
 

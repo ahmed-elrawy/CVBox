@@ -6,7 +6,7 @@ import { AlertService } from "../servies/alert.service";
 import { Observable, of, } from 'rxjs';
 import { AngularFireAuth } from "@angular/fire/auth";
 import { AngularFirestore, AngularFirestoreDocument } from "@angular/fire/firestore";
-import { switchMap } from 'rxjs/operators';
+import { switchMap, first } from 'rxjs/operators';
 import { from } from 'rxjs';
 import * as firebase from 'firebase';
 import { AlertType } from 'src/app/enum/alert-type.enum';
@@ -33,7 +33,7 @@ export class AuthService {
           const userData = {
             user_id: user.uid,
             email: user.email,
-            emailVerified: user.emailVerified,
+            emailVerified: user.emailVerified
           };
           this.userData = userData// Setting up user data in userData var
           localStorage.setItem('user', JSON.stringify(userData));
@@ -47,6 +47,10 @@ export class AuthService {
       })
     )
     this.setCurrentUserSnapshot()
+  }
+
+  getUser() {
+    return this.currentUser.pipe(first()).toPromise()
   }
 
   public signup(name: string, email: string, password: string, phone: string, user_type: string): Observable<boolean> {

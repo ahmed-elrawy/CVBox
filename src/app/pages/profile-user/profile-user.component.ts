@@ -9,6 +9,7 @@ import { User } from "../../classes/user";
 import { MatDialog } from '@angular/material/dialog';
 
 import { DialogOverviewCropeImgComponent } from 'src/app/components/dialog-overview-crope-img/dialog-overview-crope-img.component';
+import { ChatService } from 'src/app/services/chat.service';
 
 
 export interface DialogData {
@@ -32,6 +33,8 @@ export class ProfileUserComponent implements OnInit {
 
   PDFURL: string | null;
   photoUrl: string
+  userChats$;
+  chatId;
 
   constructor(
     private render: Renderer,
@@ -39,7 +42,8 @@ export class ProfileUserComponent implements OnInit {
     private db: AngularFirestore,
     private firestore: AngularFirestore,
     public auth: AuthService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    public cs: ChatService
   ) {
     this.user = JSON.parse(localStorage.getItem('user'));
 
@@ -57,6 +61,9 @@ export class ProfileUserComponent implements OnInit {
 
 
   ngOnInit() {
+
+    // this.chatId = this.cs.get('t1ZQgqAhpTiMHbCmXtE5')
+
     this.db.doc<User>(`users/${this.user.user_id}`).valueChanges().subscribe(
       user => {
         this.PDFURL = user.eslam;
@@ -69,6 +76,10 @@ export class ProfileUserComponent implements OnInit {
       }
     );
   }
+
+  // getChatId(id) {
+  //   this.cs.getChatId(id)
+  // }
 
   view(key: string): void {
     if (key == "personal-info") {

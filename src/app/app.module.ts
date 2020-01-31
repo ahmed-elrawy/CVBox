@@ -48,6 +48,7 @@ import { LoadingService } from './servies/loading.service';
 import { DisplayProfileUserComponent } from './pages/display-profile-user/display-profile-user.component';
 import { CvBoxService } from './services/cv-box.service';
 import { FilterCvComponent } from './pages/filter-cv/filter-cv.component';
+import { ChatComponent } from './components/chat/chat.component';
 
 
 
@@ -67,7 +68,8 @@ import { FilterCvComponent } from './pages/filter-cv/filter-cv.component';
     DepartmentsComponent,
     UsersComponent,
     DialogOverviewCropeImgComponent,
-    FilterCvComponent
+    FilterCvComponent,
+    ChatComponent
 
   ],
   entryComponents: [DialogOverviewCropeImgComponent],

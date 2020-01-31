@@ -56,6 +56,12 @@
                         <h2>{{userData.name}}</h2>
                         <h4>{{userData.departments}}</h4>
                     </div>
+                    <button class="button" routerLink="/chats/vgZGEIBqugGZXjs5Ev5l"
+                        (click)="cv.getChatId('t1ZQgqAhpTiMHbCmXtE5')">Join Mega
+                        Chat
+                        🎪</button>
+
+                    <button class="button is-info" (click)="cs.create()">Create New Chat</button>
 
                     <div class="container">
 
@@ -76,7 +82,15 @@
                 </div>
             </div>
         </div>
+        <div class="row">
+            <h3>My Chats</h3>
 
+            <ul>
+                <li *ngFor="let chat of userChats$ | async">
+                    <a [routerLink]="'/chats/'+ chat.id">{{ chat.id }} - {{ chat.messages.length }} Messages </a>
+                </li>
+            </ul>
+        </div>
         <div class="row ">
             <div class=" mx-auto ">
 

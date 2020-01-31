@@ -12,6 +12,7 @@ import { DisplayProfileUserComponent } from './pages/display-profile-user/displa
 import { DepartmentsComponent } from './pages/departments/departments.component';
 import { UsersComponent } from './pages/users/users.component';
 import { FilterCvComponent } from './pages/filter-cv/filter-cv.component';
+import { ChatComponent } from './components/chat/chat.component';
 
 
 const routes: Routes = [
@@ -28,6 +29,7 @@ const routes: Routes = [
   { path: 'verify-email-address', component: VerifyEmailComponent, canActivate: [SecureInnerPagesGuard] },
   { path: 'display-profile-use/:id', component: DisplayProfileUserComponent, canActivate: [AuthGuard] },
   { path: 'filter-cv', component: FilterCvComponent },
+  { path: 'chats/:id', component: ChatComponent, canActivate: [AuthGuard] }
 
 
 
