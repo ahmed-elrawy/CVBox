@@ -37,6 +37,46 @@ export class ChatService {
   ) { }
 
 
+
+  fun2(senderId, receiverId) {
+    console.log(senderId, receiverId)
+    let secondtID = this.fun(senderId.toLowerCase());
+    let firstID = this.fun(receiverId.toLowerCase());
+
+    let sum = secondtID * firstID;
+
+    this.chatHeadId = "" + sum;
+    this.getChat()
+    this.getchatHeads(secondtID)
+    // this.getMessages(this.chatHead)
+  }
+  fun(id: string): number {
+
+    let count: number = 1;
+
+
+    for (let i = 0; i < id.length; i++) {
+      let index = this.list.indexOf(id.charAt(i));
+
+      if (index > 0) {
+        count *= index;
+      }
+    }
+    console.log(count)
+
+    return count;
+  }
+  getChat() {
+
+    this.messagesCollection = this.afs.collection(`messages`, ref => {
+      // Compose a query using multiple .where() methods
+      return ref
+        .where('chat_id', '==', this.chatHeadId)
+
+    });
+    this.messages = this.messagesCollection.valueChanges();
+  }
+
   getchatHeads(senderId) {
 
     this.chatHeadCollection = this.afs.collection('chat_head', ref => {
@@ -60,8 +100,7 @@ export class ChatService {
   }
 
 
-  sendMessage(newMsg, senderId, receiverId, chatHeadId) {
-    console.log(newMsg, senderId, receiverId, chatHeadId)
+  sendMessage(newMsg, senderId, receiverId) {
     let messageId = "" + new Date().getTime();
     const userRef: AngularFirestoreDocument<Message> = this.afs.doc(`messages/${messageId}`);
     let createdAt = firebase.firestore.FieldValue.serverTimestamp()
@@ -69,26 +108,31 @@ export class ChatService {
     const updatedMessage: Message = {
       created_at: createdAt,
       message: newMsg,
-      sender_id: senderId,
-      reciver_id: receiverId,
-      chat_head_id: chatHeadId,
+      sender_id: senderId.user_id.toLowerCase(),
+      reciver_id: receiverId.user_id.toLowerCase(),
+      chat_head_id: this.chatHeadId,
       message_id: messageId
     }
 
     userRef.set(updatedMessage);
     this.afs
       .collection("chat_head")
-      .doc(chatHeadId)
+      .doc(this.chatHeadId)
       .set({
-        sender_image: senderId,
-        chat_head_id: chatHeadId,
+
+        chat_head_id: this.chatHeadId,
         last_message: newMsg,
         created_at: createdAt,
-        users: [senderId, receiverId]
+        users: [senderId.user_id.toLowerCase(), receiverId.user_id.toLowerCase()],
+        user_info: [
+          { user_id: senderId.user_id, user_image: senderId.profile_image, user_name: senderId.name },
+          { user_id: receiverId.user_id, user_image: receiverId.profile_image, user_name: receiverId.name }]
       }, { merge: true })
 
 
   }
+
+
 
 
   private scrollBottom() {

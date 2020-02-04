@@ -28,15 +28,15 @@
 
 
             <div class="inbox_chat">
-                <div class="msg_history">
-                    <ng-container *ngFor="let chat of chat.chatHead | async">
+                <div class="msg_history" *ngIf="receiver_info && sender_info">
+                    <ng-container *ngFor="let chat of headsList">
 
                         <div class="chat_list active_chat" (click)="getMessages(chat.chat_head_id)">
                             <div class=" chat_people">
-                                <div class="chat_img"> <img src="" alt="sunil">
+                                <div class="chat_img"> <img [src]="receiver_info.profile_image" alt="sunil">
                                 </div>
                                 <div class="chat_ib">
-                                    <h5>Sunil Rajput <span class="chat_date">Dec 25</span></h5>
+                                    <h5>{{receiver_info.name}} <span class="chat_date">Dec 25</span></h5>
                                     <p>{{chat.last_message}}</p>
                                 </div>
                             </div>
@@ -66,10 +66,10 @@
     <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" hideToggle>
         <mat-expansion-panel-header>
             <mat-panel-title>
-                Self aware panel
+                {{receiver_info.name}}
             </mat-panel-title>
 
-            <div class="chat_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil">
+            <div class="chat_img"> <img [src]="receiver_info.profile_image" alt="sunil">
             </div>
         </mat-expansion-panel-header>
 
@@ -83,13 +83,14 @@
                     [class.compact]="messages[i - 1]?.sender_id ===message.sender_id">
 
                     <mat-card-header>
-                        <img mat-card-avatar
-                            src="https://firebasestorage.googleapis.com/v0/b/firestore-75cc6.appspot.com/o/%20profile%2FfwidhA8MlWbIKuQlbMrCusd7LYb2%2F%20profile-Image.jpg%20?alt=media&token=46b7b21e-3932-47b7-acc9-4cfca0639d5f">
-                        <mat-card-title>Ahmed</mat-card-title>
+                        <img mat-card-avatar *ngIf="message.sender_id=== userId" [src]="receiver_info.profile_image">
+                        <img mat-card-avatar *ngIf="message.sender_id != userId" [src]="sender_info.profile_image">
+                        <mat-card-title *ngIf="message.sender_id=== userId">{{receiver_info.name}}</mat-card-title>
+                        <mat-card-title *ngIf="message.sender_id != userId">{{sender_info.name}}</mat-card-title>
                     </mat-card-header>
                     <mat-card-content>
                         <div class="body">{{ message.message }}</div>
-                        <div class="time">{{ message.created_at.seconds*1000 | date }}</div>
+                        <div class="time">{{ message.created_at | date : 'yyyy-MM-dd HH:mm:ss' }}</div>
                     </mat-card-content>
                 </mat-card>
             </div>

@@ -37,8 +37,8 @@ export class DisplayProfileUserComponent implements OnInit {
   }
 
   ngOnInit() {
-    const senderId = JSON.parse(localStorage.getItem('user')).user_id.toLowerCase();
-    let secondtID = this.fun(senderId);
+    // const senderId = JSON.parse(localStorage.getItem('user')).user_id.toLowerCase();
+    // let secondtID = this.fun(senderId);
 
     this.auth.currentUser.subscribe(user => {
       this.currentUser = user;

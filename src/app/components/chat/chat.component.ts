@@ -5,10 +5,12 @@ import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { AuthService } from '../../services/auth.service';
 import { Message } from "../../classes/message";
+import { User } from "../../classes/user";
 import { ChatHead } from "../../classes/chat_head";
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { firestore } from 'firebase/app';
 import { ScrollToBottomDirective } from '../../servies/scroll-to-bottom.directive'
+
 
 
 import * as firebase from 'firebase';
@@ -34,7 +36,10 @@ export class ChatComponent implements OnInit {
   senderId
   receiverId
 
+  sender_info
+  receiver_info
 
+  userSender
   allMessagesCollection: AngularFirestoreCollection<Message>
   allMessages: Observable<Message[]>
 
@@ -48,32 +53,36 @@ export class ChatComponent implements OnInit {
     private route: ActivatedRoute,
     public auth: AuthService,
     private db: AngularFirestore,
+    public chat: ChatService
   ) {
+    this.receiverId = this.route.snapshot.paramMap.get('id');
+    this.senderId = JSON.parse(localStorage.getItem('user')).user_id;
 
 
   }
 
   ngOnInit() {
-    this.senderId = JSON.parse(localStorage.getItem('user')).user_id.toLowerCase();
-    this.receiverId = this.route.snapshot.paramMap.get('id').toLowerCase();
-    let secondtID = this.fun(this.senderId);
-    let firstID = this.fun(this.receiverId);
+    this.db.doc<User>(`users/${this.senderId}`).valueChanges().subscribe(
+      user => {
+        this.sender_info = user
+        console.log(user)
 
-    let sum = secondtID * firstID;
+      }, (error) => {
+        console.log(error);
+      }
+    );
 
-    this.chatHeadId = "" + sum;
+    this.db.doc<User>(`users/${this.receiverId}`).valueChanges().subscribe(
+      user => {
+        this.receiver_info = user
+        console.log(user)
+      }, (error) => {
+        console.log(error);
+      }
+    );
 
-    this.getChat()
-    console.log(this.chatHeadId)
-    console.log(this.messages)
-    this.getchatHeads()
-    this.getMessages()
-    this.chatHead.subscribe(res => { console.log(res) })
-    this.allMessages.subscribe(res => { console.log(res) })
+    this.chat.fun2(this.senderId.toLowerCase(), this.receiverId.toLowerCase())
 
-    // // const source = this.cs.get(receiverId);
-    // this.chat$ = this.cs.joinUsers(source); // .pipe(tap(v => this.scrollBottom(v)));
-    // this.scrollBottom();
   }
 
   getChat() {
@@ -88,17 +97,6 @@ export class ChatComponent implements OnInit {
   }
 
 
-  // getChatHeadID() {
-  //   const receiverId = this.route.snapshot.paramMap.get('id').toLowerCase();
-  //   const senderId = JSON.parse(localStorage.getItem('user')).user_id.toLowerCase();
-
-  //   let firstID = this.fun(receiverId);
-  //   let secondtID = this.fun(senderId);
-
-  //   let finalId = firstID * secondtID;
-
-
-  // }
 
   fun(id: string): number {
 
@@ -119,36 +117,12 @@ export class ChatComponent implements OnInit {
 
 
 
-  // trackByCreated(i, msg) {
-  //   return msg.createdAt;
-  // }
 
   sendMessage() {
-    console.log()
-    let messageId = "" + new Date().getTime();
-    const userRef: AngularFirestoreDocument<Message> = this.db.doc(`messages/${messageId}`);
-    let createdAt = firebase.firestore.FieldValue.serverTimestamp()
-    this.scrollBottom();
-    const updatedMessage: Message = {
-      created_at: createdAt,
-      message: this.newMsg,
-      sender_id: this.senderId,
-      reciver_id: this.receiverId,
-      chat_head_id: this.chatHeadId,
-      message_id: messageId
-    }
+    // this.newMsg = ""
 
-    userRef.set(updatedMessage);
-    this.db
-      .collection("chat_head")
-      .doc(this.chatHeadId)
-      .set({
-        sender_image: this.senderId,
-        chat_head_id: this.chatHeadId,
-        last_message: this.newMsg,
-        created_at: createdAt,
-        users: [this.senderId, this.receiverId]
-      }, { merge: true })
+    this.chat.sendMessage(this.newMsg, this.sender_info, this.receiver_info)
+
 
 
   }
