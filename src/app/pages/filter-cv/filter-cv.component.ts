@@ -66,8 +66,8 @@ export class FilterCvComponent implements OnInit {
       gender: ['', [Validators.required]],
       country: ['', [Validators.required]],
       state: ['', [Validators.required]],
-      marital: ['', [Validators.required]],
-      military: ['', [Validators.required],]
+      marital_status: ['', [Validators.required]],
+      military_status: ['', [Validators.required],]
 
     })
 

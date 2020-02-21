@@ -5,13 +5,14 @@
 export const environment = {
   production: true,
   firebase: {
-    apiKey: "AIzaSyCozghwNcQkkBBJ74A6nD6XtwlkHlgYdhI",
-    authDomain: "firestore-75cc6.firebaseapp.com",
-    databaseURL: "https://firestore-75cc6.firebaseio.com",
-    projectId: "firestore-75cc6",
-    storageBucket: "firestore-75cc6.appspot.com",
-    messagingSenderId: "765970140114",
-    appId: "1:765970140114:web:f2e61443a0f3433546d60b"
+    apiKey: "AIzaSyAGxACNqy2NSR5E2f1KKxQqgGLIJjtF2ps",
+    authDomain: "cvbox-6ac06.firebaseapp.com",
+    databaseURL: "https://cvbox-6ac06.firebaseio.com",
+    projectId: "cvbox-6ac06",
+    storageBucket: "cvbox-6ac06.appspot.com",
+    messagingSenderId: "126947925179",
+    appId: "1:126947925179:web:706286cad263de941add9e",
+    measurementId: "G-N6J1XVNRKZ"
   }
 };
 

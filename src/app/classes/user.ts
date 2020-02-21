@@ -22,3 +22,30 @@ export class User {
     //     this.photoUrl = photoUrl;
     // }
 }
+
+// export class User {
+//     age?: number;
+//     avg_rating?: number;
+//     category?: string;
+//     city?: string;
+//     created_at?: Date;
+//     cv_ready?: boolean;
+//     departments?: [string];
+//     email: string;
+//     eslam?: string;
+//     gender?: string;
+//     job_title?: string;
+//     marital_status?: string;
+//     military_status?: string;
+//     name?: string;
+//     phone?: number;
+//     profile_image?: string;
+//     profile_ready?: boolean;
+//     state?: string;
+//     views?: number;
+//     year_experience?: number;
+//     emailVerified?: boolean;
+//     user_type?: string;
+//     rate?: number;
+
+// }

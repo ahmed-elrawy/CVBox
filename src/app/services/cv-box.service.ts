@@ -83,10 +83,19 @@ export class CvBoxService {
   }
 
   cvFilter(category, departments, gender, country, state, marital, military, minExprience, maxExprience) {
-    console.log(category, departments, gender, country, state, marital, military, minExprience, maxExprience)
+    console.log(
+      'category ' + category,
+      'departments ' + departments,
+      "gender " + gender,
+      "country " + country,
+      'state ' + state,
+      'marital ' + marital,
+      'military ' + military,
+      'minExprience ' + minExprience,
+      'maxExprience ' + maxExprience
+    )
     this.usersCollections = this.db.collection('users', ref => {
       // Compose a query using multiple .where() methods
-      console.log(`QUERY${maxExprience}+ ${minExprience}`)
       return ref
         .where('category', '==', category)
         .where('departments', 'array-contains', departments)
@@ -95,19 +104,14 @@ export class CvBoxService {
         .where('gender', '==', gender)
         .where('country', '==', country)
         .where('state', '==', state)
-        .where('marital', '==', marital)
-        .where('military', '==', military)
+        .where('marital_status', '==', marital)
+        .where('military_status', '==', military)
         .where('cv_ready', '==', true)
         .where('profile_ready', '==', true)
     });
     this.data = this.usersCollections.valueChanges()
 
-    // this.data.subscribe(res => {
-    //   this.updatedDataSelection(res);
-    //   this.loadState.next(false)
 
-    //   console.log(res)
-    // })
   }
 
   updatedDataSelection(data: any) {
@@ -117,20 +121,17 @@ export class CvBoxService {
 
 
   public submit(filterForm, minExperience, maxExperience): void {
+    console.log(filterForm.value)
+    console.log(filterForm.valid)
 
     if (filterForm.valid) {
-      const { category, departments, gender, country, state, marital, military } = filterForm.value;
+      const { category, departments, gender, country, state, marital_status, military_status } = filterForm.value;
 
-      // const department = [departments];
-
-      console.log(filterForm.value)
-      this.cvFilter(category, departments, gender, country, state, marital, military, minExperience, maxExperience);
+      this.cvFilter(category, departments, gender, country, state, marital_status, military_status, minExperience, maxExperience);
 
       this.dialog.closeAll()
-      // this.cv.cvs.subscribe(res => {
       this.router.navigate(['/users'])
-      //   console.log(res)
-      // })
+
     } else {
       console.log(false)
     }

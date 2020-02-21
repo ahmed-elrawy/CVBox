@@ -73,8 +73,8 @@ export class PersonalInfoComponent implements OnInit {
       country: ['', [Validators.required]],
       state: ['', [Validators.required]],
       city: ['', [Validators.required]],
-      marital: ['', [Validators.required]],
-      military: ['', [Validators.required],],
+      marital_status: ['', [Validators.required]],
+      military_status: ['', [Validators.required],],
 
     })
 
@@ -108,8 +108,8 @@ export class PersonalInfoComponent implements OnInit {
       country: this.userdata.country,
       state: this.userdata.state,
       city: this.userdata.city,
-      marital: this.userdata.marital,
-      military: this.userdata.military,
+      marital_status: this.userdata.marital_status,
+      military_status: this.userdata.military_status,
     })
 
 
@@ -123,11 +123,9 @@ export class PersonalInfoComponent implements OnInit {
     alert("info updated")
     console.log(form.value)
     const department = new FormArray([this.department]);
-    console.log(department)
     // const departments = this.infoForm.setControl("departments", department);
     const departments = department.value
 
-    console.log(departments)
 
     const {
       name,
@@ -142,31 +140,18 @@ export class PersonalInfoComponent implements OnInit {
       country,
       state,
       city,
-      marital,
-      military,
+      marital_status,
+      military_status,
     } = form.value;
 
-    // const customForm = {
-    //   name, email, password, phone, age, gender, jobTitle, category, departments, year_experience, country, state, city, marital, military
-    // }
-    // console.log(customForm)
 
     let data = Object.assign({ profile_ready: true, departments }, form.value);
     delete data.department;
-    // // if (this.auth.userData.uid == null)
-    // //   this.firestore.collection('users').add(data);
-    // // else
+
     this.firestore.doc('users/' + this.user.user_id).update(data).catch(err => console.log(err + " errrrrrrrrrrrrrrrrrrrrrrrr"))
 
   }
 
-  // onChange(va) {
-  //   this.departValue = va
-  //   this.infoForm.setControl('departments', this.fb.array([va]));
-  //   console.log(va)
-  //   // console.log(va)
-
-  // }
 
 
 

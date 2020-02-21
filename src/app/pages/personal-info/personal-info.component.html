@@ -301,15 +301,15 @@
                     <div class="col-md-12">
 
                         <select class="form-control" id="MaritalId" placeholder="Marital Status (required)"
-                            formControlName="marital" [ngClass]="{'is-invalid': (infoForm.get('marital').touched ||
-                                        infoForm.get('marital').dirty) &&
-                                        !infoForm.get('marital').valid }">
+                            formControlName="marital_status" [ngClass]="{'is-invalid': (infoForm.get('marital_status').touched ||
+                                        infoForm.get('marital_status').dirty) &&
+                                        !infoForm.get('marital_status').valid }">
                             <option>Unspecified</option>
                             <option>Single</option>
                             <option>Married</option>
                         </select>
                         <span class="invalid-feedback">
-                            <span *ngIf="infoForm.get('marital').errors?.required">
+                            <span *ngIf="infoForm.get('marital_status').errors?.required">
                                 Please enter your name.
                             </span>
                         </span>
@@ -320,16 +320,16 @@
                     <div class="col-md-12">
 
                         <select class="form-control" id="MilitaryId" placeholder="Marital Status (required)"
-                            formControlName="military" [ngClass]="{'is-invalid': (infoForm.get('military').touched ||
-                                        infoForm.get('military').dirty) &&
-                                        !infoForm.get('military').valid }">
+                            formControlName="military_status" [ngClass]="{'is-invalid': (infoForm.get('military_status').touched ||
+                                        infoForm.get('military_status').dirty) &&
+                                        !infoForm.get('military_status').valid }">
                             <option>Not Applicable</option>
                             <option>Exempted</option>
                             <option>Completed</option>
                             <option>Postponed</option>
                         </select>
                         <span class="invalid-feedback">
-                            <span *ngIf="infoForm.get('military').errors?.required">
+                            <span *ngIf="infoForm.get('military_status').errors?.required">
                                 Please enter your name.
                             </span>
                         </span>

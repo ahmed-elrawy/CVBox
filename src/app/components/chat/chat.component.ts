@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Input } from '@angular/core';
 import { ChatService } from '../../services/chat.service';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
@@ -21,6 +21,8 @@ import * as firebase from 'firebase';
   styleUrls: ['./chat.component.scss']
 })
 export class ChatComponent implements OnInit {
+  @Input() receiverid: string;
+
   step = 0;
 
   list: string[] = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
@@ -62,6 +64,7 @@ export class ChatComponent implements OnInit {
   }
 
   ngOnInit() {
+    console.log('receiver input' + this.receiverid)
     this.db.doc<User>(`users/${this.senderId}`).valueChanges().subscribe(
       user => {
         this.sender_info = user
@@ -72,7 +75,7 @@ export class ChatComponent implements OnInit {
       }
     );
 
-    this.db.doc<User>(`users/${this.receiverId}`).valueChanges().subscribe(
+    this.db.doc<User>(`users/${this.receiverid}`).valueChanges().subscribe(
       user => {
         this.receiver_info = user
         console.log(user)
@@ -81,7 +84,7 @@ export class ChatComponent implements OnInit {
       }
     );
 
-    this.chat.fun2(this.senderId.toLowerCase(), this.receiverId.toLowerCase())
+    this.chat.fun2(this.senderId.toLowerCase(), this.receiverid.toLowerCase())
 
   }
 

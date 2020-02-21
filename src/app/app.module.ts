@@ -49,6 +49,8 @@ import { DisplayProfileUserComponent } from './pages/display-profile-user/displa
 import { CvBoxService } from './services/cv-box.service';
 import { FilterCvComponent } from './pages/filter-cv/filter-cv.component';
 import { ChatComponent } from './components/chat/chat.component';
+import { ChatOverComponent } from './components/chat-over/chat-over.component';
+import { ScrollToBottomDirective } from './servies/scroll-to-bottom.directive';
 
 
 
@@ -62,6 +64,7 @@ import { ChatComponent } from './components/chat/chat.component';
     PersonalInfoComponent,
     LoadingSpinnerComponent,
     SafePipe,
+    ScrollToBottomDirective,
     ForgotPasswordComponent,
     VerifyEmailComponent,
     DisplayProfileUserComponent,
@@ -69,7 +72,8 @@ import { ChatComponent } from './components/chat/chat.component';
     UsersComponent,
     DialogOverviewCropeImgComponent,
     FilterCvComponent,
-    ChatComponent
+    ChatComponent,
+    ChatOverComponent
 
   ],
   entryComponents: [DialogOverviewCropeImgComponent],
