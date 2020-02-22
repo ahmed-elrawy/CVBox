@@ -1,5 +1,8 @@
 {
   "projects": {
-    "default": "cvstore-73c98"
+    "default": "cvstore-73c98",
+    "CVBOX": "cvbox-6ac06",
+    "cvbox": "cvbox-6ac06",
+    "box": "cvbox-6ac06"
   }
 }

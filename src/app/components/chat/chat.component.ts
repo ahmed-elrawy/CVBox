@@ -124,7 +124,7 @@ export class ChatComponent implements OnInit {
   sendMessage() {
     // this.newMsg = ""
 
-    this.chat.sendMessage(this.newMsg, this.sender_info, this.receiver_info)
+    this.chat.sendMessage(this.newMsg, this.receiver_info, this.sender_info)
 
 
 

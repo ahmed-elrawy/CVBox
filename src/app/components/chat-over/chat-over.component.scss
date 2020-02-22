@@ -16,10 +16,10 @@ mat-form-field {
   margin-right: 12px;
 }
 
-mat-expansion-panel {
+ .example-headers-align {
    
-    width: 28%;
-    min-width: 300px;
+    width: 20%;
+    min-width: 200px;
     position: fixed;
     bottom:   0;
     margin-left: 20px;
@@ -193,7 +193,7 @@ img{ max-width:100%;}
   min-width: 300px;
   position: fixed;
   bottom:   0;
-  margin-left: 400px;
+  margin-left: 300px;
   max-height: 400px;
   // min-height: 400px;
 }
@@ -294,4 +294,32 @@ footer {
       width: 100%;
     }
   }
+}
+
+
+@media only screen and (max-width: 600px) {
+  .message {
+    // overflow: hidden;
+  
+    // width: 28%;
+    min-width: 300px;
+    position: fixed;
+    bottom:   0;
+    margin-left: 20%;
+    max-height: 400px;
+    // min-height: 400px;
+  }
+
+  
+ .example-headers-align {
+   
+  width: 20%;
+  min-width: 300px;
+  position: fixed;
+  bottom:   0;
+  // margin-left: 20px;
+  max-height: 70%;
+  // min-height: 400px;
+}
+
 }
