@@ -51,6 +51,8 @@ import { FilterCvComponent } from './pages/filter-cv/filter-cv.component';
 import { ChatComponent } from './components/chat/chat.component';
 import { ChatOverComponent } from './components/chat-over/chat-over.component';
 import { ScrollToBottomDirective } from './servies/scroll-to-bottom.directive';
+import { ChatListComponent } from './components/chat/chat-list/chat-list.component';
+import { MessagesComponent } from './components/chat/messages/messages.component';
 
 
 
@@ -73,7 +75,9 @@ import { ScrollToBottomDirective } from './servies/scroll-to-bottom.directive';
     DialogOverviewCropeImgComponent,
     FilterCvComponent,
     ChatComponent,
-    ChatOverComponent
+    ChatOverComponent,
+    ChatListComponent,
+    MessagesComponent
 
   ],
   entryComponents: [DialogOverviewCropeImgComponent],

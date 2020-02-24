@@ -1,51 +1,28 @@
-import { Component, OnInit, ViewEncapsulation, ViewChild, Input } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, Input } from '@angular/core';
+import { routerTransition } from "../animation";
 import { animate, query, stagger, style, transition, trigger } from '@angular/animations';
 
-import { ChatService } from '../../services/chat.service';
-import { ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs';
-import { tap } from 'rxjs/operators';
-import { AuthService } from '../../services/auth.service';
-import { Message } from "../../classes/message";
-import { User } from "../../classes/user";
-import { ChatHead } from "../../classes/chat_head";
-import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/firestore';
-import { firestore } from 'firebase/app';
-import { ScrollToBottomDirective } from '../../servies/scroll-to-bottom.directive'
+import { ChatService } from '../../../services/chat.service';
 
-
-
-import * as firebase from 'firebase';
+import { AuthService } from '../../../services/auth.service';
+import { Message } from "../../../classes/message";
+import { User } from "../../../classes/user";
+import { ChatHead } from "../../../classes/chat_head";
+import { AngularFirestore } from '@angular/fire/firestore';
 
 @Component({
-  selector: 'app-chat',
-  templateUrl: './chat.component.html',
-  styleUrls: ['./chat.component.scss'],
-  // encapsulation: ViewEncapsulation.None,
-  // animations: [
-  //   trigger('listStagger', [
-  //     transition('* <=> *', [
-  //       query(':enter', style({ opacity: 0 }), { optional: true }),
-  //       query(
-  //         ':enter',
-  //         [
-  //           stagger(
-  //             '50ms',
-  //             animate(
-  //               '550ms ease-out',
-  //               style({ opacity: 1, transform: 'translateY(0px)' })
-  //             )
-  //           )
-  //         ],
-  //         { optional: true }
-  //       )
-  //     ])
-  //   ])
-  // ] // for remove angular matrial class
+  selector: 'app-messages',
+  templateUrl: './messages.component.html',
+  styleUrls: ['../chat.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+  animations: [routerTransition()],
+
+  // for remove angular matrial class
 
 
 })
-export class ChatComponent implements OnInit {
+export class MessagesComponent implements OnInit {
+
   @Input() receiverid: string;
 
 

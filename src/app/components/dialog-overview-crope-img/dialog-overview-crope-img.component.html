@@ -8,7 +8,8 @@
 
 
                     <button type="button" mat-button (click)="fileInput.click()">Choose File</button>
-                    <input hidden (change)="fileChangeEvent($event)" #fileInput type="file" id="file">
+                    <input hidden (change)="fileChangeEvent($event)" #fileInput type="file" id="file"
+                        accept="image/x-png,image/gif,image/jpeg">
 
 
                     <!-- <input type="file" (change)="fileChangeEvent($event)" /> -->

@@ -50,6 +50,7 @@ export class ChatService {
     this.getchatHeads(secondtID)
     // this.getMessages(this.chatHead)
   }
+
   fun(id: string): number {
 
     let count: number = 1;
@@ -75,6 +76,7 @@ export class ChatService {
 
     });
     this.messages = this.messagesCollection.valueChanges();
+
   }
 
   getchatHeads(senderId) {
@@ -86,6 +88,8 @@ export class ChatService {
 
     });
     this.chatHead = this.chatHeadCollection.valueChanges();
+
+
   }
 
   getMessages(chatHeadId) {
@@ -97,6 +101,10 @@ export class ChatService {
 
     });
     this.allMessages = this.allMessagesCollection.valueChanges();
+
+    this.allMessages.subscribe(head => {
+      console.log(head)
+    })
   }
 
 

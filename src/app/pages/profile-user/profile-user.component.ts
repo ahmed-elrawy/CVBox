@@ -125,11 +125,5 @@ export class ProfileUserComponent implements OnInit {
 
 
 
-  // resizeOptions: ResizeOptions = {
-  //   resizeMaxHeight: 74,
-  //   resizeMaxWidth: 74
-  // };
-
-
 
 }
