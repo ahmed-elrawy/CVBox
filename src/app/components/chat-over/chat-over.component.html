@@ -1,4 +1,4 @@
-<mat-accordion class="example-headers-align" *ngIf="currentUser">
+<mat-accordion class="example-headers-align" *ngIf="user">
     <div>
         <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" hideToggle>
             <mat-expansion-panel-header class="mat-expansion-panel-header">
@@ -14,14 +14,14 @@
 
 
             <div class="inbox_chat">
-                <div class="msg_history" *ngIf="receiver_info && sender_info">
+                <div class="msg_history" *ngIf="user">
                     <ng-container *ngFor="let chat of headsList">
 
-                        <div class="chat_list active_chat" (click)="getMessages(chat.chat_head_id)">
+                        <div class="chat_list active_chat" (click)="getMessages(chat.chat_head_id,chat.user_info)">
                             <div class=" chat_people">
                                 <div class="chat_img">
 
-                                    <div *ngIf="chat.user_info[1].user_id != senderId; else elseImage">
+                                    <div *ngIf="chat.user_info[1].user_id != this.user.user_id; else elseImage">
                                         <img [src]="chat.user_info[1].user_image" alt="sunil">
                                     </div>
                                     <ng-template #elseImage>
@@ -32,7 +32,7 @@
                                 </div>
                                 <div class="chat_ib">
 
-                                    <div *ngIf="chat.user_info[1].user_id != senderId; else elseBlock">
+                                    <div *ngIf="chat && chat.user_info[1].user_id != this.user.user_id; else elseBlock">
                                         <h5> {{chat.user_info[1].user_name }} <span class="chat_date">Dec 25</span>
                                         </h5>
                                         <p>{{chat.last_message}}</p>
@@ -72,15 +72,18 @@
 
 
 
-<mat-accordion *ngIf="chatView" class="example-headers-align message">
+<mat-accordion *ngIf="secondUser && chatView" class="example-headers-align message">
 
     <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" hideToggle>
         <mat-expansion-panel-header>
             <mat-panel-title>
-                {{receiver_info.name}}
+                <div (click)="close()"><i class="material-icons"> cancel </i>
+                </div>
+
+                {{secondUser.name}}
             </mat-panel-title>
 
-            <div class="chat_img"> <img [src]="receiver_info.profile_image" alt="sunil">
+            <div class="chat_img"> <img [src]="secondUser.profile_image" alt="sunil">
             </div>
         </mat-expansion-panel-header>
 
@@ -89,15 +92,18 @@
         <div class="msg_history pb-5" #scrollMe [scrollTop]="scrollMe.scrollHeight">
             <div class="messages" *ngIf="chat.allMessages | async as messages" [@listStagger]="messages.length">
                 <mat-card class="message" *ngFor="let message of messages; trackBy: trackById; index as i;"
-                    [class.from-me]="message.sender_id=== userId"
+                    [class.from-me]="message.sender_id=== userIdLowerCase"
                     [class.compact]="messages[i - 1]?.reciver_id ===message.reciver_id "
                     [class.compact]="messages[i - 1]?.sender_id ===message.sender_id">
 
                     <mat-card-header>
-                        <img mat-card-avatar *ngIf="message.sender_id=== userId" [src]="receiver_info.profile_image">
-                        <img mat-card-avatar *ngIf="message.sender_id != userId" [src]="sender_info.profile_image">
-                        <mat-card-title *ngIf="message.sender_id=== userId">{{receiver_info.name}}</mat-card-title>
-                        <mat-card-title *ngIf="message.sender_id != userId">{{sender_info.name}}</mat-card-title>
+                        <img mat-card-avatar *ngIf="message.sender_id=== userIdLowerCase"
+                            [src]="secondUser.profile_image">
+                        <img mat-card-avatar *ngIf="message.sender_id != userIdLowerCase" [src]="user.profile_image">
+                        <mat-card-title *ngIf="message.sender_id=== userIdLowerCase">{{secondUser.name}}
+                        </mat-card-title>
+                        <mat-card-title *ngIf="message.sender_id != userIdLowerCase">{{user.name}}
+                        </mat-card-title>
                     </mat-card-header>
                     <mat-card-content>
                         <div class="body">{{ message.message }}</div>

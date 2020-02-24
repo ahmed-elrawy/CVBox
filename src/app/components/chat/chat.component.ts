@@ -23,17 +23,12 @@ import * as firebase from 'firebase';
 export class ChatComponent implements OnInit {
   @Input() receiverid: string;
 
+
+
   step = 0;
 
-  list: string[] = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
-
-  chatHeadId: string = "";
-
-  chat$: Observable<any>;
   newMsg: string;
 
-  messagesCollection: AngularFirestoreCollection<Message>
-  messages: Observable<Message[]>
 
   senderId
   receiverId
@@ -41,23 +36,14 @@ export class ChatComponent implements OnInit {
   sender_info
   receiver_info
 
-  userSender
-  allMessagesCollection: AngularFirestoreCollection<Message>
-  allMessages: Observable<Message[]>
-
-  chatHeadCollection: AngularFirestoreCollection<ChatHead>
-  chatHead: Observable<ChatHead[]>
-
-  @ViewChild(ScrollToBottomDirective, { static: false })
-  scroll: ScrollToBottomDirective;
+  allMessages
   constructor(
     public cs: ChatService,
-    private route: ActivatedRoute,
     public auth: AuthService,
     private db: AngularFirestore,
     public chat: ChatService
   ) {
-    this.receiverId = this.route.snapshot.paramMap.get('id');
+    // this.receiverId = this.route.snapshot.paramMap.get('id');
     this.senderId = JSON.parse(localStorage.getItem('user')).user_id;
 
 
@@ -88,35 +74,8 @@ export class ChatComponent implements OnInit {
 
   }
 
-  getChat() {
-
-    this.messagesCollection = this.db.collection(`messages`, ref => {
-      // Compose a query using multiple .where() methods
-      return ref
-        .where('chat_id', '==', this.chatHeadId)
-
-    });
-    this.messages = this.messagesCollection.valueChanges();
-  }
 
 
-
-  fun(id: string): number {
-
-    let count: number = 1;
-
-
-    for (let i = 0; i < id.length; i++) {
-      let index = this.list.indexOf(id.charAt(i));
-
-      if (index > 0) {
-        count *= index;
-      }
-    }
-    console.log(count)
-
-    return count;
-  }
 
 
 
@@ -131,30 +90,6 @@ export class ChatComponent implements OnInit {
   }
 
 
-  getMessages() {
-
-    this.allMessagesCollection = this.db.collection('messages', ref => {
-      // Compose a query using multiple .where() methods
-      return ref
-        .where('chat_head_id', '==', this.chatHeadId)
-
-    });
-    this.allMessages = this.allMessagesCollection.valueChanges();
-  }
-
-  getchatHeads() {
-
-    this.chatHeadCollection = this.db.collection('chat_head', ref => {
-      // Compose a query using multiple .where() methods
-      return ref
-        .where('users', 'array-contains', this.senderId)
-
-    });
-    this.chatHead = this.chatHeadCollection.valueChanges();
-  }
-
-
-  // chat window
   setStep(index: number) {
     this.step = index;
   }
@@ -168,22 +103,9 @@ export class ChatComponent implements OnInit {
   }
 
 
-  // submit(chatId) {
-  //   if (!this.newMsg) {
-  //     return alert('you need to enter something');
-  //   }
-  //   this.cs.sendMessage(chatId, this.newMsg);
-  //   this.newMsg = '';
-  //   this.scrollBottom();
-  // }
-
-  // trackByCreated(i, msg) {
-  //   return msg.createdAt;
-  // }
 
 
-  private scrollBottom() {
-    setTimeout(() => window.scrollTo(0, document.body.scrollHeight), 500);
-  }
+
+
 
 }

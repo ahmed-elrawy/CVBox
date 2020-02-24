@@ -38,91 +38,118 @@ import { ChatHead } from '../../classes/chat_head';
 })
 export class ChatOverComponent implements OnInit {
 
+
+  user
+  userIdLowerCase
+
+  secondUser
+  secondUserID
+
   step = 0;
   chatView = false
-  public currentUser: User = null;
   headsList
   chatHead: ChatHead;
+
   newMsg: string;
-  userSender
-  chatHeadinformation: ChatHead = null;
-
-  senderId
-  receiverId
-  sender_info
-  receiver_info
 
 
-  userId
+
+
+
+
 
   constructor(
     private auth: AuthService,
     public chat: ChatService,
     private db: AngularFirestore
-  ) { }
+  ) {
+
+  }
 
 
   ngOnInit() {
 
-    if (JSON.parse(localStorage.getItem('user'))) {
-      this.senderId = JSON.parse(localStorage.getItem('user')).user_id;
-      this.chat.getchatHeads(JSON.parse(localStorage.getItem('user')).user_id.toLowerCase())
-      this.userId = this.senderId.toLowerCase()
-      this.chat.chatHead.pipe(
-        map(head => {
-          this.headsList = head
-          return head.filter(item => item.users[0] || item.users[1] == this.senderId.toLowerCase())[0]
-        })
-      ).subscribe(head => {
-        this.chatHeadinformation = head
-        this.getUserInfo()
-      });
+    const user = JSON.parse(localStorage.getItem('user'))
+    if (user) {
+      this.user = user
+      this.userIdLowerCase = this.user.user_id.toLowerCase()
+      this.chat.getchatHeads(this.userIdLowerCase)
 
-    }
-
-
-
-
-
-
-
-
-
-    this.auth.currentUser.subscribe(user => {
-      this.currentUser = user;
-      console.log(user)
-    })
-
-  }
-
-  getUserInfo() {
-    this.db.doc<User>(`users/${this.senderId}`).valueChanges().subscribe(
-      user => {
-        this.sender_info = user
-
-      }, (error) => {
-        console.log(error);
-      }
-    );
-
-    if (this.chatHeadinformation) {
-      if (this.chatHeadinformation.user_info[0].user_id == this.senderId) {
-        this.receiverId = this.chatHeadinformation.user_info[1].user_id
-      } else {
-        this.receiverId = this.chatHeadinformation.user_info[0].user_id
-      }
-      this.db.doc<User>(`users/${this.receiverId}`).valueChanges().subscribe(
+      this.db.doc<User>(`users/${user.user_id}`).valueChanges().subscribe(
         user => {
-          this.receiver_info = user
+          this.user = user
+
         }, (error) => {
           console.log(error);
         }
       );
-      this.chat.fun2(this.senderId.toLowerCase(), this.receiverId.toLowerCase())
+
+      //get chat header list
+      this.chat.chatHead.subscribe(head => {
+        this.headsList = head
+
+      })
+
 
     }
 
+
+
+
+
+
+
+
+
+
+
   }
+
+
+  getMessages(idMessages, userinfo) {
+
+    this.chatView = !this.chatView
+
+    if (userinfo[0].user_id == this.user.user_id) {
+      this.secondUserID = userinfo[1].user_id
+      this.getUserInfo(userinfo[1].user_id)
+
+    } else {
+      this.secondUserID = userinfo[0].user_id
+      this.getUserInfo(userinfo[0].user_id)
+    }
+
+    this.chat.getMessages(idMessages)
+    this.chat.getchatHeads(this.userIdLowerCase)
+
+
+  }
+
+  getUserInfo(id) {
+
+    this.db.doc<User>(`users/${id}`).valueChanges().subscribe(
+      user => {
+        this.secondUser = user
+
+      }, (error) => {
+        console.log(error);
+      });
+
+  }
+
+
+  sendMessage() {
+    this.chat.fun2(this.userIdLowerCase, this.secondUserID.toLowerCase())
+
+
+    this.chat.sendMessage(this.newMsg, this.secondUser, this.user)
+
+    this.newMsg = ""
+
+  }
+
+
+
   trackById(index: number, message: Message): string {
     return message.message_id;
   }
@@ -130,36 +157,6 @@ export class ChatOverComponent implements OnInit {
   scrollToBottom(): void {
     setTimeout(() => window.scroll({ top: document.body.scrollHeight, behavior: 'smooth' }));
   }
-  getMessages(idMessages) {
-    this.chatView = !this.chatView
-    this.chat.getMessages(idMessages)
-    this.chat.getchatHeads(JSON.parse(localStorage.getItem('user')).user_id.toLowerCase())
-
-    this.chat.chatHead.pipe(
-      map(head => {
-        return head.filter(item => item.chat_head_id == idMessages)[0]
-      })
-    ).subscribe(head => {
-      this.chatHead = head
-      console.log(this.chatHead)
-    });
-  }
-
-  // ngAfterViewInit() {
-  //   this.scrollToBottom();
-  // }
-
-  sendMessage() {
-
-
-
-    console.log(this.newMsg, this.sender_info, this.receiver_info)
-    this.chat.sendMessage(this.newMsg, this.receiver_info, this.sender_info)
-
-    this.newMsg = ""
-
-  }
-
 
   setStep(index: number) {
     this.step = index;
@@ -172,6 +169,15 @@ export class ChatOverComponent implements OnInit {
   prevStep() {
     this.step--;
   }
+
+  close() {
+    this.chatView = !this.chatView
+    console.log('colse')
+
+  }
+
+
+
 
 
 }
