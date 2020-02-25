@@ -248,4 +248,24 @@ progress::-webkit-progress-value {
   
 
 
- 
+//change image
+.container .change {
+  position: absolute;
+  top: 77%;
+  left: 95%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  background-color:#f0f0f0;
+  color: #4d37b1;
+  font-size: 15px;
+  padding: 7px 40px 7px 5px;
+  margin: 0px 40px 10px 0px;
+  border: none;
+  cursor: pointer;
+  border-radius: 3px;
+  text-align: center;
+}
+ .material-icons{
+  font-size: 35px;
+
+ }

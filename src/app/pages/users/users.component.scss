@@ -107,7 +107,13 @@
   
   .frontside .card,
   .backside .card {
-      min-height: 312px;
+      min-height: 340px;
+      max-height: 360px;
+      width: 250px;
+      margin: auto;
+      margin-bottom: 15px;
+      border-radius: 10px;
+      font-size: x-large;
   }
   
   .backside .card a {
@@ -127,8 +133,7 @@
   }
 
 
-
-
+ 
 
   ////////////////////////////////////////@extend
 
@@ -169,7 +174,7 @@
     box-shadow: 10px 10px 15px rgba(0,0,0,0.3);
   }
   .card-text{
-    height:80px;  
+    height:50px;  
   }
   
   .card::before, .card::after {
@@ -194,4 +199,26 @@
     transform: scale3d(1, 1, 1);
   }
   
+  @media only screen and (max-width: 600px) {
+    .frontside,
+  
+  .frontside .card,
+  .backside .card {
+      width: 300px;
+      margin: auto;
+      margin-bottom: 15px;
+      min-height: 250px;
+      border-radius: 10px;
+      font-size: x-large;
+
+  }
+  .card-text{
+    height:30px;  
+    font-size:inherit;
+
+  }
+  .card-title{
+    font-size: x-large;
+  }
+  }
   

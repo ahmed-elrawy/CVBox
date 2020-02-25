@@ -43,7 +43,6 @@ export class HomeComponent implements OnInit {
     })
     this.auth.currentUser.subscribe(user => {
       this.currentUser = user;
-      console.log(user)
     })
   }
 
@@ -54,7 +53,6 @@ export class HomeComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
     });
   }
 

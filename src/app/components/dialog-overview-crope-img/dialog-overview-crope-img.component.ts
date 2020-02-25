@@ -4,6 +4,7 @@ import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material/dial
 import { ImageCroppedEvent, ImageCropperComponent } from 'ngx-image-cropper';
 import { AngularFireStorage, AngularFireUploadTask } from '@angular/fire/storage';
 import { AngularFirestore } from "@angular/fire/firestore";
+import { LoadingService } from 'src/app/servies/loading.service';
 
 import { AuthService } from 'src/app/services/auth.service';
 import { User } from "../../classes/user";
@@ -37,6 +38,8 @@ export class DialogOverviewCropeImgComponent {
     private firestore: AngularFirestore,
     public dialog: MatDialog,
     private auth: AuthService,
+    private loadingService: LoadingService,
+
     @Inject(MAT_DIALOG_DATA) public data: DialogData) {
 
     this.user = this.auth.userData
@@ -60,15 +63,19 @@ export class DialogOverviewCropeImgComponent {
 
 
   async updatePhoto() {
+    this.loadingService.isLoading.next(true)
     try {
       let progressResult = this.uploadImageToStorage(this.croppedImage);
       progressResult.percentageChanges()
-        .subscribe(
-          res => {
+        .subscribe({
+          next: value => {
+            let progress = Math.floor(value);
+          },
+          error: err => console.error(err),
+          complete: () => this.loadingService.isLoading.next(false)
+        })
+      //You can get the image upload progress in here.        
 
-            console.log(res);
-            let progress = Math.floor(res);//You can get the image upload progress in here.        
-          });
       this.dialog.closeAll()
       this.showCropper = false;
       let result = await progressResult;
@@ -86,13 +93,19 @@ export class DialogOverviewCropeImgComponent {
   }
 
   fileChangeEvent(event: any): void {
-    this.imageChangedEvent = event;
+    let text = '' + event.target.value
+    if (text.includes("jpg") || text.includes("png") || text.includes("jpeg")) {
+      this.imageChangedEvent = event;
+    } else {
+      alert(`You cannot upload that file type !! 
+      You must upload only image`)
+    }
 
-    // console.log(event.target.files[0].name)
 
   }
 
   imageCropped(event: ImageCroppedEvent) {
+    // event.base64.includes("image")
     this.croppedImage = event.base64;
     // this.getImage(event.base64)
 
@@ -104,19 +117,16 @@ export class DialogOverviewCropeImgComponent {
 
   imageLoaded() {
     this.showCropper = true;
-    console.log('Image loaded');
     this.imageIsReady = true
   }
 
   cropperReady() {
-    console.log('Cropper ready');
     this.imageIsReady = false
 
   }
 
   loadImageFailed() {
 
-    console.log('Load failed');
   }
 
   rotateLeft() {

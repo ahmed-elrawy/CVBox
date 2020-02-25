@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewEncapsulation, Input } from '@angular/core';
-import { routerTransition } from "../animation";
+import { animatation } from "../animation";
 import { animate, query, stagger, style, transition, trigger } from '@angular/animations';
 
 import { ChatService } from '../../../services/chat.service';
@@ -15,7 +15,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
   templateUrl: './messages.component.html',
   styleUrls: ['../chat.component.scss'],
   encapsulation: ViewEncapsulation.None,
-  animations: [routerTransition()],
+  animations: [animatation],
 
   // for remove angular matrial class
 
@@ -96,7 +96,6 @@ export class MessagesComponent implements OnInit {
   }
 
   sum(senderId, receiverId) {
-    console.log(senderId, receiverId)
     let secondtID = this.chat.fun(senderId.toLowerCase());
     let firstID = this.chat.fun(receiverId.toLowerCase());
     let sum = `${secondtID * firstID}`;
@@ -107,7 +106,6 @@ export class MessagesComponent implements OnInit {
   sendMessage() {
     this.chat.fun2(this.userIdLowerCase, this.receiverid.toLowerCase())
 
-    console.log(this.newMsg, this.secondUser, this.user)
     this.chat.sendMessage(this.newMsg, this.secondUser, this.user)
 
     this.newMsg = ""
@@ -137,7 +135,6 @@ export class MessagesComponent implements OnInit {
 
   close() {
     this.chatView = !this.chatView
-    console.log('colse')
 
   }
 

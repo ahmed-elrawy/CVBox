@@ -21,22 +21,10 @@ import { ChatHead } from './classes/chat_head';
 })
 export class AppComponent implements OnInit, OnDestroy {
 
-  step = 0;
-  chatView = false
-  public currentUser: User = null;
-  headsList
-  chatHead: ChatHead;
-  newMsg: string;
-  userSender
-  chatHeadinformation: ChatHead = null;
-
-  senderId
-  receiverId
-  sender_info
-  receiver_info
 
 
-  userId
+
+
 
   private subscriptions: Subscription[] = [];
   public alerts: Array<Alert> = [];
@@ -44,8 +32,6 @@ export class AppComponent implements OnInit, OnDestroy {
   constructor(
     private alertService: AlertService,
     private loadingService: LoadingService,
-    private auth: AuthService,
-
 
   ) {
 
@@ -54,10 +40,7 @@ export class AppComponent implements OnInit, OnDestroy {
   ngOnInit() {
 
 
-    this.auth.currentUser.subscribe(user => {
-      this.currentUser = user;
-      console.log(user)
-    })
+
 
 
     this.subscriptions.push(

@@ -7,7 +7,6 @@ import { Observable } from "rxjs";
 import { MatDialog } from '@angular/material';
 import { FilterCvComponent } from "../filter-cv/filter-cv.component";
 
-import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-users',
@@ -21,7 +20,6 @@ export class UsersComponent implements OnInit {
   showSpinner: boolean = true
 
 
-  // public dataList$: Observable<any[]>;
   data: Observable<any>
 
 
@@ -34,17 +32,8 @@ export class UsersComponent implements OnInit {
 
   ngOnInit() {
 
-    this.cv.data.subscribe(data => {
-      data.map(count => {
-        if (count >= 0) {
-          console.log('is aempty')
-        }
-      })
-    })
 
 
-
-    // .map(count => count > 0).defaultIfEmpty(false);
 
     this.auth.currentUser.subscribe(user => {
       this.currentUser = user;
@@ -57,18 +46,13 @@ export class UsersComponent implements OnInit {
     this.activetedRouter.params.subscribe(params => {
       if (params['id']) {
         this.userId = params['id'];
-        console.log(`${this.userId}`)
         this.getUsers(this.userId)
       } else {
-        console.log("no user id")
         this.cv.data.subscribe(() => this.showSpinner = false)
-        this.cv.data.subscribe(user => console.log(user))
       }
     })
 
-    this.cv.data.subscribe(data => {
-      console.log(data.length)
-    })
+
   }
 
 
@@ -77,19 +61,11 @@ export class UsersComponent implements OnInit {
       width: '800px',
     });
 
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
-    });
+
   }
 
   getUsers(id) {
-
-
     this.cv.getUsers(id)
-    // this.cv.data.subscribe(() => this.showSpinner = false)
-
-
-
   }
 
 }

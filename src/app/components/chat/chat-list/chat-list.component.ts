@@ -1,6 +1,6 @@
 import { Component, ViewEncapsulation, OnInit, } from '@angular/core';
 import { animate, query, stagger, style, transition, trigger } from '@angular/animations';
-import { routerTransition } from "../animation";
+import { animatation } from "../animation";
 
 
 import { AuthService } from '../../../services/auth.service';
@@ -14,7 +14,7 @@ import { ChatHead } from '../../../classes/chat_head';
   templateUrl: './chat-list.component.html',
   styleUrls: ['../chat.component.scss'],
   encapsulation: ViewEncapsulation.None,
-  animations: [routerTransition()],
+  animations: [animatation],
 })
 export class ChatListComponent implements OnInit {
 

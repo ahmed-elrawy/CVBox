@@ -38,6 +38,10 @@
                                 <div *ngIf="photoUrl">
                                     <img [src]="photoUrl | safe" height="150" width="150">
 
+                                    <a class="change" (click)="openDialog()"><i class="material-icons">
+                                            image_search
+                                        </i> </a>
+
                                 </div>
                             </div>
                         </label>
@@ -57,7 +61,6 @@
 
                     <div class="container">
 
-                        <button mat-button (click)="openDialog()">Cgange profile image</button>
 
                     </div>
                     <div class="row">
@@ -89,17 +92,19 @@
                         <div class="file">
                             <a [href]="PDFURL" target="_blank" rel="noopener">Download PDF!</a>
 
-                            <!-- <label class="file-label">
 
-                                <button type="button" mat-raised-button color="primary"
-                                    (click)="fileInput.click()">upload/update pdf</button>
-                                <input hidden (change)="startUpload($event.target.files)" #fileInput type="file"
-                                    id="file" accept="application/pdf">
-                            </label> -->
+                            <div class="box mt-2 mb-5" align="end">
 
-                            <div class="box mt-2">
+
+
                                 <input hidden type="file" name="file-2[]" id="file-2" class="inputfile inputfile-2"
                                     accept="application/pdf" (change)="startUpload($event.target.files)" />
+
+
+
+
+
+
                                 <label for="file-2"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="17"
                                         #fileInput viewBox="0 0 20 17">
                                         <path

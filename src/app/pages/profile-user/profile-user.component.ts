@@ -5,6 +5,7 @@ import { AngularFireUploadTask, AngularFireStorage } from "@angular/fire/storage
 import { finalize } from 'rxjs/operators';
 import { AngularFirestore } from "@angular/fire/firestore";
 import { User } from "../../classes/user";
+import { LoadingService } from 'src/app/servies/loading.service';
 
 import { MatDialog } from '@angular/material/dialog';
 
@@ -43,7 +44,9 @@ export class ProfileUserComponent implements OnInit {
     private firestore: AngularFirestore,
     public auth: AuthService,
     public dialog: MatDialog,
-    public cs: ChatService
+    public cs: ChatService,
+    private loadingService: LoadingService,
+
   ) {
     this.user = JSON.parse(localStorage.getItem('user'));
 
@@ -69,8 +72,6 @@ export class ProfileUserComponent implements OnInit {
         this.PDFURL = user.eslam;
         this.photoUrl = user.profile_image
         this.userData = user
-        console.log(this.photoUrl)
-
       }, (error) => {
         console.log(error);
       }
@@ -84,11 +85,9 @@ export class ProfileUserComponent implements OnInit {
   view(key: string): void {
     if (key == "personal-info") {
       this.curentView = "personal-info"
-      console.log(this.curentView)
 
     } if (key == "resume-info") {
       this.curentView = "resume-info"
-      console.log(this.curentView)
 
     }
   }
@@ -101,26 +100,39 @@ export class ProfileUserComponent implements OnInit {
 
   startUpload(event: FileList) {
 
-    const filePath = `cv/${this.user.user_id}/${event.item(0).name}`
-    // const filePath = 'cv/' + event.item(0).name;
-    const fileRef = this.afStorage.ref(filePath);
+    if (event.item(0).type == 'application/pdf') {
+      this.loadingService.isLoading.next(true)
 
-    return new Promise<any>((resolve, reject) => {
-      const task = this.afStorage.upload(filePath, event.item(0));
+      const filePath = `cv/${this.user.user_id}/${event.item(0).name}`
+      // const filePath = 'cv/' + event.item(0).name;
+      const fileRef = this.afStorage.ref(filePath);
 
-      task.snapshotChanges().pipe(
-        finalize(() => fileRef.getDownloadURL().subscribe(
-          res => resolve(
-            this.firestore
-              .collection("users")
-              .doc(this.user.user_id)
-              .set({ filePath, eslam: res, cv_ready: true }, { merge: true })
+      return new Promise<any>((resolve, reject) => {
+        const task = this.afStorage.upload(filePath, event.item(0));
 
+        task.snapshotChanges().pipe(
+          finalize(() => fileRef.getDownloadURL().subscribe(
+            res => resolve(
+              this.firestore
+                .collection("users")
+                .doc(this.user.user_id)
+                .set({ filePath, eslam: res, cv_ready: true }, { merge: true })
+
+            ),
+            err => reject(err))
           ),
-          err => reject(err))
-        )
-      ).subscribe();
-    })
+        ).subscribe({
+          next: value => console.log(value),
+          error: err => console.error(err),
+          complete: () => {
+            this.loadingService.isLoading.next(false);
+          }
+        });
+      })
+    } else {
+      alert(`You cannot upload that file type ${event.item(0).type} !! 
+       You must upload only pdf`)
+    }
   }
 
 

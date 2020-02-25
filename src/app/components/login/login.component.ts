@@ -44,9 +44,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   public submit(): void {
-    // TODO call the auth service
-    // const email = this.loginForm.value.email
-    // const password = this.loginForm.value.password
+
 
     if (this.loginForm.valid) {
       this.loadingService.isLoading.next(true)
@@ -57,10 +55,8 @@ export class LoginComponent implements OnInit, OnDestroy {
           if (success && this.auth.afAuth.auth.currentUser.emailVerified) {
             this.router.navigateByUrl(this.returnUrl);
           } else {
-            // this.displayFailedLogin()
           }
           this.loadingService.isLoading.next(false);
-          console.log(success)
         })
       );
     } else {

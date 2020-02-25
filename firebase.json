@@ -3,7 +3,7 @@
     "rules": "database.rules.json"
   },
   "hosting": {
-    "public": "dist/CV-Store",
+    "public": "dist/cvstore",
     "ignore": [
       "firebase.json",
       "**/.*",

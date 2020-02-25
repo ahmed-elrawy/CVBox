@@ -24,13 +24,16 @@
             </image-cropper>
         </div>
         <div class="text-center col-md-4 " [style.display]="showCropper ? null : 'none'">
-            <h5>Preview</h5>
-            <img class="mx-auto" [src]="croppedImage" style="display: block;" width="250px">
-            <button class="btn btn-primary m-3" (click)="updatePhoto()">change</button>
+            <!-- <h5>Preview</h5>
+            <img class="mx-auto" [src]="croppedImage" style="display: block;" width="250px"> -->
+            <!-- <button class="btn btn-primary m-3" (click)="updatePhoto()">change</button> -->
         </div>
     </div>
 </div>
 
 <mat-dialog-actions align="end">
+
     <button mat-button mat-dialog-close>Cancel</button>
+    <button *ngIf="imageChangedEvent" class="btn btn-primary m-3" (click)="updatePhoto()">change</button>
+
 </mat-dialog-actions>

@@ -6,6 +6,9 @@ import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/fire
 import { AuthService } from 'src/app/services/auth.service';
 import { User } from "../../classes/user";
 import { Observable } from "rxjs";
+import { LoadingService } from 'src/app/servies/loading.service';
+
+
 @Component({
   selector: 'app-personal-info',
   templateUrl: './personal-info.component.html',
@@ -40,20 +43,20 @@ export class PersonalInfoComponent implements OnInit {
     public db: AngularFirestore,
     public cv: CvBoxService,
     public firestore: AngularFirestore,
-    public auth: AuthService) {
+    public auth: AuthService,
+    private loadingService: LoadingService,
+  ) {
     this.user = JSON.parse(localStorage.getItem('user'));
 
 
   }
 
   ngOnInit() {
-    // console.log(this.childMessage)
     this.db.doc<any>(`users/${this.childMessage}`).valueChanges().subscribe(
       user => {
         this.userdata = user;
         this.populateTestDate()
 
-        console.log(this.userdata)
       }, (error) => {
         console.log(error);
       }
@@ -93,7 +96,6 @@ export class PersonalInfoComponent implements OnInit {
       this.cv.getDepartments(this.userdata.category)
       this.country.onChangeCountry(this.userdata.country)
     }
-    console.log(this.userdata)
 
     this.infoForm.patchValue({
       name: this.userdata.name,
@@ -119,9 +121,8 @@ export class PersonalInfoComponent implements OnInit {
 
 
   onSubmit(form) {
-
+    this.loadingService.isLoading.next(true)
     alert("info updated")
-    console.log(form.value)
     const department = new FormArray([this.department]);
     // const departments = this.infoForm.setControl("departments", department);
     const departments = department.value
@@ -148,7 +149,10 @@ export class PersonalInfoComponent implements OnInit {
     let data = Object.assign({ profile_ready: true, departments }, form.value);
     delete data.department;
 
-    this.firestore.doc('users/' + this.user.user_id).update(data).catch(err => console.log(err + " errrrrrrrrrrrrrrrrrrrrrrrr"))
+    this.firestore.doc('users/' + this.user.user_id).update(data).then((res) =>
+      this.loadingService.isLoading.next(false)
+    )
+      .catch(err => console.log(err + " errrrrrrrrrrrrrrrrrrrrrrrr"))
 
   }
 

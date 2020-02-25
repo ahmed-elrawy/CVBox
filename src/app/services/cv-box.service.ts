@@ -83,17 +83,7 @@ export class CvBoxService {
   }
 
   cvFilter(category, departments, gender, country, state, marital, military, minExprience, maxExprience) {
-    console.log(
-      'category ' + category,
-      'departments ' + departments,
-      "gender " + gender,
-      "country " + country,
-      'state ' + state,
-      'marital ' + marital,
-      'military ' + military,
-      'minExprience ' + minExprience,
-      'maxExprience ' + maxExprience
-    )
+
     this.usersCollections = this.db.collection('users', ref => {
       // Compose a query using multiple .where() methods
       return ref
@@ -121,8 +111,7 @@ export class CvBoxService {
 
 
   public submit(filterForm, minExperience, maxExperience): void {
-    console.log(filterForm.value)
-    console.log(filterForm.valid)
+
 
     if (filterForm.valid) {
       const { category, departments, gender, country, state, marital_status, military_status } = filterForm.value;

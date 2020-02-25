@@ -8,7 +8,10 @@
                 {{secondUser.name}}
             </mat-panel-title>
 
-            <div class="chat_img"> <img [src]="secondUser.profile_image" alt="sunil">
+            <div class="chat_img">
+                <img *ngIf="secondUser.profile_image" [src]="secondUser.profile_image" alt="sunil">
+                <img *ngIf="!secondUser.profile_image" src="../../../assets/default-user-image.png" alt="sunil">
+
             </div>
         </mat-expansion-panel-header>
 

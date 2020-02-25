@@ -58,21 +58,7 @@ overflow-x: hidden;">
 
             <div class="row mt-4 ">
 
-                <!-- 
-                <div class="mx-auto my-auto  mb-5">
-                    <div *ngIf="!category  && !user" (click)="onClick('category')">
-                        <a> categories>department</a>
 
-                    </div>
-                    <div *ngIf="category">
-                        <a> categories> </a>
-                    </div>
-
-                    <div *ngIf="user" (click)="onClick('department')">
-                        <a> categories> department> user</a>
-                    </div>
-
-                </div> -->
 
             </div>
             <div class="mx-auto my-auto  mb-5">
@@ -86,7 +72,6 @@ overflow-x: hidden;">
                     <h1 *ngIf="(cv.data | async)?.length==0">No cvs found.</h1>
                 </div>
 
-                <!-- <h1 *ngIf="cv.data.legnth| async">empty ehjkjkjkjkjkjjhjhhjbvjl, </h1> -->
                 <ng-container *ngFor="let user of cv.data | async">
 
 
@@ -96,7 +81,11 @@ overflow-x: hidden;">
                         <div class="frontside">
                             <div class="card">
                                 <div class="card-body text-center">
-                                    <p><img class=" img-fluid" [src]="user.profile_image" alt="card image"></p>
+                                    <p><img *ngIf="user.profile_image" class=" img-fluid" [src]="user.profile_image"
+                                            alt="card image"></p>
+                                    <p><img *ngIf="!user.profile_image" class=" img-fluid "
+                                            src="../../../assets/default-user-image.png" alt="card image"></p>
+
                                     <h4 class="card-title">{{user.name}}</h4>
                                     <p class="card-text">{{user.category}}</p>
                                     <a class="btn btn-primary "

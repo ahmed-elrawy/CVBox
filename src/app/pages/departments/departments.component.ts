@@ -27,7 +27,6 @@ export class DepartmentsComponent implements OnInit {
     })
     this.activetedRouter.params.subscribe(params => {
       this.departmenrId = params['id'];
-      console.log(`${this.departmenrId}`)
       this.getDepartments(this.departmenrId)
     })
   }
