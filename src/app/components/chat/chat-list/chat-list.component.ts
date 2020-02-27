@@ -25,7 +25,7 @@ export class ChatListComponent implements OnInit {
   secondUser
   secondUserID
 
-  step = 0;
+  step = 1;
   chatView = false
   headsList
   chatHead: ChatHead;

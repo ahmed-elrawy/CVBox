@@ -2,9 +2,19 @@
 </ngx-loading>
 
 <div class="alert-wrapper">
-    <alert *ngFor="let alert of alerts" [type]="alert.type" dismissOnTimeout="5000" class="text-center">
+    <alert *ngFor="let alert of alerts" [type]="alert.type" dismissOnTimeout="5000" class="text-center"
+        style="position: fixed;">
         {{ alert.text }}
     </alert>
 </div>
 
 <router-outlet></router-outlet>
+<div *ngIf="!chat.showTempletMessage">
+    <app-chat-list></app-chat-list>
+
+</div>
+
+<div *ngIf="chat.showTempletMessage">
+    <app-messages [receiverid]="dataMessage"></app-messages>
+
+</div>

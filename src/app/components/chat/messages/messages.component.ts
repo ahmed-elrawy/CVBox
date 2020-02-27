@@ -27,7 +27,7 @@ export class MessagesComponent implements OnInit {
 
 
 
-  step = 0;
+  step = 1;
 
 
 
@@ -57,6 +57,9 @@ export class MessagesComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+
+    console.log("message copmonent it is work ")
+    console.log("second user " + this.secondUser)
 
     const user = JSON.parse(localStorage.getItem('user'))
 

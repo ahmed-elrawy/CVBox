@@ -1,9 +1,9 @@
-<mat-accordion *ngIf="secondUser " class="example-headers-align message">
+<mat-accordion *ngIf="secondUser " class="example-headers-align message messages-chat-list">
 
     <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" hideToggle>
         <mat-expansion-panel-header>
             <mat-panel-title>
-
+                <h6>chat with &nbsp;</h6>
 
                 {{secondUser.name}}
             </mat-panel-title>

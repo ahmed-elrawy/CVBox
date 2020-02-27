@@ -12,6 +12,7 @@ import { Message } from './classes/message';
 import { map } from "rxjs/operators";
 import { AngularFirestore } from '@angular/fire/firestore';
 import { ChatHead } from './classes/chat_head';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -23,6 +24,8 @@ export class AppComponent implements OnInit, OnDestroy {
 
 
 
+  dataMessage: string;
+  templetmesaage = false
 
 
 
@@ -32,6 +35,9 @@ export class AppComponent implements OnInit, OnDestroy {
   constructor(
     private alertService: AlertService,
     private loadingService: LoadingService,
+    public activatedRoute: ActivatedRoute,
+    public chat: ChatService
+
 
   ) {
 
@@ -39,8 +45,17 @@ export class AppComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
 
+    //this for show temple message in display profile user
+    this.chat.currentMessage.subscribe(
+      massage => {
+        if (massage) {
+          this.dataMessage = massage
+          this.chat.showTempletMessage = true
+        }
 
-
+        console.log(massage)
+      }
+    )
 
 
     this.subscriptions.push(

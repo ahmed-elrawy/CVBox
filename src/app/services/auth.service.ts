@@ -29,13 +29,14 @@ export class AuthService {
   ) {
     this.currentUser = this.afAuth.authState.pipe(
       switchMap((user) => {
-        if (user) {
+        if (user && user.emailVerified) {
           const userData = {
             user_id: user.uid,
             email: user.email,
             emailVerified: user.emailVerified
           };
-          this.userData = userData// Setting up user data in userData var
+          this.userData = userData
+          userData// Setting up user data in userData var
           localStorage.setItem('user', JSON.stringify(userData));
           JSON.parse(localStorage.getItem('user'));
           return this.db.doc<User>(`users/${user.uid}`).valueChanges();
@@ -141,7 +142,7 @@ export class AuthService {
       emailVerified: user.user.emailVerified,
       created_at: firebase.firestore.FieldValue.serverTimestamp(),
       name,
-      profile_image: 'https://firebasestorage.googleapis.com/v0/b/cvstore-73c98.appspot.com/o/%20profile%2Fuser.png?alt=media&token=ac2e28d3-33d1-4878-9ae4-b946bd39ce76',
+      profile_image: 'https://firebasestorage.googleapis.com/v0/b/cvbox-6ac06.appspot.com/o/default-user-image.png?alt=media&token=7ca18b1f-f138-4feb-b8c6-5317c10aa7a9',
       phone,
       password,
       departments,

@@ -1,15 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { User } from "../../classes/user";
 import { AngularFirestore } from "@angular/fire/firestore";
 import { AuthService } from 'src/app/services/auth.service';
+import { ChatService } from 'src/app/services/chat.service';
 
 @Component({
   selector: 'app-display-profile-user',
   templateUrl: './display-profile-user.component.html',
   styleUrls: ['./display-profile-user.component.scss']
 })
-export class DisplayProfileUserComponent implements OnInit {
+export class DisplayProfileUserComponent implements OnInit, OnDestroy {
   public currentUser: User = null;
 
   public curentView: string = "personal-info";
@@ -23,7 +24,8 @@ export class DisplayProfileUserComponent implements OnInit {
   constructor(
     public activatedRoute: ActivatedRoute,
     public db: AngularFirestore,
-    public auth: AuthService
+    public auth: AuthService,
+    public chat: ChatService
 
   ) {
     this.activatedRoute.params.subscribe(params => {
@@ -33,6 +35,8 @@ export class DisplayProfileUserComponent implements OnInit {
 
   ngOnInit() {
 
+    //this for show temple message in display profile user
+    this.chat.showtempletmessage(this.userID)
 
     this.auth.currentUser.subscribe(user => {
       this.currentUser = user;
@@ -49,7 +53,8 @@ export class DisplayProfileUserComponent implements OnInit {
   }
 
 
-
+  changeMessage() {
+  }
 
   view(key: string): void {
     if (key == "personal-info") {
@@ -59,6 +64,11 @@ export class DisplayProfileUserComponent implements OnInit {
       this.curentView = "resume-info"
 
     }
+  }
+
+  ngOnDestroy() {
+    this.chat.showTempletMessage = false
+
   }
 
 }

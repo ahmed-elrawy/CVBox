@@ -6,7 +6,7 @@ import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
 import { firestore } from 'firebase/app';
 import { map, switchMap } from 'rxjs/operators';
-import { Observable, combineLatest, of } from 'rxjs';
+import { Observable, combineLatest, of, BehaviorSubject } from 'rxjs';
 import { Message } from "../classes/message";
 import { ChatHead } from "../classes/chat_head";
 
@@ -28,7 +28,10 @@ export class ChatService {
   chatHeadCollection: AngularFirestoreCollection<ChatHead>
   chatHead: Observable<ChatHead[]>
 
-
+  //this for show temple message in display profile user
+  private messageSource = new BehaviorSubject('');
+  currentMessage = this.messageSource.asObservable();
+  showTempletMessage: boolean
 
   constructor(
     private afs: AngularFirestore,
@@ -37,6 +40,10 @@ export class ChatService {
   ) { }
 
 
+  //this for show temple message in display profile user
+  showtempletmessage(iduser: string) {
+    this.messageSource.next(iduser)
+  }
 
   fun2(senderId, receiverId) {
     let secondtID = this.fun(senderId.toLowerCase());
