@@ -27,7 +27,7 @@ mat-form-field {
     // min-height: 400px;
 }
 
-.messages-chat-list {
+.mar-chat-list  {
   margin-left: 300px;
 
 }
@@ -152,7 +152,7 @@ img{ max-width:100%;}
 }
 
  .sent_msg p {
-  background: #05728f none repeat scroll 0 0;
+  background:$primary none repeat scroll 0 0;
   border-radius: 3px;
   font-size: 14px;
   margin: 0; color:#fff;
@@ -175,7 +175,7 @@ img{ max-width:100%;}
 
 .type_msg {border-top: 1px solid #c4c4c4;position: relative;}
 .msg_send_btn {
-  background: #05728f none repeat scroll 0 0;
+  background:$primary none repeat scroll 0 0;
   border: medium none;
   border-radius: 50%;
   color: #fff;
@@ -272,7 +272,7 @@ overflow-y: auto;
 
     &.from-me {
       align-self: flex-end;
-      background: #3f51b5;
+      background:$primary;
       color: white;
 
       .mat-card-subtitle {

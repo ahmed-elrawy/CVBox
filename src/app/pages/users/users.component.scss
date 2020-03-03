@@ -49,6 +49,96 @@
       background: #ffffff;
   }
   
+
+  
+ // find ccv button 
+ 
+ .button {
+  display: inline-block;
+  border-radius: 7px;
+  background-color: $primary;
+  border: none;
+  color: #FFFFFF;
+  text-align: center;
+  font-size: 28px;
+  width: 200px;
+  height: 40px;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin: 5px;
+}
+
+.button span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+.button span:after {
+  content: '\00bb';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+
+.button:hover span {
+  padding-right: 25px;
+}
+
+.button:hover span:after {
+  opacity: 1;
+  right: 0;
+}
+
+
+  
+ // find ccv button 
+ 
+ .button {
+  display: inline-block;
+  border-radius: 7px;
+  background-color: $primary;
+  border: none;
+  color: #FFFFFF;
+  text-align: center;
+  font-size: 28px;
+  width: 200px;
+  height: 40px;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin: 5px;
+}
+
+.button span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+.button span:after {
+  content: '\00bb';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+
+.button:hover span {
+  padding-right: 25px;
+}
+
+.button:hover span:after {
+  opacity: 1;
+  right: 0;
+}
+
+
+  
   .image-flip:hover .backside,
   .image-flip.hover .backside {
       -webkit-transform: rotateY(0deg);
@@ -84,7 +174,7 @@
       position: relative;
       -webkit-transform: rotateY(0deg);
       -ms-transform: rotateY(0deg);
-      z-index: 2;
+      // z-index: 2;
       margin-bottom: 30px;
   }
   
@@ -109,7 +199,7 @@
   .backside .card {
       min-height: 340px;
       max-height: 360px;
-      width: 250px;
+      width: auto;
       margin: auto;
       margin-bottom: 15px;
       border-radius: 10px;

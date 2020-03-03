@@ -22,6 +22,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class AppComponent implements OnInit, OnDestroy {
 
+  public currentUser: User = null;
 
 
   dataMessage: string;
@@ -36,7 +37,8 @@ export class AppComponent implements OnInit, OnDestroy {
     private alertService: AlertService,
     private loadingService: LoadingService,
     public activatedRoute: ActivatedRoute,
-    public chat: ChatService
+    public chat: ChatService,
+    public auth: AuthService
 
 
   ) {
@@ -44,7 +46,9 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-
+    this.auth.currentUser.subscribe(user => {
+      this.currentUser = user;
+    })
     //this for show temple message in display profile user
     this.chat.currentMessage.subscribe(
       massage => {

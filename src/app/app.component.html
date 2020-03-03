@@ -9,12 +9,12 @@
 </div>
 
 <router-outlet></router-outlet>
-<div *ngIf="!chat.showTempletMessage">
+<div *ngIf="!chat.showTempletMessage && currentUser">
     <app-chat-list></app-chat-list>
 
 </div>
 
-<div *ngIf="chat.showTempletMessage">
+<div *ngIf="chat.showTempletMessage && currentUser">
     <app-messages [receiverid]="dataMessage"></app-messages>
 
 </div>

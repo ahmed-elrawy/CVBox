@@ -13,48 +13,13 @@ input[type=number] {
   -moz-appearance:textfield;
 }
 
-
-// .example-container {
-//     display: flex;
-//     flex-direction: column;
-//   }
+h4 {
+  font-size: 23px;
+  color: $primary;
+  letter-spacing: 1px;
+  margin-bottom: 25px
+  }
   
-//   .example-container > * {
-//     width: 40%;
-//   }
-
-
-// //////////////@at-root@import 
-
-// .main-raised {
-//   min-height: 400px;
-//   margin: 100px 150px 0;
-//   border-radius: 6px;
-//   box-shadow: 0 16px 24px 2px rgba(0,0,0,.14), 0 6px 30px 5px rgba(0,0,0,.12), 0 8px 10px -5px rgba(0,0,0,.2);
-// }
-
-// .main {
-//   background: #FFF;
-//   position: relative;
-//   z-index: 3;
-// }
-
-
-// //////////////////@at-root
-
-// h4 {
-//   color: $primary;
-//   font-size: 2.3rem;
-// }
-// div.card-header {
-//   font-size: large;
-//  }
- 
-//  div.card {
-//    margin-top: 10px
-//  }
-
-
 
 
 

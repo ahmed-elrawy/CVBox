@@ -31,17 +31,18 @@
             <div class="mx-auto ">
                 <div class="container-profile">
                     <div class="avatar-flip">
-                        <div *ngIf="user">
-                            <img *ngIf="user.profile_image" [src]="user.profile_image | safe" height="150" width="150">
-                            <img *ngIf="!user.profile_image" src="../../../assets/default-user-image.png" height="150"
+                        <div *ngIf="userdata">
+                            <img *ngIf="userdata.profile_image" [src]="userdata.profile_image | safe" height="150"
                                 width="150">
+                            <img *ngIf="!userdata.profile_image" src="../../../assets/default-user-image.png"
+                                height="150" width="150">
 
                         </div>
 
                     </div>
-                    <div *ngIf="user">
-                        <h2>{{user.name }} </h2>
-                        <h4>{{user.departments}}</h4>
+                    <div *ngIf="userdata">
+                        <h2>{{userdata.name }} </h2>
+                        <h4>{{userdata.departments}}</h4>
                         <!-- <a class="btn btn-primary " [routerLink]="['/chats/', user.user_id]">message</a> -->
 
                     </div>
@@ -70,12 +71,12 @@
 
                 <div class="container-display">
                     <ng-template [ngIf]="curentView == 'resume-info'">
-                        <img *ngIf="!user.eslam" src="../../../assets/draw.png" alt="pdfImage" class="pdf">
-                        <div *ngIf="user.eslam" class="pdf">
+                        <img *ngIf="!userdata.eslam" src="../../../assets/draw.png" alt="pdfImage" class="pdf">
+                        <div *ngIf="userdata.eslam" class="pdf">
 
-                            <embed [src]="user 
+                            <embed [src]="userdata 
                                 .eslam | safe" type="application/pdf" class="pdf">
-                            <a [href]="user 
+                            <a [href]="userdata 
                             .eslam" target="_blank" rel="noopener">Download PDF!</a>
                         </div>
 
@@ -84,7 +85,172 @@
 
 
                     <ng-template [ngIf]="curentView == 'personal-info'">
-                        <app-personal-info [childMessage]="userID"></app-personal-info>
+                        <form [formGroup]="infoForm">
+                            <div class="card mb-2">
+                                <div class="container">
+                                    <div class="card-body">
+                                        <h4>basic info</h4>
+
+                                        <div class="form-group ">
+                                            <label for="nameId">Name</label>
+                                            <div class="col-md-12">
+                                                <input class="form-control" type="text" formControlName="name"
+                                                    readonly />
+
+                                            </div>
+                                        </div>
+
+
+                                        <div class="form-group">
+                                            <label for="emailId">Email</label>
+                                            <div class="col-md-12">
+                                                <input class="form-control" type="text" formControlName="email"
+                                                    readonly />
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group ">
+                                            <label for="phoneId">phone</label>
+                                            <div class="col-md-12">
+                                                <input class="form-control" type="tel" formControlName="phone"
+                                                    readonly />
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group ">
+                                            <label for="ageId">Age</label>
+                                            <div class="col-md-12">
+                                                <input class="form-control" type=" number" formControlName="age"
+                                                    readonly />
+
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group ">
+                                            <label for="genderId">Gender</label>
+                                            <div class="col-md-12">
+                                                <input class="form-control" formControlName="gender" readonly />
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="card mb-2">
+                                <div class="container">
+                                    <div class="card-body">
+                                        <h4>Work experience</h4>
+
+                                        <div class="form-group ">
+                                            <label for="jobTitleId">job Title</label>
+                                            <div class="col-md-12">
+                                                <input class="form-control" type="text" formControlName="jobTitle"
+                                                    readonly />
+                                            </div>
+                                        </div>
+
+
+                                        <div class="form-group">
+                                            <label for="categoryId">category</label>
+                                            <div class="col-md-12">
+                                                <input class="form-control" formControlName="category" type="text"
+                                                    readonly>
+
+                                            </div>
+                                        </div>
+
+                                        <div>
+                                            <div class="form-group ">
+                                                <label for="departmentyId">department</label>
+                                                <div class="col-md-12">
+
+                                                    <input class="form-control" formControlName="department" readonly />
+
+
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+
+
+                                        <div class="form-group ">
+                                            <label for="yearsOfEperienceId">years Of
+                                                Eperience</label>
+                                            <div class="col-md-12">
+                                                <input class="form-control" type="text"
+                                                    formControlName="year_experience" readonly />
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="card mb-2">
+                                <div class="container">
+                                    <div class="card-body">
+                                        <h4>address</h4>
+                                        <div class="form-group ">
+                                            <label for="nameId">Country</label>
+                                            <div class="col-md-12">
+                                                <input class="form-control" formControlName="country" readonly />
+                                            </div>
+                                        </div>
+
+
+                                        <div class="form-group">
+                                            <label for="stateId">State</label>
+                                            <div class="col-md-12">
+
+                                                <input class="form-control" formControlName="state" readonly />
+
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group ">
+                                            <label for="cityId">City</label>
+                                            <div class="col-md-12">
+
+
+                                                <input class="form-control" type="text" formControlName="city"
+                                                    readonly />
+
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="card mb-2">
+                                <div class="container">
+                                    <div class="card-body">
+                                        <h4>statuses</h4>
+                                        <div class="form-group ">
+                                            <label for="MaritalId">Marital Status</label>
+                                            <div class="col-md-12">
+
+                                                <input class="form-control" formControlName="marital_status" readonly />
+
+
+                                            </div>
+                                        </div>
+                                        <div class="form-group ">
+                                            <label for="MilitaryId">Military Status</label>
+                                            <div class="col-md-12">
+
+                                                <input class="form-control" formControlName="military_status"
+                                                    readonly />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
 
                     </ng-template>
 
@@ -97,8 +263,4 @@
     </div>
 
 </header>
-<!-- <div *ngIf="user">
-    <app-messages [receiverid]="user.user_id" style="z-index: 44;"></app-messages>
-
-</div> -->
 <div class="back" style="width: 100%; height: 100%;"></div>

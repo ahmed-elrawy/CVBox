@@ -1,8 +1,8 @@
 <form [formGroup]="infoForm">
     <div class="card mb-2">
         <div class="container">
-            <h4>basic info</h4>
             <div class="card-body">
+                <h4>basic info</h4>
 
                 <div class="form-group ">
                     <label for="nameId">Name</label>
@@ -97,8 +97,8 @@
     </div>
     <div class="card mb-2">
         <div class="container">
-            <h4>Work experience</h4>
             <div class="card-body">
+                <h4>Work experience</h4>
 
                 <div class="form-group ">
                     <label for="jobTitleId">job Title</label>
@@ -221,8 +221,8 @@
 
     <div class="card mb-2">
         <div class="container">
-            <h4>address</h4>
             <div class="card-body">
+                <h4>address</h4>
 
                 <div class="form-group ">
                     <label for="nameId">Country</label>
@@ -293,8 +293,8 @@
 
     <div class="card mb-2">
         <div class="container">
-            <h4>statuses</h4>
             <div class="card-body">
+                <h4>statuses</h4>
 
                 <div class="form-group ">
                     <label for="MaritalId">Marital Status</label>
@@ -346,7 +346,7 @@
                 <button class="btn btn-primary mr-3 mb-5" type="button" style="width:80px"
                     [title]="infoForm.valid ? 'Save your entered data' : 'Disabled until the form data is valid'"
                     (click)="onSubmit(infoForm)">
-                    Save
+                    update
                 </button>
 
                 <!-- [disabled]="!infoForm.valid" -->

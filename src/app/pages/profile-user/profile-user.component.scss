@@ -91,12 +91,13 @@ h2 {
   margin-bottom: 15px;
   color: #333;
 }
+
 h4 {
-  font-size: 13px;
-  color: #00baff;
+  font-size: 23px;
+  color: $primary;
   letter-spacing: 1px;
   margin-bottom: 25px
-}
+  }
 
 
 @media only screen and (max-width: 600px) and (min-width: 400px)  {
@@ -256,7 +257,7 @@ progress::-webkit-progress-value {
   transform: translate(-50%, -50%);
   -ms-transform: translate(-50%, -50%);
   background-color:#f0f0f0;
-  color: #4d37b1;
+  color: $primary;
   font-size: 15px;
   padding: 7px 40px 7px 5px;
   margin: 0px 40px 10px 0px;

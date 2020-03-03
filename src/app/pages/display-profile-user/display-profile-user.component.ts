@@ -4,6 +4,8 @@ import { User } from "../../classes/user";
 import { AngularFirestore } from "@angular/fire/firestore";
 import { AuthService } from 'src/app/services/auth.service';
 import { ChatService } from 'src/app/services/chat.service';
+import { FormGroup, Validators, FormBuilder, FormArray, NgForm, FormControl } from '@angular/forms';
+
 
 @Component({
   selector: 'app-display-profile-user',
@@ -21,11 +23,18 @@ export class DisplayProfileUserComponent implements OnInit, OnDestroy {
   userID: string = ""
 
 
+  infoForm: FormGroup;
+  userdata: any = {}
+
+
+
   constructor(
     public activatedRoute: ActivatedRoute,
     public db: AngularFirestore,
     public auth: AuthService,
-    public chat: ChatService
+    public chat: ChatService,
+    public fb: FormBuilder,
+
 
   ) {
     this.activatedRoute.params.subscribe(params => {
@@ -45,13 +54,59 @@ export class DisplayProfileUserComponent implements OnInit, OnDestroy {
     this.db.doc<User>(`users/${this.userID}`).valueChanges().subscribe(
       user => {
         this.user = user
+        this.userdata = user;
+        this.populateTestDate()
 
       }, (error) => {
         console.log(error);
       }
     );
+
+    this.infoForm = this.fb.group({
+      name: ['', [Validators.required, Validators.minLength(3)]],
+      email: ['', [Validators.required, Validators.email]],
+      phone: ['', [Validators.required]],
+      age: ['', [Validators.required]],
+      gender: ['', [Validators.required]],
+      jobTitle: ['', Validators.required],
+      category: ['', Validators.required],
+      department: ['', Validators.required],
+      year_experience: ['', Validators.required],
+      country: ['', [Validators.required]],
+      state: ['', [Validators.required]],
+      city: ['', [Validators.required]],
+      marital_status: ['', [Validators.required]],
+      military_status: ['', [Validators.required],],
+
+    })
+
   }
 
+
+  populateTestDate() {
+
+
+
+    this.infoForm.patchValue({
+      name: this.userdata.name,
+      email: this.userdata.email,
+      phone: this.userdata.phone,
+      age: this.userdata.age,
+      gender: this.userdata.gender,
+      jobTitle: this.userdata.jobTitle,
+      category: this.userdata.category,
+      department: this.userdata.departments[0],
+      year_experience: this.userdata.year_experience,
+      country: this.userdata.country,
+      state: this.userdata.state,
+      city: this.userdata.city,
+      marital_status: this.userdata.marital_status,
+      military_status: this.userdata.military_status,
+    })
+
+
+
+  }
 
   changeMessage() {
   }
