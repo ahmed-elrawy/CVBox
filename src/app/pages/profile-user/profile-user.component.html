@@ -64,13 +64,13 @@
 
                     </div>
                     <div class="row">
-                        <div class="col-6 border-top border-right mb-0" (click)="view('personal-info')"
-                            [ngStyle]="{'background-color':curentView === 'personal-info' ? '#2f2dc0' : 'white'}">
+                        <div class="swich col-6 border-top border-right mb-0" (click)="view('personal-info')"
+                            [class.defulat]="curentView === 'personal-info' ">
                             personal
                             info
                         </div>
-                        <div class="col-6 border-top" (click)="view('resume-info')"
-                            [ngStyle]="{'background-color':curentView === 'resume-info' ? '#2f2dc0' : 'white' }">resume
+                        <div class="swich col-6 border-top" (click)="view('resume-info')"
+                            [class.defulat]="curentView != 'personal-info' ">resume
                             info</div>
                     </div>
 

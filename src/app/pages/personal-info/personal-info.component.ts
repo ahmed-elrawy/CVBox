@@ -62,6 +62,7 @@ export class PersonalInfoComponent implements OnInit {
       }
     );
 
+    this.cv.getCategories()
 
     this.infoForm = this.fb.group({
       name: ['', [Validators.required, Validators.minLength(3)]],

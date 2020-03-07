@@ -77,7 +77,7 @@
                             formControlName="gender" [ngClass]="{'is-invalid': (infoForm.get('gender').touched ||
                                         infoForm.get('gender').dirty) &&
                                         !infoForm.get('gender').valid }">
-                            <option>--Select gender--</option>
+                            <option value="" disabled selected>gender</option>
                             <option>Male</option>
                             <option>Female</option>
                         </select>
@@ -124,7 +124,7 @@
                             placeholder="category (required)" formControlName="category" [ngClass]="{'is-invalid': (infoForm.get('category').touched ||
                                     infoForm.get('category').dirty) &&
                                     !infoForm.get('category').valid }">
-                            <option>--Select category--</option>
+                            <option value="" disabled selected>--Select category--</option>
 
                             <option *ngFor="let category of cv.categories |async" [value]="category.name">
                                 {{category.name}}</option>
@@ -150,8 +150,7 @@
                                 [ngClass]="{'is-invalid': (infoForm.get('department').touched ||
                                     infoForm.get('department').dirty) &&
                                     !infoForm.get('department').valid }" formControlName="department">
-
-                                <option>--Select department--</option>
+                                <option value="" disabled selected>--Select department--</option>
 
                                 <option *ngFor="let department of cv.departments |async" [value]="department.name">
                                     {{department.name}}</option>
@@ -169,34 +168,6 @@
                     </div>
 
                 </div>
-                <!-- <div class="form-group " formArrayName="departments">
-                    <label for="departmentyId">department</label>
-                    <div class="col-md-12">
-
-                        <select class="form-control" id="departmentId" placeholder="department (required)"
-                            (change)="onChange($event.target.value)" [ngClass]="{'is-invalid': (infoForm.get('departments').touched ||
-                                infoForm.get('departments').dirty) &&
-                                !infoForm.get('departments').valid }" [formControlName]="">
-
-                            <option>--Select department--</option>
-
-                            <option *ngFor="let department of cv.departments |async" [value]="department.name">
-                                {{department.name}}</option>
-
-
-                        </select>
-
-                        <span class="invalid-feedback">
-                            <span *ngIf="infoForm.get('departments').errors?.required">
-                                Please enter department.
-                            </span>
-
-                        </span>
-                    </div>
-                </div>
-
-            </div> -->
-
 
                 <div class="form-group ">
                     <label for="yearsOfEperienceId">years Of
@@ -231,7 +202,7 @@
                             countryId" placeholder="Country (required)" formControlName="country" [ngClass]="{'is-invalid': (infoForm.get('country').touched ||
                                     infoForm.get('country').dirty) &&
                                     !infoForm.get('country').valid }">
-                            <option>--Select country--</option>
+                            <option value="" disabled selected>--Select country--</option>
 
                             <option *ngFor="let country of country.countries |async" [value]="country.name">
                                 {{country.name}}</option>
@@ -253,7 +224,7 @@
                             [ngClass]="{'is-invalid': (infoForm.get('state').touched ||
                                         infoForm.get('state').dirty) &&
                                         !infoForm.get('state').valid }">
-                            <option>--Select State--</option>
+                            <option value="" disabled selected>--Select state--</option>
                             <option *ngFor="let state of country.states | async" [value]="state.name">{{state.name}}
                             </option>
                         </select>
@@ -304,6 +275,8 @@
                             formControlName="marital_status" [ngClass]="{'is-invalid': (infoForm.get('marital_status').touched ||
                                         infoForm.get('marital_status').dirty) &&
                                         !infoForm.get('marital_status').valid }">
+                            <option value="" disabled selected>--Select marital status--</option>
+
                             <option>Unspecified</option>
                             <option>Single</option>
                             <option>Married</option>
@@ -323,6 +296,8 @@
                             formControlName="military_status" [ngClass]="{'is-invalid': (infoForm.get('military_status').touched ||
                                         infoForm.get('military_status').dirty) &&
                                         !infoForm.get('military_status').valid }">
+                            <option value="" disabled selected>--Select military status--</option>
+
                             <option>Not Applicable</option>
                             <option>Exempted</option>
                             <option>Completed</option>

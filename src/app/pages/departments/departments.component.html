@@ -53,10 +53,10 @@
 
                 <ng-container *ngFor="let department of cv.departments | async">
 
-                    <div class="col-xl-4  col-md-6 card-block  ">
+                    <div class="col-xl-4  col-sm-6 card-block  ">
                         <div class="card card-block m-3 py-md-5  align-items-center"
                             [routerLink]="['/users/', department.name]">
-                            <h4>{{department.name}}</h4>
+                            <h4 class="text-concat">{{department.name}}</h4>
                         </div>
                     </div>
                 </ng-container>

@@ -16,8 +16,20 @@
   }
   .card{
     transition:0.5s;
+    min-width: 250px;
+    height: 150px;
+    max-height: 150px;
     cursor:pointer;
     box-shadow: 0 0 5px;
+
+    margin: auto;
+    border-radius: 6px;
+    font-size: x-large;
+  }
+  .text-concat {
+    max-width: 200px;
+    word-wrap: break-word;
+     text-align: center;
   }
   .card:hover{
     transform: scale(1.05);
@@ -46,12 +58,41 @@
     transform: scale3d(1, 1, 1);
   }
 
-
+  .text-concat {
+    overflow-wrap: break-word;
+  word-wrap: break-word;
+  width: auto;
+  height: auto;
+  -ms-word-break: break-all;
+  /* This is the dangerous one in WebKit, as it breaks things wherever */
+  word-break: break-all;
+  /* Instead use this non-standard one: */
+  word-break: break-word;
+  
+  /* Adds a hyphen where the word breaks, if supported (No Blink) */
+  -ms-hyphens: auto;
+  -moz-hyphens: auto;
+  -webkit-hyphens: auto;
+  hyphens: auto;
+  
+  }
+  
+  .limit-message{
+    width: 250px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
   @media only screen and (max-width: 450px) {
     .card{
       // width: 150px;
       padding-top: 30px;
       height: 100px;
       border-radius: 5px;
+    }
+    .text-concat {
+      max-width: 300px;
+      word-wrap: break-word;
+       text-align: center;
     }
   }

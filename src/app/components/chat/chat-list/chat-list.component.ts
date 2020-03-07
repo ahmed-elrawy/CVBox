@@ -122,8 +122,10 @@ export class ChatListComponent implements OnInit {
     this.chat.fun2(this.userIdLowerCase, this.secondUserID.toLowerCase())
 
 
-    this.chat.sendMessage(this.newMsg, this.secondUser, this.user)
+    if (this.newMsg != "") {
+      this.chat.sendMessage(this.newMsg, this.secondUser, this.user)
 
+    }
     this.newMsg = ""
 
   }

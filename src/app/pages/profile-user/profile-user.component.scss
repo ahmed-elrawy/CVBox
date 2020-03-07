@@ -51,7 +51,7 @@ body {
   width: 800px;
   margin: 20px auto 20px;
   background-color: #fff;
-  padding: 0 20px 20px;
+  padding: 0 20px 0px;
   border-radius: 6px;
   -webkit-border-radius: 6px;
   -moz-border-radius: 6px;
@@ -270,3 +270,18 @@ progress::-webkit-progress-value {
   font-size: 35px;
 
  }
+
+ // changr design of user-info and pdf
+ .swich{
+   height: 35px;
+   font-size: large;
+   font-weight: 600;
+   font-family: Arial, Helvetica, sans-serif;
+  &.defulat {
+    background-color:#f0552e;
+    color: white;
+    width: 70px;
+  }
+  
+ }
+
