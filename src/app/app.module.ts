@@ -29,6 +29,9 @@ import { MaterialModule } from './material/material.module';
 import { HttpClientModule } from '@angular/common/http';
 import { ImageCropperModule } from 'ngx-image-cropper';
 import { Ng5SliderModule } from 'ng5-slider';
+import { ScrollingModule } from '@angular/cdk/scrolling';
+import { AdsenseModule } from 'ng2-adsense';
+
 
 //firebase
 import { environment } from "../environments/environment";
@@ -98,7 +101,10 @@ import { MessagesComponent } from './components/chat/messages/messages.component
     MaterialModule,
     HttpClientModule,
     ImageCropperModule,
-    Ng5SliderModule
+    Ng5SliderModule,
+    ScrollingModule,
+    AdsenseModule.forRoot()
+
   ],
   providers: [
     AlertService,

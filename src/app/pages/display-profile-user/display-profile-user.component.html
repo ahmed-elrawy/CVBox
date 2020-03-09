@@ -4,25 +4,49 @@
         <div class="d-flex row-hl">
             <div class="mr-auto p-2 item-hl">
                 <a class="navbar-brand" [routerLink]="['/home']"
-                    style=" color:#fff; margin-top: 40px; font-size: x-large;">HOME</a>
+                    style=" color:#fff; margin-top: 20px; font-size: x-large;">HOME</a>
             </div>
-            <div style=" margin-top: 40px; " *ngIf="currentUser else loggedOut">
-                <a class="" [routerLink]="['/profile']">
-                    <img [src]="currentUser.profile_image " class=" profileImg rounded-circle">
-                </a>
+            <div style=" margin-top: 20px; " *ngIf="currentUser else loggedOut">
+
+
+                <li ngbDropdown class="d-inline-block">
+                    <a class="nav-link dropdown-toggle" id="dropdownMenuButton" ngbDropdownToggle>
+                        <img [src]="currentUser.profile_image | safe" width="50" height="50"
+                            class=" profileImg rounded-circle">
+                    </a>
+                    <div class="dropdown-menu" ngbDropdownMenu aria-labelledby="dropdownMenuButton">
+
+                <li class="dropdown-item" [routerLink]="['/profile']"><span
+                        class="material-icons md-48">account_circle</span>my
+                    profile
+                </li>
+                <li class="dropdown-item" [routerLink]="['/forgot-password']"><span
+                        class="material-icons md-48">https</span>change password</li>
+                <li class="dropdown-item" [routerLink]="['/forgot-password']"><span
+                        class="material-icons md-48">email</span>change email address
+                </li>
+
+
+
+                <li class="dropdown-item" (click)="auth.logout()"><span class="material-icons md-48">exit_to_app
+                    </span>logout</li>
+
+
             </div>
-
-            <ng-template #loggedOut>
-
-                <div class=" p-2 item-hl" style="margin-top: 40px;">
-                    <button type=" button" [routerLink]="['/login']" class="btn btn-outline-light mr-4">login</button>
-                    <button type="button" [routerLink]="['/signup']" class="btn btn-outline-light mr-4">sign
-                        up</button>
-
-                </div>
-            </ng-template>
-
+            </li>
         </div>
+
+        <ng-template #loggedOut>
+
+            <div class=" p-2 item-hl" style="margin-top: 40px;">
+                <button type=" button" [routerLink]="['/login']" class="btn btn-outline-light mr-4">login</button>
+                <button type="button" [routerLink]="['/signup']" class="btn btn-outline-light mr-4">sign
+                    up</button>
+
+            </div>
+        </ng-template>
+
+    </div>
     </div>
 
 
@@ -32,17 +56,15 @@
                 <div class="container-profile">
                     <div class="avatar-flip">
                         <div *ngIf="userdata">
-                            <img *ngIf="userdata.profile_image" [src]="userdata.profile_image | safe" height="150"
-                                width="150">
-                            <img *ngIf="!userdata.profile_image" src="../../../assets/default-user-image.png"
-                                height="150" width="150">
+                            <img *ngIf="userdata.profile_image" [src]="userdata.profile_image | safe">
+                            <img *ngIf="!userdata.profile_image" src="../../../assets/default-user-image.png">
 
                         </div>
 
                     </div>
                     <div *ngIf="userdata">
-                        <h2>{{userdata.name }} </h2>
-                        <h4>{{userdata.departments}}</h4>
+                        <h2 class="user-data">{{userdata.name }} </h2>
+                        <h4 class="user-data">{{userdata.departments}}</h4>
                         <!-- <a class="btn btn-primary " [routerLink]="['/chats/', user.user_id]">message</a> -->
 
                     </div>
